@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="CEIBIO.Datos/CEIBIO.Datos.csproj" />
+  <Project Path="CEIBIO.Entidades/CEIBIO.Entidades.csproj" />
+  <Project Path="CEIBIO.Negocio/CEIBIO.Negocio.csproj" />
+  <Project Path="CEIBIO.Presentacion/CEIBIO.Presentacion.csproj" />
+</Solution>

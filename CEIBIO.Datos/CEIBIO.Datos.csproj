@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CEIBIO.Entidades\CEIBIO.Entidades.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Admision\" />
+    <Folder Include="Catalogos\" />
+    <Folder Include="Evaluacion\" />
+    <Folder Include="Caja\" />
+    <Folder Include="Muestras\" />
+    <Folder Include="Analisis\" />
+    <Folder Include="Entregas\" />
+    <Folder Include="Reportes\" />
+    <Folder Include="Seguridad\" />
+  </ItemGroup>
+
+</Project>
