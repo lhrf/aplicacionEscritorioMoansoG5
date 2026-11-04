@@ -28,10 +28,20 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "FrmLogin";
+            SuspendLayout();
+            // 
+            // FrmLogin
+            // 
+            AutoScaleDimensions = new System.Drawing.SizeF(9F, 23F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            ClientSize = new System.Drawing.Size(420, 300);
+            Font = new System.Drawing.Font("Segoe UI", 10F);
+            FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            MaximizeBox = false;
+            Name = "FrmLogin";
+            StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            Text = "Iniciar sesión";
+            ResumeLayout(false);
         }
 
         #endregion

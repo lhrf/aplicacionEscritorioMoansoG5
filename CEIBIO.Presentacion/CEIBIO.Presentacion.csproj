@@ -14,17 +14,197 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Admision\" />
-    <Folder Include="Evaluacion\" />
-    <Folder Include="Caja\" />
-    <Folder Include="Analisis\" />
-    <Folder Include="Formalizacion\" />
-    <Folder Include="Entregas\" />
-    <Folder Include="Mantenedores\" />
     <Folder Include="Impresion\" />
-    <Folder Include="Preparacion\" />
-    <Folder Include="TomaMuestras\" />
     <Folder Include="Sesion\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Admision\FrmBuscarFicha.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Admision\FrmConsultarAtenciones.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Admision\FrmConsultarVisitas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Admision\FrmProgramarVisita.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Admision\FrmRegistrarAtencion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Admision\FrmRegistrarFicha.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Analisis\FrmConsultarBitacora.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Analisis\FrmFallaAnalitica.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Analisis\FrmPendientesValidacion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Analisis\FrmRegistrarResultados.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Analisis\FrmRegistrarUsoEquipo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Caja\FrmAutorizarTransferencia.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Caja\FrmConsultarComprobantes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Caja\FrmConsultarRecaudacion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Caja\FrmConsultarTransferencias.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Caja\FrmDerivarAtencion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Caja\FrmEmitirComprobante.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Caja\FrmRechazarTransferencia.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Caja\FrmRegistrarPago.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Caja\FrmVisitasAsignadas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Entregas\FrmCerrarAtencion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Entregas\FrmConsultarEntregas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Entregas\FrmPendientesEntrega.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Entregas\FrmRegistrarEntrega.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Entregas\FrmRetenerEntrega.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Evaluacion\FrmConsultarSuspendidas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Evaluacion\FrmRegistrarObservaciones.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Evaluacion\FrmResultadoEvaluacion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Evaluacion\FrmSuspenderAtencion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Formalizacion\FrmAutorizarReporte.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Formalizacion\FrmConsultarReportes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Formalizacion\FrmDevolverReporte.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Formalizacion\FrmElaborarReporte.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Formalizacion\FrmHistorialRevisiones.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Formalizacion\FrmRepetirAnalisis.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Formalizacion\FrmRetenerResultado.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Formalizacion\FrmRevisarReporte.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Formalizacion\FrmValidarResultados.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Mantenedores\FrmMantBoxes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Mantenedores\FrmMantCondiciones.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Mantenedores\FrmMantConvenios.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Mantenedores\FrmMantEquipos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Mantenedores\FrmMantExamenes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Mantenedores\FrmMantIntervalos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Mantenedores\FrmMantMediosPago.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Mantenedores\FrmMantParametros.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Mantenedores\FrmMantPlantillas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Mantenedores\FrmMantTubos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Mantenedores\FrmMantUsuarios.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Preparacion\FrmAcondicionarMuestra.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Preparacion\FrmConsultarTransito.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Preparacion\FrmDevolverMuestra.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Preparacion\FrmPendientesAcondicionar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Preparacion\FrmRecepcionMuestra.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Seguridad\FrmCambiarClave.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Seguridad\FrmLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Seguridad\FrmMenuPrincipal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="TomaMuestras\FrmAsignarBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="TomaMuestras\FrmConsultarRechazadas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="TomaMuestras\FrmRechazoMuestra.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="TomaMuestras\FrmTomaMuestraDomicilio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="TomaMuestras\FrmTomaMuestraSede.cs">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
 
 </Project>

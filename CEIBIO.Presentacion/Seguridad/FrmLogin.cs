@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
 
 namespace CEIBIO.Presentacion.Seguridad
 {
+    // Iniciar sesión (CU-63)
     public partial class FrmLogin : Form
     {
         public FrmLogin()
