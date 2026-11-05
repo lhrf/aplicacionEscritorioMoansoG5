@@ -130,9 +130,7 @@
     <Compile Update="Formalizacion\FrmRevisarReporte.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Formalizacion\FrmValidarResultados.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Update="Formalizacion\FrmValidarResultados.cs" />
     <Compile Update="Mantenedores\FrmMantBoxes.cs">
       <SubType>Form</SubType>
     </Compile>
