@@ -10,5 +10,10 @@ namespace CEIBIO.Presentacion.Seguridad
         {
             InitializeComponent();
         }
+
+        private void FrmMenuPrincipal_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

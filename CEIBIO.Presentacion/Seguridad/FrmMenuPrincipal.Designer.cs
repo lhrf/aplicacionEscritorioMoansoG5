@@ -32,16 +32,15 @@
             // 
             // FrmMenuPrincipal
             // 
-            AutoScaleDimensions = new System.Drawing.SizeF(9F, 23F);
-            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(1200, 700);
-            Font = new System.Drawing.Font("Segoe UI", 10F);
-            FormBorderStyle = System.Windows.Forms.FormBorderStyle.Sizable;
-            MaximizeBox = true;
-            WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            AutoScaleDimensions = new SizeF(7F, 17F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(1200, 700);
+            Font = new Font("Segoe UI", 10F);
             Name = "FrmMenuPrincipal";
-            StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Sistema de Gestión de Resultados Clínicos CEIBIO";
+            WindowState = FormWindowState.Maximized;
+            Load += FrmMenuPrincipal_Load;
             ResumeLayout(false);
         }
 

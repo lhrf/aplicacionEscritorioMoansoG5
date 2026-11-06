@@ -10,5 +10,10 @@ namespace CEIBIO.Presentacion.TomaMuestras
         {
             InitializeComponent();
         }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
