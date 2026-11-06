@@ -19,9 +19,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Admision\FrmBuscarFicha.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Update="Admision\FrmConsultarAtenciones.cs">
       <SubType>Form</SubType>
     </Compile>
