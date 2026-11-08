@@ -9,7 +9,7 @@
         public string NombreExamen { get; set; } = string.Empty;
         public decimal? ValorMinimo { get; set; }
         public decimal? ValorMaximo { get; set; }
-        public string Sexo { get; set; } = "Ambos";   // Ambos, Femenino, Masculino
+        public string Sexo { get; set; } = "Ambos";
         public int EdadMinima { get; set; }
         public int EdadMaxima { get; set; } = 120;
         public string? ReferenciaTexto { get; set; }
@@ -18,7 +18,6 @@
         public string EdadTexto => EdadMinima + " a " + EdadMaxima + " años";
         public string EstadoTexto => Habilitado ? "Habilitado" : "Inhabilitado";
 
-        /// <summary>Texto del intervalo para mostrar: "12 - 16", "≤ 200" o la referencia en texto.</summary>
         public string Texto
         {
             get

@@ -3,7 +3,6 @@ using CEIBIO.Entidades;
 
 namespace CEIBIO.Negocio
 {
-    /// <summary>CU-06 Mantenedor de exámenes.</summary>
     public class ExamenNegocio
     {
         private readonly ExamenDatos datos = new();
@@ -11,10 +10,8 @@ namespace CEIBIO.Negocio
         public static readonly string[] TiposMuestra = { "Sangre", "Orina", "Heces" };
         public static readonly string[] Procedimientos = { "Automatizado", "Microscópico" };
 
-        /// <summary>Todos los exámenes (para la grilla del mantenedor).</summary>
         public List<Examen> Listar(string filtro = "") => datos.Listar((filtro ?? "").Trim(), false);
 
-        /// <summary>Exámenes habilitados (buscador de CU-01, combos y listas de otros mantenedores).</summary>
         public List<Examen> ListarHabilitados(string filtro = "") => datos.Listar((filtro ?? "").Trim(), true);
 
         public Examen? ObtenerPorId(int id) => datos.ObtenerPorId(id);

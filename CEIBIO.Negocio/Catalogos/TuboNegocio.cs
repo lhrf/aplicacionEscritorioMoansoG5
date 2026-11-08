@@ -3,14 +3,12 @@ using CEIBIO.Entidades;
 
 namespace CEIBIO.Negocio
 {
-    /// <summary>CU-31 Mantenedor de tubos y recipientes.</summary>
     public class TuboNegocio
     {
         private readonly TuboDatos datos = new();
 
         public List<Tubo> Listar(string filtro = "") => datos.Listar((filtro ?? "").Trim());
 
-        /// <summary>Devuelve el tubo con la lista IdExamenes para marcar el CheckedListBox.</summary>
         public Tubo? ObtenerPorId(int id) => datos.ObtenerPorId(id);
 
         public Respuesta Guardar(Tubo t) => Respuesta.Intentar(() =>

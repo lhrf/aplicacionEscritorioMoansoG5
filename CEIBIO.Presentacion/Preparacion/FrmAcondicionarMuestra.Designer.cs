@@ -477,7 +477,6 @@
             Name = "FrmAcondicionarMuestra";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Registrar acondicionamiento de la muestra";
-            Load += FrmAcondicionarMuestra_Load;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             flowLayoutPanel1.ResumeLayout(false);

@@ -1,8 +1,5 @@
 ﻿namespace CEIBIO.Entidades
 {
-    // Textos fijos que se guardan en la base de datos.
-    // Usarlos siempre desde aquí para no escribirlos mal en cada formulario.
-
     public static class EstadoAtencion
     {
         public const string PendienteEvaluacion = "Pendiente de evaluación";

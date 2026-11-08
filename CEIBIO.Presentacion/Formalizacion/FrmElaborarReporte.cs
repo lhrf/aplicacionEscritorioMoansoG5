@@ -1,76 +1,75 @@
-﻿
-using System;
-using System.Drawing;
-using System.Windows.Forms;
+using CEIBIO.Entidades;
+using CEIBIO.Negocio;
 
 namespace CEIBIO.Presentacion.Formalizacion
 {
     public partial class FrmElaborarReporte : Form
     {
-        private readonly Color AZUL = Color.FromArgb(11, 61, 110);
-        private readonly Color BLANCO = Color.White;
-        private readonly Color TEXTO = Color.FromArgb(31, 35, 40);
-        private readonly Color FONDO = Color.FromArgb(244, 246, 249);
-        private readonly Color RO = Color.FromArgb(233, 238, 243);
-        private readonly Color LINEA = Color.FromArgb(214, 221, 230);
+        private readonly ReporteNegocio negocio = new();
+        private ReporteClinico? reporte;
 
         public FrmElaborarReporte()
         {
             InitializeComponent();
-            this.btnCerrar.Click += (sender, args) => this.Close();
-
+            rtbVistaPrevia.ReadOnly = true;
+            rtbVistaPrevia.Font = new Font("Consolas", 10F);
+            dgvAtenciones.SelectionChanged += (s, e) => Ui.Intentar(MostrarSeleccion);
+            btnGenerar.Click += BtnGenerar_Click;
+            btnImprimirBorrador.Click += (s, e) => Imprimir();
+            btnEnviarRevision.Click += (s, e) => Ejecutar(id => negocio.EnviarARevision(id));
+            btnGuardarDefinitivo.Click += (s, e) => Ejecutar(id => negocio.GuardarDefinitivo(id));
+            btnImprimirDefinitivo.Click += (s, e) => Imprimir();
+            btnEnviarAutorizacion.Click += (s, e) => Ejecutar(id => negocio.EnviarAAutorizacion(id));
+            btnEnviarEntrega.Click += (s, e) => Ejecutar(id => negocio.EnviarAEntrega(id));
+            btnCerrar.Click += (s, e) => Close();
+            Load += (s, e) => Ui.Intentar(Cargar);
         }
 
-
-
-        private Button CrearBoton(
-            string nombre,
-            string texto,
-            int ancho,
-            string estilo)
+        private void Cargar()
         {
-            Button boton = new Button
-            {
-                Name = nombre,
-                Text = texto,
-                Size = new Size(ancho, 36),
-                Font = new Font("Segoe UI", 10, FontStyle.Bold),
-                FlatStyle = FlatStyle.Flat,
-                Cursor = Cursors.Hand,
-                UseVisualStyleBackColor = false,
-                TabStop = true
-            };
+            int? seleccion = Ui.Seleccionado<Atencion>(dgvAtenciones)?.IdAtencion;
+            var lista = negocio.ListarParaElaborar();
+            Ui.Llenar(dgvAtenciones, lista, a => new object?[] { a.NumeroAtencion, a.NombrePaciente, a.EstadoReporte });
+            if (seleccion.HasValue)
+                foreach (DataGridViewRow fila in dgvAtenciones.Rows)
+                    if (fila.Tag is Atencion a && a.IdAtencion == seleccion.Value) { fila.Selected = true; dgvAtenciones.CurrentCell = fila.Cells[0]; }
+            MostrarSeleccion();
+        }
 
-            switch (estilo)
-            {
-                case "pri":
-                    boton.BackColor = AZUL;
-                    boton.ForeColor = BLANCO;
-                    boton.FlatAppearance.BorderSize = 0;
-                    boton.FlatAppearance.MouseOverBackColor =
-                        Color.FromArgb(20, 82, 140);
-                    break;
+        private void MostrarSeleccion()
+        {
+            var a = Ui.Seleccionado<Atencion>(dgvAtenciones);
+            reporte = a == null ? null : negocio.ObtenerPorAtencion(a.IdAtencion);
+            rtbVistaPrevia.Text = reporte == null ? "" : ReporteNegocio.TextoImpresion(reporte);
+            txtEstado.Text = reporte?.EstadoVersion ?? (a == null ? "" : "Sin reporte");
 
-                case "sec":
-                    boton.BackColor = BLANCO;
-                    boton.ForeColor = AZUL;
-                    boton.FlatAppearance.BorderSize = 1;
-                    boton.FlatAppearance.BorderColor = AZUL;
-                    boton.FlatAppearance.MouseOverBackColor =
-                        Color.FromArgb(227, 236, 246);
-                    break;
+            string estado = reporte?.Estado ?? "";
+            btnGenerar.Enabled = a != null && (reporte == null || estado == EstadoReporte.Borrador || estado == EstadoReporte.Observado || estado == EstadoReporte.DevueltoMedico);
+            btnImprimirBorrador.Enabled = reporte != null && !reporte.Definitivo;
+            btnEnviarRevision.Enabled = estado == EstadoReporte.Borrador;
+            btnGuardarDefinitivo.Enabled = estado == EstadoReporte.Revisado && reporte?.Definitivo == false;
+            btnImprimirDefinitivo.Enabled = reporte?.Definitivo == true;
+            btnEnviarAutorizacion.Enabled = estado == EstadoReporte.Revisado && reporte?.Definitivo == true;
+            btnEnviarEntrega.Enabled = estado == EstadoReporte.Autorizado;
+        }
 
-                case "neu":
-                    boton.BackColor =
-                        Color.FromArgb(229, 231, 235);
-                    boton.ForeColor = TEXTO;
-                    boton.FlatAppearance.BorderSize = 0;
-                    boton.FlatAppearance.MouseOverBackColor =
-                        Color.FromArgb(209, 213, 219);
-                    break;
-            }
+        private void BtnGenerar_Click(object? sender, EventArgs e)
+        {
+            var a = Ui.Seleccionado<Atencion>(dgvAtenciones);
+            if (a == null) { Ui.Aviso("Seleccione una atención."); return; }
+            if (Ui.Mostrar(negocio.Generar(a.IdAtencion))) Ui.Intentar(Cargar);
+        }
 
-            return boton;
+        private void Ejecutar(Func<int, Respuesta> accion)
+        {
+            if (reporte == null) { Ui.Aviso("Primero genere el reporte."); return; }
+            if (Ui.Mostrar(accion(reporte.IdReporte))) Ui.Intentar(Cargar);
+        }
+
+        private void Imprimir()
+        {
+            if (reporte == null) return;
+            Ui.Imprimir("Reporte clínico " + reporte.NumeroAtencion, ReporteNegocio.TextoImpresion(reporte));
         }
     }
 }

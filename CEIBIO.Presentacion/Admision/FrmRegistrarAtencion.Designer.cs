@@ -140,7 +140,6 @@
             btnGuardar.TabIndex = 3;
             btnGuardar.Text = "Guardar";
             btnGuardar.UseVisualStyleBackColor = false;
-            btnGuardar.Click += btnGuardar_Click;
             // 
             // btnAnular
             // 
@@ -409,7 +408,6 @@
             btnAgregarExamen.TabIndex = 2;
             btnAgregarExamen.Text = "Agregar";
             btnAgregarExamen.UseVisualStyleBackColor = false;
-            btnAgregarExamen.Click += btnAgregarExamen_Click;
             // 
             // txtBuscarExamen
             // 

@@ -3,7 +3,6 @@ using CEIBIO.Entidades;
 
 namespace CEIBIO.Negocio
 {
-    /// <summary>CU-03 Buscar Ficha clínica histórica y CU-04 Registrar Ficha clínica histórica.</summary>
     public class PacienteNegocio
     {
         private readonly PacienteDatos datos = new();
@@ -11,15 +10,12 @@ namespace CEIBIO.Negocio
 
         public static readonly string[] Sexos = { "Femenino", "Masculino" };
 
-        /// <summary>Null si no existe. Validar antes el DNI con Validacion.EsDni (CU-03 A1).</summary>
         public Paciente? BuscarPorDni(string dni) => Validacion.EsDni(dni) ? datos.ObtenerPorDni(dni.Trim()) : null;
 
         public Paciente? ObtenerPorId(int idPaciente) => datos.ObtenerPorId(idPaciente);
 
-        /// <summary>Atenciones anteriores del paciente (CU-03 paso 5).</summary>
         public List<Atencion> ListarAtenciones(int idPaciente) => atencionDatos.ListarPorPaciente(idPaciente);
 
-        /// <summary>CU-04: registra la Ficha clínica histórica.</summary>
         public Respuesta Registrar(Paciente p) => Respuesta.Intentar(() =>
         {
             var error = Validar(p);
@@ -29,7 +25,6 @@ namespace CEIBIO.Negocio
             return Respuesta.Ok("Ficha clínica histórica registrada.", id);
         });
 
-        /// <summary>CU-03 A3: actualiza los datos de filiación (guarda el usuario y la fecha).</summary>
         public Respuesta Actualizar(Paciente p) => Respuesta.Intentar(() =>
         {
             if (p.IdPaciente <= 0) return Respuesta.Error("Primero busque al paciente.");

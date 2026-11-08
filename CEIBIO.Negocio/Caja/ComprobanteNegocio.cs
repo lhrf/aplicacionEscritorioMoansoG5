@@ -4,23 +4,14 @@ using CEIBIO.Entidades;
 
 namespace CEIBIO.Negocio
 {
-    /// <summary>
-    /// CU-20 Emitir Comprobante de pago, CU-21 Registrar recaudación, CU-24 Consultar recaudación diaria
-    /// y CU-25 Consultar comprobantes de pago.
-    /// </summary>
     public class ComprobanteNegocio
     {
         private readonly ComprobanteDatos datos = new();
         private readonly AtencionDatos atencionDatos = new();
         private readonly PagoDatos pagoDatos = new();
 
-        /// <summary>
-        /// CU-20 paso 1: atenciones pagadas. La propiedad NumeroComprobante viene vacía si aún no se emitió
-        /// (Emitir) y llena si ya se emitió (Reimprimir o Anular).
-        /// </summary>
         public List<Atencion> ListarAtencionesPagadas() => atencionDatos.ListarPorEstado(EstadoAtencion.Pagada);
 
-        /// <summary>Datos para la vista previa antes de emitir (número vacío).</summary>
         public Comprobante? VistaPrevia(int idAtencion)
         {
             var atencion = atencionDatos.ObtenerPorId(idAtencion);
@@ -40,7 +31,6 @@ namespace CEIBIO.Negocio
             };
         }
 
-        /// <summary>CU-20 + CU-21: emite el comprobante y registra la recaudación. Respuesta.Dato = número de comprobante.</summary>
         public Respuesta Emitir(int idAtencion) => Respuesta.Intentar(() =>
         {
             var atencion = atencionDatos.ObtenerPorId(idAtencion);
@@ -64,7 +54,6 @@ namespace CEIBIO.Negocio
             return Respuesta.Ok("Comprobante " + numero + " emitido y registrado en la recaudación del día.", id, numero);
         });
 
-        /// <summary>Comprobante emitido de la atención, con su detalle (para reimprimir o mostrar). Null si no tiene.</summary>
         public Comprobante? ObtenerPorAtencion(int idAtencion)
         {
             var c = datos.ObtenerEmitidoPorAtencion(idAtencion);
@@ -79,7 +68,6 @@ namespace CEIBIO.Negocio
             return c;
         }
 
-        /// <summary>CU-20 A2: anula el comprobante (solo si la atención aún no fue derivada) y lo descuenta de la recaudación.</summary>
         public Respuesta Anular(int idComprobante, string motivo) => Respuesta.Intentar(() =>
         {
             var c = datos.ObtenerPorId(idComprobante);
@@ -93,7 +81,6 @@ namespace CEIBIO.Negocio
             return Respuesta.Ok("Comprobante " + c.NumeroComprobante + " anulado y descontado de la recaudación del día.", idComprobante);
         });
 
-        /// <summary>Texto del comprobante para imprimir (PrintDocument) o mostrar.</summary>
         public static string TextoImpresion(Comprobante c)
         {
             var sb = new StringBuilder();
@@ -114,21 +101,16 @@ namespace CEIBIO.Negocio
             return sb.ToString();
         }
 
-        // ---------------- CU-24 ----------------
         public List<Recaudacion> ConsultarRecaudacion(DateTime fecha) => datos.ListarRecaudacion(fecha);
 
-        /// <summary>Total por medio de pago, por ejemplo totales["Efectivo"].</summary>
         public static Dictionary<string, decimal> TotalesPorMedio(IEnumerable<Recaudacion> movimientos) =>
             movimientos.GroupBy(m => m.MedioPago).ToDictionary(g => g.Key, g => g.Sum(m => m.Importe));
 
-        /// <summary>Total por cajero.</summary>
         public static Dictionary<string, decimal> TotalesPorCajero(IEnumerable<Recaudacion> movimientos) =>
             movimientos.GroupBy(m => m.NombreCajero).ToDictionary(g => g.Key, g => g.Sum(m => m.Importe));
 
         public static decimal TotalDia(IEnumerable<Recaudacion> movimientos) => movimientos.Sum(m => m.Importe);
 
-        // ---------------- CU-25 ----------------
-        /// <summary>Si se indica un DNI (8 dígitos), filtra por ese paciente dentro del rango de fechas.</summary>
         public List<Comprobante> Consultar(DateTime desde, DateTime hasta, string? dni) => datos.Consultar(desde, hasta, dni);
     }
 }

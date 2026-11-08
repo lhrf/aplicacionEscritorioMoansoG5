@@ -214,7 +214,6 @@
             ShowInTaskbar = false;
             StartPosition = FormStartPosition.CenterParent;
             Text = "Rechazar transferencia";
-            Load += FrmRechazarTransferencia_Load;
             pnlEncabezado.ResumeLayout(false);
             pnlEncabezado.PerformLayout();
             flpBotones.ResumeLayout(false);

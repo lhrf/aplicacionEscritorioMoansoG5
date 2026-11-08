@@ -3,7 +3,6 @@ using CEIBIO.Entidades;
 
 namespace CEIBIO.Negocio
 {
-    /// <summary>CU-54 Mantenedor de intervalos biológicos de referencia.</summary>
     public class IntervaloNegocio
     {
         private readonly IntervaloDatos datos = new();
@@ -40,10 +39,6 @@ namespace CEIBIO.Negocio
             return Respuesta.Ok("Intervalo inhabilitado.");
         });
 
-        /// <summary>
-        /// Elige el intervalo que corresponde al sexo y la edad del paciente.
-        /// Prefiere el del mismo sexo sobre "Ambos". Null si no hay intervalo.
-        /// </summary>
         public static IntervaloReferencia? Elegir(IEnumerable<IntervaloReferencia> intervalos, int idParametro, string sexo, int edad)
         {
             return intervalos

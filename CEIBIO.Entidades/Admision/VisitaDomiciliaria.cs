@@ -12,7 +12,6 @@
         public string? Motivo { get; set; }
         public int? IdTecnico { get; set; }
 
-        // Datos para mostrar
         public string NumeroAtencion { get; set; } = string.Empty;
         public string NombrePaciente { get; set; } = string.Empty;
         public string Examenes { get; set; } = string.Empty;

@@ -92,7 +92,6 @@
             label1.Size = new Size(349, 25);
             label1.TabIndex = 1;
             label1.Text = "Registrar toma de muestra a domicilio";
-            label1.Click += label1_Click;
             // 
             // flowLayoutPanel1
             // 
@@ -187,7 +186,6 @@
             button6.TabIndex = 3;
             button6.Text = "Preparar visita";
             button6.UseVisualStyleBackColor = false;
-            button6.Click += button6_Click;
             // 
             // groupBox1
             // 
@@ -241,7 +239,6 @@
             dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridView1.Size = new Size(940, 150);
             dataGridView1.TabIndex = 4;
-            dataGridView1.CellContentClick += dataGridView1_CellContentClick;
             // 
             // colNAtencion
             // 
@@ -382,7 +379,6 @@
             label6.Size = new Size(126, 19);
             label6.TabIndex = 6;
             label6.Text = "Rechazos ocurridos";
-            label6.Click += label6_Click;
             // 
             // textBox2
             // 

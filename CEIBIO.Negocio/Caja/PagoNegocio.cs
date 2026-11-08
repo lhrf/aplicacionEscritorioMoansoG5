@@ -3,32 +3,20 @@ using CEIBIO.Entidades;
 
 namespace CEIBIO.Negocio
 {
-    /// <summary>CU-15 Registrar pago de la atención.</summary>
     public class PagoNegocio
     {
         private readonly PagoDatos datos = new();
         private readonly AtencionDatos atencionDatos = new();
         private readonly MedioPagoDatos medioPagoDatos = new();
 
-        /// <summary>CU-15 paso 2: atenciones pendientes de pago (sede y domicilio).</summary>
         public List<Atencion> ListarPendientes() => atencionDatos.ListarPorEstado(EstadoAtencion.PendientePago);
 
-        /// <summary>CU-15 paso 4: exámenes y tarifas de la atención (el descuento y el total están en la Atencion).</summary>
         public List<AtencionExamen> ListarDetalle(int idAtencion) => atencionDatos.ListarDetalle(idAtencion);
 
-        /// <summary>Pago en curso de la atención (pendiente de autorización o autorizado). Null si no tiene.</summary>
         public Pago? ObtenerPagoEnCurso(int idAtencion) => datos.ObtenerVigente(idAtencion);
 
-        /// <summary>CU-15 paso 6: vuelto (0 si el monto no alcanza).</summary>
         public static decimal CalcularVuelto(decimal total, decimal montoRecibido) => montoRecibido > total ? montoRecibido - total : 0m;
 
-        /// <summary>
-        /// CU-15: registra el pago y su conformidad.
-        /// - Medio sin autorización (efectivo, tarjeta): valida el monto, calcula el vuelto y la atención queda "Pagada".
-        /// - Medio con autorización (transferencia): el pago queda pendiente hasta que el Supervisor de Turno lo autorice (CU-16).
-        /// - Si la transferencia ya fue autorizada: registra la conformidad y la atención queda "Pagada".
-        /// Respuesta.Dato = vuelto (cuando corresponde).
-        /// </summary>
         public Respuesta RegistrarPago(int idAtencion, int idMedioPago, decimal montoRecibido) => Respuesta.Intentar(() =>
         {
             var atencion = atencionDatos.ObtenerPorId(idAtencion);

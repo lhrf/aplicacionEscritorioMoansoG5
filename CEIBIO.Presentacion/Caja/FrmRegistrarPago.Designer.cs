@@ -418,7 +418,6 @@
             Name = "FrmRegistrarPago";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Registrar pago";
-            Load += FrmRegistrarPago_Load;
             pnlEncabezado.ResumeLayout(false);
             pnlEncabezado.PerformLayout();
             flpBotones.ResumeLayout(false);

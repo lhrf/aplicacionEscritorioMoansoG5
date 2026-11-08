@@ -3,14 +3,12 @@ using CEIBIO.Entidades;
 
 namespace CEIBIO.Negocio
 {
-    /// <summary>CU-53 Mantenedor de plantillas de Reporte clínico.</summary>
     public class PlantillaNegocio
     {
         private readonly PlantillaDatos datos = new();
 
         public List<Plantilla> Listar(string filtro = "") => datos.Listar((filtro ?? "").Trim());
 
-        /// <summary>Devuelve la plantilla con la lista IdExamenes para marcar el CheckedListBox.</summary>
         public Plantilla? ObtenerPorId(int id) => datos.ObtenerPorId(id);
 
         public Respuesta Guardar(Plantilla p) => Respuesta.Intentar(() =>

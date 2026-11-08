@@ -2,7 +2,6 @@
 
 namespace CEIBIO.Datos
 {
-    /// <summary>Lee columnas del SqlDataReader. Si la columna no viene en la consulta o es NULL, devuelve el valor por defecto.</summary>
     internal static class Leer
     {
         private static object? Valor(SqlDataReader r, string columna)

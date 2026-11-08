@@ -3,14 +3,12 @@ using CEIBIO.Entidades;
 
 namespace CEIBIO.Negocio
 {
-    /// <summary>CU-18 Mantenedor de medios de pago.</summary>
     public class MedioPagoNegocio
     {
         private readonly MedioPagoDatos datos = new();
 
         public List<MedioPago> Listar(string filtro = "") => datos.Listar((filtro ?? "").Trim(), false);
 
-        /// <summary>Medios habilitados (combo de CU-15).</summary>
         public List<MedioPago> ListarHabilitados() => datos.Listar("", true);
 
         public MedioPago? ObtenerPorId(int id) => datos.ObtenerPorId(id);

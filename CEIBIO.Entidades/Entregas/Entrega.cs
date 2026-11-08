@@ -6,10 +6,9 @@
         public int IdReporte { get; set; }
         public string NombreRecibe { get; set; } = string.Empty;
         public string DniRecibe { get; set; } = string.Empty;
-        public string Relacion { get; set; } = string.Empty;   // Paciente, Representante, Familiar
+        public string Relacion { get; set; } = string.Empty;
         public DateTime FechaEntrega { get; set; }
 
-        // Datos para mostrar
         public int IdAtencion { get; set; }
         public string NumeroAtencion { get; set; } = string.Empty;
         public string NombrePaciente { get; set; } = string.Empty;

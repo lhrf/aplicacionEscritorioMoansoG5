@@ -1,248 +1,113 @@
-﻿
-using System;
-using System.Drawing;
-using System.Windows.Forms;
+using CEIBIO.Entidades;
+using CEIBIO.Negocio;
 
 namespace CEIBIO.Presentacion.Mantenedores
 {
     public partial class FrmMantIntervalos : Form
     {
-        private readonly Color AZUL = Color.FromArgb(11, 61, 110);
-        private readonly Color BLANCO = Color.White;
-        private readonly Color TEXTO = Color.FromArgb(31, 35, 40);
-        private readonly Color FONDO = Color.FromArgb(244, 246, 249);
-        private readonly Color PELIGRO = Color.FromArgb(180, 35, 24);
+        private readonly IntervaloNegocio negocio = new();
+        private readonly ParametroNegocio parametros = new();
+        private readonly Mantenedor m;
+        private bool cargando;
 
         public FrmMantIntervalos()
         {
             InitializeComponent();
-            this.btnCerrar.Click += (sender, args) => this.Close();
-
+            cboExamen.Items.Clear();
+            cboParametro.Items.Clear();
+            cboSexo.Items.Clear();
+            cboSexo.Items.AddRange(IntervaloNegocio.Sexos);
+            nudMinimo.Minimum = -1000000;
+            nudMaximo.Minimum = -1000000;
+            nudEdadMinima.Minimum = 0;
+            nudEdadMinima.Maximum = 120;
+            nudEdadMaxima.Minimum = 0;
+            nudEdadMaxima.Maximum = 120;
+            m = new Mantenedor(grpDatos, btnNuevo, btnEditar, btnGuardar, btnCancelar, btnInhabilitar);
+            cboExamen.SelectedIndexChanged += (s, e) => CargarParametros();
+            btnBuscar.Click += (s, e) => Buscar();
+            btnNuevo.Click += (s, e) => Nuevo();
+            btnEditar.Click += BtnEditar_Click;
+            btnGuardar.Click += BtnGuardar_Click;
+            btnCancelar.Click += (s, e) => m.Cancelar();
+            btnInhabilitar.Click += BtnInhabilitar_Click;
+            btnCerrar.Click += (s, e) => Close();
+            Load += (s, e) => Ui.Intentar(() =>
+            {
+                cargando = true;
+                Ui.Combo(cboExamen, new ExamenNegocio().ListarHabilitados(), "Nombre", "IdExamen");
+                cargando = false;
+                Buscar();
+            });
         }
 
-
-
-        // CREAR GROUPBOX
-        private GroupBox CrearGrupo(
-            string nombre,
-            string titulo,
-            int x, int y,
-            int ancho, int alto)
+        private void CargarParametros()
         {
-            return new GroupBox
-            {
-                Name = nombre,
-                Text = titulo,
-                Location = new Point(x, y),
-                Size = new Size(ancho, alto),
-                BackColor = BLANCO,
-                ForeColor = AZUL,
-                Font = new Font("Segoe UI", 10, FontStyle.Bold)
-            };
+            if (cargando) return;
+            var ex = Ui.ItemCombo<Examen>(cboExamen);
+            if (ex == null) { cboParametro.DataSource = null; cboParametro.Items.Clear(); return; }
+            Ui.Intentar(() => Ui.Combo(cboParametro, parametros.ListarPorExamen(ex.IdExamen), "Nombre", "IdParametro"));
         }
 
-        // CREAR LABEL
-        private Label CrearEtiqueta(
-            string nombre,
-            string texto,
-            int x, int y)
+        private void Buscar()
         {
-            return new Label
+            Ui.Intentar(() => Ui.Llenar(dgvRegistros, negocio.Listar(txtBuscar.Text), x => new object?[]
             {
-                Name = nombre,
-                Text = texto,
-                Location = new Point(x, y),
-                AutoSize = true,
-                Font = new Font("Segoe UI", 10),
-                ForeColor = TEXTO,
-                BackColor = Color.Transparent
-            };
+                x.NombreParametro, x.ValorMinimo?.ToString("0.##"), x.ValorMaximo?.ToString("0.##"),
+                x.Sexo, x.EdadTexto, x.ReferenciaTexto, x.EstadoTexto
+            }));
         }
 
-        // CREAR TEXTBOX
-        private TextBox CrearTexto(
-            string nombre,
-            int x, int y,
-            int ancho, int alto)
+        private void Nuevo()
         {
-            return new TextBox
-            {
-                Name = nombre,
-                Location = new Point(x, y),
-                Size = new Size(ancho, alto),
-                Font = new Font("Segoe UI", 10),
-                ForeColor = TEXTO,
-                BackColor = BLANCO,
-                BorderStyle = BorderStyle.FixedSingle
-            };
+            m.Nuevo();
+            Ui.Decimal(nudMinimo, null);
+            Ui.Decimal(nudMaximo, null);
+            cboSexo.SelectedItem = "Ambos";
+            nudEdadMinima.Value = 0;
+            nudEdadMaxima.Value = 120;
+            cboExamen.Focus();
         }
 
-        // CREAR COMBOBOX
-        private ComboBox CrearCombo(
-            string nombre,
-            int x, int y,
-            int ancho)
+        private void BtnEditar_Click(object? sender, EventArgs e)
         {
-            return new ComboBox
-            {
-                Name = nombre,
-                Location = new Point(x, y),
-                Size = new Size(ancho, 31),
-                Font = new Font("Segoe UI", 10),
-                DropDownStyle = ComboBoxStyle.DropDownList
-            };
+            var x = Ui.Seleccionado<IntervaloReferencia>(dgvRegistros);
+            if (x == null) { Ui.Aviso("Seleccione un registro."); return; }
+            m.Editar(x.IdIntervalo);
+            cboExamen.SelectedValue = x.IdExamen;
+            cboParametro.SelectedValue = x.IdParametro;
+            Ui.Decimal(nudMinimo, x.ValorMinimo);
+            Ui.Decimal(nudMaximo, x.ValorMaximo);
+            cboSexo.SelectedItem = x.Sexo;
+            nudEdadMinima.Value = Math.Clamp(x.EdadMinima, 0, 120);
+            nudEdadMaxima.Value = Math.Clamp(x.EdadMaxima, 0, 120);
+            txtReferenciaTexto.Text = x.ReferenciaTexto ?? "";
         }
 
-        // CREAR NUMERICUPDOWN
-        private NumericUpDown CrearNumero(
-            string nombre,
-            int x, int y,
-            int ancho,
-            bool decimalPermitido)
+        private void BtnGuardar_Click(object? sender, EventArgs e)
         {
-            NumericUpDown numero = new NumericUpDown
+            var x = new IntervaloReferencia
             {
-                Name = nombre,
-                Location = new Point(x, y),
-                Size = new Size(ancho, 27),
-                Font = new Font("Segoe UI", 10),
-                Minimum = 0,
-                Maximum = 999999
+                IdIntervalo = m.Id,
+                IdParametro = Ui.ItemCombo<Parametro>(cboParametro)?.IdParametro ?? 0,
+                ValorMinimo = Ui.Decimal(nudMinimo),
+                ValorMaximo = Ui.Decimal(nudMaximo),
+                Sexo = cboSexo.Text,
+                EdadMinima = (int)nudEdadMinima.Value,
+                EdadMaxima = (int)nudEdadMaxima.Value,
+                ReferenciaTexto = txtReferenciaTexto.Text
             };
-
-            if (decimalPermitido)
-            {
-                numero.DecimalPlaces = 2;
-                numero.Increment = 0.01M;
-            }
-            else
-            {
-                numero.DecimalPlaces = 0;
-                numero.Increment = 1;
-            }
-
-            return numero;
+            if (!Ui.Mostrar(negocio.Guardar(x))) return;
+            m.Cancelar();
+            Buscar();
         }
 
-        // CREAR DATAGRIDVIEW
-        private DataGridView CrearGrilla(string nombre)
+        private void BtnInhabilitar_Click(object? sender, EventArgs e)
         {
-            DataGridView dgv = new DataGridView
-            {
-                Name = nombre,
-                Dock = DockStyle.Fill,
-                BackgroundColor = BLANCO,
-                BorderStyle = BorderStyle.None,
-                GridColor = Color.FromArgb(208, 215, 222),
-                EnableHeadersVisualStyles = false,
-
-                ColumnHeadersHeightSizeMode =
-                    DataGridViewColumnHeadersHeightSizeMode.DisableResizing,
-
-                ColumnHeadersHeight = 48,
-                RowHeadersVisible = false,
-                ReadOnly = true,
-
-                SelectionMode =
-                    DataGridViewSelectionMode.FullRowSelect,
-
-                MultiSelect = false,
-                AllowUserToAddRows = false,
-                AllowUserToDeleteRows = false,
-                AllowUserToResizeRows = false,
-
-                AutoSizeColumnsMode =
-                    DataGridViewAutoSizeColumnsMode.Fill
-            };
-
-            dgv.RowTemplate.Height = 28;
-
-            dgv.ColumnHeadersDefaultCellStyle.BackColor = AZUL;
-            dgv.ColumnHeadersDefaultCellStyle.ForeColor = BLANCO;
-            dgv.ColumnHeadersDefaultCellStyle.SelectionBackColor = AZUL;
-            dgv.ColumnHeadersDefaultCellStyle.Font =
-                new Font("Segoe UI", 10, FontStyle.Bold);
-
-            dgv.ColumnHeadersDefaultCellStyle.WrapMode =
-                DataGridViewTriState.True;
-
-            dgv.ColumnHeadersDefaultCellStyle.Alignment =
-                DataGridViewContentAlignment.MiddleLeft;
-
-            dgv.DefaultCellStyle.Font =
-                new Font("Segoe UI", 10);
-
-            dgv.DefaultCellStyle.ForeColor = TEXTO;
-
-            dgv.DefaultCellStyle.SelectionBackColor =
-                Color.FromArgb(207, 226, 243);
-
-            dgv.DefaultCellStyle.SelectionForeColor = TEXTO;
-
-            dgv.AlternatingRowsDefaultCellStyle.BackColor =
-                Color.FromArgb(242, 246, 250);
-
-            return dgv;
-        }
-
-        // CREAR BOTONES
-        private Button CrearBoton(
-            string nombre,
-            string texto,
-            int ancho,
-            string estilo)
-        {
-            Button boton = new Button
-            {
-                Name = nombre,
-                Text = texto,
-                Size = new Size(ancho, 36),
-                AutoSize = false,
-                AutoEllipsis = false,
-                TextAlign = ContentAlignment.MiddleCenter,
-                Font = new Font("Segoe UI", 10, FontStyle.Bold),
-                FlatStyle = FlatStyle.Flat,
-                Cursor = Cursors.Hand,
-                UseVisualStyleBackColor = false,
-                TabStop = true
-            };
-
-            if (estilo == "pri")
-            {
-                boton.BackColor = AZUL;
-                boton.ForeColor = BLANCO;
-                boton.FlatAppearance.BorderSize = 0;
-                boton.FlatAppearance.MouseOverBackColor =
-                    Color.FromArgb(20, 90, 158);
-            }
-            else if (estilo == "dan")
-            {
-                boton.BackColor = PELIGRO;
-                boton.ForeColor = BLANCO;
-                boton.FlatAppearance.BorderSize = 0;
-                boton.FlatAppearance.MouseOverBackColor =
-                    Color.FromArgb(143, 28, 19);
-            }
-            else if (estilo == "sec")
-            {
-                boton.BackColor = BLANCO;
-                boton.ForeColor = AZUL;
-                boton.FlatAppearance.BorderSize = 1;
-                boton.FlatAppearance.BorderColor = AZUL;
-                boton.FlatAppearance.MouseOverBackColor =
-                    Color.FromArgb(238, 244, 251);
-            }
-            else
-            {
-                boton.BackColor =
-                    Color.FromArgb(229, 231, 235);
-                boton.ForeColor = TEXTO;
-                boton.FlatAppearance.BorderSize = 0;
-                boton.FlatAppearance.MouseOverBackColor =
-                    Color.FromArgb(209, 213, 219);
-            }
-
-            return boton;
+            var x = Ui.Seleccionado<IntervaloReferencia>(dgvRegistros);
+            if (x == null) { Ui.Aviso("Seleccione un registro."); return; }
+            if (!Ui.Confirmar("¿Desea inhabilitar el intervalo de " + x.NombreParametro + "?")) return;
+            if (Ui.Mostrar(negocio.Inhabilitar(x.IdIntervalo))) Buscar();
         }
     }
 }

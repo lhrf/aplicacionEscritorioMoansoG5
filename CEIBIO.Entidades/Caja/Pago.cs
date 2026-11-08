@@ -12,7 +12,6 @@
         public DateTime FechaRegistro { get; set; }
         public DateTime? FechaConformidad { get; set; }
 
-        // Datos para mostrar
         public string NumeroAtencion { get; set; } = string.Empty;
         public string NombrePaciente { get; set; } = string.Empty;
         public string MedioPago { get; set; } = string.Empty;

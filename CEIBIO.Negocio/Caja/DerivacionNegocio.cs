@@ -4,23 +4,16 @@ using CEIBIO.Entidades;
 
 namespace CEIBIO.Negocio
 {
-    /// <summary>CU-22 Derivar atención pagada.</summary>
     public class DerivacionNegocio
     {
         private readonly AtencionDatos atencionDatos = new();
         private readonly VisitaDatos visitaDatos = new();
         private readonly UsuarioDatos usuarioDatos = new();
 
-        /// <summary>CU-22 paso 1: atenciones pagadas con comprobante emitido.</summary>
         public List<Atencion> ListarParaDerivar() => atencionDatos.ListarPagadas(true);
 
-        /// <summary>Técnicos laboratoristas itinerantes habilitados (combo).</summary>
         public List<Usuario> ListarTecnicosItinerantes() => usuarioDatos.ListarPorRol(Roles.TecnicoItinerante);
 
-        /// <summary>
-        /// CU-22: en sede asigna el número de turno (Respuesta.Dato = turno);
-        /// a domicilio asigna el técnico itinerante (idTecnico obligatorio).
-        /// </summary>
         public Respuesta Derivar(int idAtencion, int? idTecnico) => Respuesta.Intentar(() =>
         {
             var atencion = atencionDatos.ObtenerPorId(idAtencion);
@@ -33,7 +26,6 @@ namespace CEIBIO.Negocio
                 return Respuesta.Ok("Turno N.° " + turno + " asignado. El paciente pasa a la sala de espera.", idAtencion, turno.ToString());
             }
 
-            // A1: atención a domicilio
             if (!idTecnico.HasValue || idTecnico.Value <= 0) return Respuesta.Error("Seleccione el técnico itinerante.");
             var visita = visitaDatos.ObtenerPorAtencion(idAtencion);
             if (visita == null || visita.Estado == EstadoVisita.Cancelada)
@@ -45,7 +37,6 @@ namespace CEIBIO.Negocio
             return Respuesta.Ok("Visita asignada al técnico itinerante.", idAtencion);
         });
 
-        /// <summary>Texto del ticket de turno para imprimir.</summary>
         public static string TextoTicket(Atencion atencion, int turno)
         {
             var sb = new StringBuilder();

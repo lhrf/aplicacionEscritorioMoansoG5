@@ -444,7 +444,6 @@
             label5.Size = new Size(98, 19);
             label5.TabIndex = 3;
             label5.Text = "Color de Tapa*";
-            label5.Click += label5_Click;
             // 
             // label4
             // 
@@ -469,7 +468,6 @@
             label3.Size = new Size(45, 19);
             label3.TabIndex = 1;
             label3.Text = "Tipo *";
-            label3.Click += label3_Click;
             // 
             // FrmMantTubos
             // 

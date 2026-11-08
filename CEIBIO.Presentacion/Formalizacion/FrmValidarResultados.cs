@@ -1,235 +1,77 @@
-﻿
-using System;
-using System.Drawing;
-using System.Windows.Forms;
+using CEIBIO.Entidades;
+using CEIBIO.Negocio;
 
 namespace CEIBIO.Presentacion.Formalizacion
 {
-    // CU-46: Validar resultados clínicos
     public partial class FrmValidarResultados : Form
     {
+        private readonly ResultadoNegocio negocio = new();
+        private int idAtencion;
 
-        private readonly Color azul = Color.FromArgb(11, 61, 110);
-        private readonly Color fondo = Color.FromArgb(244, 246, 249);
-        private readonly Color rojo = Color.FromArgb(180, 35, 24);
+        public FrmValidarResultados() : this(0)
+        {
+        }
 
-        public FrmValidarResultados()
+        public FrmValidarResultados(int idAtencion)
         {
             InitializeComponent();
-            this.btnCerrar.Click += this.BtnCerrar_Click;
-            this.btnRetener.Click += this.BtnRetener_Click;
-            this.btnValidar.Click += this.BtnValidar_Click;
-
+            this.idAtencion = idAtencion;
+            btnValidar.Click += BtnValidar_Click;
+            btnRetener.Click += BtnRetener_Click;
+            btnCerrar.Click += (s, e) => Close();
+            Load += (s, e) => Ui.Intentar(() =>
+            {
+                if (this.idAtencion == 0) ElegirAtencion();
+                Cargar();
+            });
         }
 
-
-
-        // CREAR GRUPOS
-        private GroupBox CrearGrupo(
-            string nombre, string titulo,
-            int x, int y, int ancho, int alto)
+        private void ElegirAtencion()
         {
-            GroupBox grupo = new GroupBox
-            {
-                Name = nombre,
-                Text = titulo,
-                Location = new Point(x, y),
-                Size = new Size(ancho, alto),
-                BackColor = Color.White,
-                ForeColor = azul,
-                Font = new Font(
-                    "Segoe UI", 10, FontStyle.Bold)
-            };
-
-            Controls.Add(grupo);
-            return grupo;
+            var pendientes = negocio.ListarPendientesValidacion();
+            if (pendientes.Count == 0) { Ui.Info("No hay resultados pendientes de validación."); return; }
+            var elegida = Ui.Elegir("Seleccionar atención", pendientes, r => r.NumeroAtencion + " - " + r.NombrePaciente + " (" + r.NombreExamen + ")");
+            idAtencion = elegida?.IdAtencion ?? 0;
         }
 
-        // CREAR ETIQUETAS
-        private void CrearEtiqueta(
-            Control padre, string nombre,
-            string texto, int x, int y)
+        private void Cargar()
         {
-            Label etiqueta = new Label
-            {
-                Name = nombre,
-                Text = texto,
-                Location = new Point(x, y),
-                AutoSize = true,
-                ForeColor = Color.FromArgb(31, 35, 40),
-                Font = new Font("Segoe UI", 10)
-            };
+            var paciente = idAtencion == 0 ? null : negocio.ObtenerPaciente(idAtencion);
+            var resultados = idAtencion == 0 ? new List<ResultadoAnalitico>() : negocio.ListarParaValidar(idAtencion);
+            txtNumeroAtencion.Text = resultados.FirstOrDefault()?.NumeroAtencion ?? "";
+            txtPaciente.Text = paciente?.NombreCompleto ?? "";
+            txtSexo.Text = paciente?.Sexo ?? "";
+            txtEdad.Text = paciente == null ? "" : paciente.Edad + " años";
 
-            padre.Controls.Add(etiqueta);
+            Ui.Llenar(dgvResultados, resultados, r => new object?[]
+            {
+                r.NombreExamen, r.NombreParametro, r.Valor, r.Unidad, r.IntervaloReferencia, r.FueraDeRangoTexto, r.Estado
+            });
+            foreach (DataGridViewRow fila in dgvResultados.Rows)
+                if (fila.Tag is ResultadoAnalitico r && r.FueraDeRango)
+                {
+                    fila.DefaultCellStyle.ForeColor = Color.FromArgb(180, 35, 24);
+                    fila.DefaultCellStyle.Font = new Font(dgvResultados.Font, FontStyle.Bold);
+                }
+
+            var anteriores = idAtencion == 0 ? new List<ResultadoAnalitico>() : negocio.ListarAnteriores(idAtencion);
+            Ui.Llenar(dgvAnteriores, anteriores, r => new object?[] { Ui.Fecha(r.FechaValidacion), r.NombreParametro, r.Valor });
         }
 
-        // CREAR CUADROS DE TEXTO
-        private TextBox CrearTexto(
-            Control padre, string nombre,
-            int x, int y, int ancho, bool lectura)
+        private void BtnValidar_Click(object? sender, EventArgs e)
         {
-            TextBox caja = new TextBox
-            {
-                Name = nombre,
-                Location = new Point(x, y),
-                Size = new Size(ancho, 27),
-                ReadOnly = lectura,
-                BackColor = lectura
-                    ? Color.FromArgb(233, 238, 243)
-                    : Color.White,
-                BorderStyle = BorderStyle.FixedSingle
-            };
-
-            padre.Controls.Add(caja);
-            return caja;
+            var r = Ui.Seleccionado<ResultadoAnalitico>(dgvResultados);
+            if (r == null) { Ui.Aviso("Seleccione un resultado."); return; }
+            if (r.FueraDeRango && !Ui.Confirmar("El resultado está fuera del intervalo de referencia. ¿Desea validarlo de todos modos?")) return;
+            if (Ui.Mostrar(negocio.Validar(r.IdResultado))) Ui.Intentar(Cargar);
         }
 
-        // CREAR TABLAS
-        private DataGridView CrearTabla(
-            Control padre, string nombre,
-            string[] columnas)
+        private void BtnRetener_Click(object? sender, EventArgs e)
         {
-            DataGridView tabla = new DataGridView
-            {
-                Name = nombre,
-                Location = new Point(12, 30),
-                Size = new Size(
-                    padre.Width - 24,
-                    padre.Height - 42),
-                BackgroundColor = Color.White,
-                BorderStyle = BorderStyle.FixedSingle,
-                AllowUserToAddRows = false,
-                AllowUserToDeleteRows = false,
-                ReadOnly = true,
-                MultiSelect = false,
-                SelectionMode =
-                    DataGridViewSelectionMode.FullRowSelect,
-                AutoSizeColumnsMode =
-                    DataGridViewAutoSizeColumnsMode.Fill,
-                RowHeadersVisible = false,
-                EnableHeadersVisualStyles = false,
-
-                // CORRECCIÓN DE ENCABEZADOS
-                ColumnHeadersHeightSizeMode =
-                    DataGridViewColumnHeadersHeightSizeMode
-                    .DisableResizing,
-
-                ColumnHeadersHeight = 60
-            };
-
-            tabla.ColumnHeadersDefaultCellStyle.BackColor = azul;
-            tabla.ColumnHeadersDefaultCellStyle.ForeColor =
-                Color.White;
-            tabla.ColumnHeadersDefaultCellStyle.Font =
-                new Font("Segoe UI", 10, FontStyle.Bold);
-
-            tabla.ColumnHeadersDefaultCellStyle.SelectionBackColor =
-                azul;
-
-            tabla.ColumnHeadersDefaultCellStyle.WrapMode =
-                DataGridViewTriState.True;
-
-            tabla.ColumnHeadersDefaultCellStyle.Alignment =
-                DataGridViewContentAlignment.MiddleLeft;
-
-            tabla.RowTemplate.Height = 30;
-
-            tabla.DefaultCellStyle.SelectionBackColor =
-                Color.FromArgb(227, 236, 246);
-
-            tabla.DefaultCellStyle.SelectionForeColor =
-                Color.Black;
-
-            foreach (string columna in columnas)
-            {
-                tabla.Columns.Add(columna, columna);
-            }
-
-            foreach (DataGridViewColumn columna in tabla.Columns)
-            {
-                columna.HeaderCell.Style.WrapMode =
-                    DataGridViewTriState.True;
-
-                columna.HeaderCell.Style.Alignment =
-                    DataGridViewContentAlignment.MiddleLeft;
-            }
-
-            padre.Controls.Add(tabla);
-            return tabla;
-        }
-
-        // CREAR BOTONES
-        private Button CrearBoton(
-            string nombre, string texto,
-            int x, int y, int ancho,
-            Color colorFondo, Color colorTexto)
-        {
-            Button boton = new Button
-            {
-                Name = nombre,
-                Text = texto,
-                Location = new Point(x, y),
-                Size = new Size(ancho, 36),
-                BackColor = colorFondo,
-                ForeColor = colorTexto,
-                FlatStyle = FlatStyle.Flat,
-                Cursor = Cursors.Hand,
-                Font = new Font(
-                    "Segoe UI", 10, FontStyle.Bold)
-            };
-
-            boton.FlatAppearance.BorderSize = 0;
-
-            return boton;
-        }
-
-        // EVENTOS DE LOS BOTONES
-        private void BtnCerrar_Click(
-            object sender, EventArgs e)
-        {
-            Close();
-        }
-
-        private void BtnValidar_Click(
-            object sender, EventArgs e)
-        {
-            if (dgvResultados.SelectedRows.Count == 0)
-            {
-                MessageBox.Show(
-                    "Seleccione un resultado para validar.",
-                    "CEIBIO",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Information);
-                return;
-            }
-
-            MessageBox.Show(
-                "La validación debe conectarse con " +
-                "la lógica de negocio del sistema.",
-                "CEIBIO",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Information);
-        }
-
-        private void BtnRetener_Click(
-            object sender, EventArgs e)
-        {
-            if (dgvResultados.SelectedRows.Count == 0)
-            {
-                MessageBox.Show(
-                    "Seleccione un resultado para retener.",
-                    "CEIBIO",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Warning);
-                return;
-            }
-
-            MessageBox.Show(
-                "La retención y repetición debe conectarse " +
-                "con la lógica de negocio del sistema.",
-                "CEIBIO",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Information);
+            var r = Ui.Seleccionado<ResultadoAnalitico>(dgvResultados);
+            if (r == null) { Ui.Aviso("Seleccione un resultado."); return; }
+            using var f = new FrmRetenerResultado(r);
+            if (f.ShowDialog(this) == DialogResult.OK) Ui.Intentar(Cargar);
         }
     }
 }

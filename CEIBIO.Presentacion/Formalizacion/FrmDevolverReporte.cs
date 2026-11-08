@@ -1,131 +1,33 @@
-﻿
-using System;
-using System.Drawing;
-using System.Windows.Forms;
+using CEIBIO.Entidades;
+using CEIBIO.Negocio;
 
 namespace CEIBIO.Presentacion.Formalizacion
 {
     public partial class FrmDevolverReporte : Form
     {
-        private readonly Color AZUL =
-            Color.FromArgb(11, 61, 110);
-
-        private readonly Color BLANCO = Color.White;
-
-        private readonly Color TEXTO =
-            Color.FromArgb(31, 35, 40);
-
-        private readonly Color FONDO =
-            Color.FromArgb(244, 246, 249);
-
-        private readonly Color RO =
-            Color.FromArgb(233, 238, 243);
-
-        private readonly Color PELIGRO =
-            Color.FromArgb(180, 35, 24);
+        private readonly ReporteNegocio negocio = new();
+        private readonly ReporteClinico? reporte;
 
         public FrmDevolverReporte()
         {
             InitializeComponent();
-            this.btnCancelar.Click += (sender, args) => this.Close();
-
+            btnDevolver.Click += BtnDevolver_Click;
+            btnCancelar.Click += (s, e) => { DialogResult = DialogResult.Cancel; Close(); };
         }
 
-
-
-        // CREAR ETIQUETAS
-        private Label CrearEtiqueta(
-            string nombre,
-            string texto,
-            int x,
-            int y)
+        public FrmDevolverReporte(ReporteClinico reporte) : this()
         {
-            return new Label
-            {
-                Name = nombre,
-                Text = texto,
-                Location = new Point(x, y),
-                AutoSize = true,
-                Font = new Font("Segoe UI", 10),
-                ForeColor = TEXTO,
-                BackColor = Color.Transparent
-            };
+            this.reporte = reporte;
+            txtNumeroAtencion.Text = reporte.NumeroAtencion;
+            txtPaciente.Text = reporte.NombrePaciente;
         }
 
-        // CREAR TEXTBOX
-        private TextBox CrearTexto(
-            string nombre,
-            int x,
-            int y,
-            int ancho,
-            int alto,
-            bool soloLectura,
-            bool multilinea)
+        private void BtnDevolver_Click(object? sender, EventArgs e)
         {
-            TextBox texto = new TextBox
-            {
-                Name = nombre,
-                Location = new Point(x, y),
-                Size = new Size(ancho, alto),
-                Multiline = multilinea,
-                ReadOnly = soloLectura,
-                BorderStyle = BorderStyle.FixedSingle,
-                BackColor = soloLectura ? RO : BLANCO,
-                ForeColor = TEXTO,
-                Font = new Font("Segoe UI", 10),
-                TabStop = !soloLectura
-            };
-
-            if (multilinea)
-            {
-                texto.ScrollBars = ScrollBars.Vertical;
-            }
-
-            return texto;
-        }
-
-        // CREAR BOTONES
-        private Button CrearBoton(
-            string nombre,
-            string texto,
-            int ancho,
-            bool peligro)
-        {
-            Button boton = new Button
-            {
-                Name = nombre,
-                Text = texto,
-                Size = new Size(ancho, 36),
-                AutoSize = false,
-                AutoEllipsis = false,
-                TextAlign = ContentAlignment.MiddleCenter,
-                Font = new Font(
-                    "Segoe UI", 10, FontStyle.Bold),
-                FlatStyle = FlatStyle.Flat,
-                Cursor = Cursors.Hand,
-                UseVisualStyleBackColor = false,
-                TabStop = true
-            };
-
-            if (peligro)
-            {
-                boton.BackColor = PELIGRO;
-                boton.ForeColor = BLANCO;
-                boton.FlatAppearance.BorderSize = 0;
-                boton.FlatAppearance.MouseOverBackColor =
-                    Color.FromArgb(143, 28, 19);
-            }
-            else
-            {
-                boton.BackColor =
-                    Color.FromArgb(229, 231, 235);
-                boton.ForeColor = TEXTO;
-                boton.FlatAppearance.BorderSize = 0;
-                boton.FlatAppearance.MouseOverBackColor =
-                    Color.FromArgb(209, 213, 219);
-            }
-
-            return boton;
+            if (reporte == null) { Ui.Aviso("Abra este formulario desde la autorización de reportes."); return; }
+            if (!Ui.Mostrar(negocio.DevolverAlMedico(reporte.IdReporte, txtObservacion.Text))) return;
+            DialogResult = DialogResult.OK;
+            Close();
         }
     }
 }

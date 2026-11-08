@@ -5,8 +5,8 @@
         public int IdExamen { get; set; }
         public string Codigo { get; set; } = string.Empty;
         public string Nombre { get; set; } = string.Empty;
-        public string TipoMuestra { get; set; } = string.Empty;     // Sangre, Orina, Heces
-        public string Procedimiento { get; set; } = string.Empty;   // Automatizado, Microscópico
+        public string TipoMuestra { get; set; } = string.Empty;
+        public string Procedimiento { get; set; } = string.Empty;
         public decimal Tarifa { get; set; }
         public bool Habilitado { get; set; } = true;
 

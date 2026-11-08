@@ -1,6 +1,5 @@
 ﻿namespace CEIBIO.Entidades
 {
-    /// <summary>Ficha clínica histórica del paciente.</summary>
     public class Paciente
     {
         public int IdPaciente { get; set; }
@@ -8,7 +7,7 @@
         public string Nombres { get; set; } = string.Empty;
         public string Apellidos { get; set; } = string.Empty;
         public DateTime FechaNacimiento { get; set; } = DateTime.Today;
-        public string Sexo { get; set; } = string.Empty;   // Femenino, Masculino
+        public string Sexo { get; set; } = string.Empty;
         public string? Direccion { get; set; }
         public string? Telefono { get; set; }
 

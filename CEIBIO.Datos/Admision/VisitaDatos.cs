@@ -28,13 +28,10 @@ namespace CEIBIO.Datos
         public VisitaDomiciliaria? ObtenerPorAtencion(int idAtencion) =>
             Db.Obtener("usp_Visita_ObtenerPorAtencion", Mapear, P("@IdAtencion", idAtencion));
 
-        /// <summary>CU-09.</summary>
         public List<VisitaDomiciliaria> ListarPorFecha(DateTime fecha) => Db.Listar("usp_Visita_ListarPorFecha", Mapear, P("@Fecha", fecha.Date));
 
-        /// <summary>CU-23.</summary>
         public List<VisitaDomiciliaria> ListarAsignadas(int idTecnico) => Db.Listar("usp_Visita_ListarAsignadas", Mapear, P("@IdTecnico", idTecnico));
 
-        /// <summary>CU-30.</summary>
         public List<VisitaDomiciliaria> ListarDelDia(int idTecnico, DateTime fecha) =>
             Db.Listar("usp_Visita_ListarDelDia", Mapear, P("@IdTecnico", idTecnico), P("@Fecha", fecha.Date));
 

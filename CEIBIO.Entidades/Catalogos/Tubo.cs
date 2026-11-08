@@ -9,7 +9,6 @@
         public int MinutosCentrifugacion { get; set; }
         public bool Habilitado { get; set; } = true;
 
-        /// <summary>Exámenes asociados al tubo (CheckedListBox del mantenedor).</summary>
         public List<int> IdExamenes { get; set; } = new();
 
         public string EstadoTexto => Habilitado ? "Habilitado" : "Inhabilitado";

@@ -17,7 +17,6 @@ namespace CEIBIO.Datos
 
         public List<Plantilla> Listar(string filtro) => Db.Listar("usp_Plantilla_Listar", Mapear, P("@Filtro", filtro));
 
-        /// <summary>Devuelve la plantilla con sus exámenes asociados (IdExamenes).</summary>
         public Plantilla? ObtenerPorId(int id)
         {
             var plantilla = Db.Obtener("usp_Plantilla_ObtenerPorId", Mapear, P("@IdPlantilla", id));
@@ -26,13 +25,11 @@ namespace CEIBIO.Datos
             return plantilla;
         }
 
-        /// <summary>Plantilla habilitada asociada a un examen (CU-49). Null si el examen no tiene plantilla.</summary>
         public Plantilla? ObtenerPorExamen(int idExamen) => Db.Obtener("usp_Plantilla_ObtenerPorExamen", Mapear, P("@IdExamen", idExamen));
 
         public bool ExisteNombre(string nombre, int idExcluir) =>
             Db.Entero("usp_Plantilla_ExisteNombre", P("@Nombre", nombre), P("@IdExcluir", idExcluir)) > 0;
 
-        /// <summary>CU-53: exámenes de la lista que ya están en otra plantilla habilitada ("Examen (Plantilla), ..."); vacío si ninguno.</summary>
         public string ExamenesEnOtraPlantilla(IEnumerable<int> idExamenes, int idExcluir) =>
             Db.Texto("usp_Plantilla_ExamenesEnOtraPlantilla", P("@IdExamenes", Lista(idExamenes)), P("@IdExcluir", idExcluir));
 

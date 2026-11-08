@@ -1,135 +1,50 @@
-﻿
-using System;
-using System.Drawing;
-using System.Windows.Forms;
+using CEIBIO.Entidades;
+using CEIBIO.Negocio;
 
 namespace CEIBIO.Presentacion.Formalizacion
 {
     public partial class FrmConsultarReportes : Form
     {
-        private readonly Color AZUL =
-            Color.FromArgb(11, 61, 110);
-
-        private readonly Color BLANCO = Color.White;
-
-        private readonly Color TEXTO =
-            Color.FromArgb(31, 35, 40);
-
-        private readonly Color FONDO =
-            Color.FromArgb(244, 246, 249);
+        private readonly ReporteNegocio negocio = new();
 
         public FrmConsultarReportes()
         {
             InitializeComponent();
-            this.btnCerrar.Click += (sender, args) => this.Close();
-
+            txtDni.MaxLength = 8;
+            cboEstado.Items.Clear();
+            cboEstado.Items.Add("(Todos)");
+            foreach (var estado in EstadoReporte.Todos) cboEstado.Items.Add(estado);
+            cboEstado.SelectedIndex = 0;
+            dtpFechaInicio.Value = DateTime.Today.AddDays(-30);
+            dtpFechaFin.Value = DateTime.Today;
+            btnBuscar.Click += (s, e) => Buscar();
+            btnReimprimir.Click += BtnReimprimir_Click;
+            btnCerrar.Click += (s, e) => Close();
+            Load += (s, e) => Buscar();
         }
 
-
-
-        // ======================================
-        // CREAR GROUPBOX
-        // ======================================
-
-        private GroupBox CrearGrupo(
-            string nombre,
-            string titulo,
-            int x,
-            int y,
-            int ancho,
-            int alto)
+        private void Buscar()
         {
-            return new GroupBox
+            if (!Validacion.Vacio(txtDni.Text) && !Validacion.EsDni(txtDni.Text))
             {
-                Name = nombre,
-                Text = titulo,
-                Location = new Point(x, y),
-                Size = new Size(ancho, alto),
-                BackColor = BLANCO,
-                ForeColor = AZUL,
-                Font = new Font(
-                    "Segoe UI", 10, FontStyle.Bold)
-            };
-        }
-
-        // ======================================
-        // CREAR LABEL
-        // ======================================
-
-        private Label CrearEtiqueta(
-            string nombre,
-            string texto,
-            int x,
-            int y)
-        {
-            return new Label
-            {
-                Name = nombre,
-                Text = texto,
-                Location = new Point(x, y),
-                AutoSize = true,
-                Font = new Font("Segoe UI", 10),
-                ForeColor = TEXTO,
-                BackColor = Color.Transparent
-            };
-        }
-
-        // ======================================
-        // CREAR BOTONES
-        // ======================================
-
-        private Button CrearBoton(
-            string nombre,
-            string texto,
-            int ancho,
-            string estilo)
-        {
-            Button boton = new Button
-            {
-                Name = nombre,
-                Text = texto,
-                Size = new Size(ancho, 36),
-
-                AutoSize = false,
-                AutoEllipsis = false,
-
-                TextAlign =
-                    ContentAlignment.MiddleCenter,
-
-                Font = new Font(
-                    "Segoe UI", 10, FontStyle.Bold),
-
-                FlatStyle = FlatStyle.Flat,
-                Cursor = Cursors.Hand,
-
-                UseVisualStyleBackColor = false,
-                TabStop = true
-            };
-
-            if (estilo == "sec")
-            {
-                boton.BackColor = BLANCO;
-                boton.ForeColor = AZUL;
-
-                boton.FlatAppearance.BorderSize = 1;
-                boton.FlatAppearance.BorderColor = AZUL;
-
-                boton.FlatAppearance.MouseOverBackColor =
-                    Color.FromArgb(238, 244, 251);
+                Ui.Aviso("El DNI debe tener 8 dígitos numéricos.");
+                return;
             }
-            else
+            Ui.Intentar(() =>
             {
-                boton.BackColor =
-                    Color.FromArgb(229, 231, 235);
+                var lista = negocio.Consultar(txtDni.Text, dtpFechaInicio.Value, dtpFechaFin.Value, cboEstado.Text);
+                Ui.Llenar(dgvReportes, lista, r => new object?[]
+                {
+                    r.NumeroAtencion, r.NombrePaciente, r.Examenes, r.Estado, Ui.FechaHora(r.FechaAutorizacion)
+                });
+            });
+        }
 
-                boton.ForeColor = TEXTO;
-                boton.FlatAppearance.BorderSize = 0;
-
-                boton.FlatAppearance.MouseOverBackColor =
-                    Color.FromArgb(209, 213, 219);
-            }
-
-            return boton;
+        private void BtnReimprimir_Click(object? sender, EventArgs e)
+        {
+            var r = Ui.Seleccionado<ReporteClinico>(dgvReportes);
+            if (r == null) { Ui.Aviso("Seleccione un reporte."); return; }
+            Ui.Imprimir("Reporte clínico " + r.NumeroAtencion, ReporteNegocio.TextoImpresion(r));
         }
     }
 }

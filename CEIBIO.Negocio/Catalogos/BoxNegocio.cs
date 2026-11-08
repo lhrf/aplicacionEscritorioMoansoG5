@@ -3,14 +3,12 @@ using CEIBIO.Entidades;
 
 namespace CEIBIO.Negocio
 {
-    /// <summary>CU-32 Mantenedor de boxes de extracción.</summary>
     public class BoxNegocio
     {
         private readonly BoxDatos datos = new();
 
         public List<Box> Listar(string filtro = "") => datos.Listar((filtro ?? "").Trim());
 
-        /// <summary>Boxes habilitados y sin paciente en toma de muestra (CU-26).</summary>
         public List<Box> ListarLibres() => datos.ListarLibres();
 
         public Box? ObtenerPorId(int id) => datos.ObtenerPorId(id);
