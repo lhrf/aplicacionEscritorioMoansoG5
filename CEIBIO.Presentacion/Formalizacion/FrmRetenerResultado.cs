@@ -64,7 +64,7 @@ namespace CEIBIO.Presentacion.Formalizacion
             Label lblCU = new Label
             {
                 Name = "lblCU",
-                Text = "CU-47",
+                Text = "",
                 Location = new Point(458, 16),
                 AutoSize = true,
                 ForeColor = Color.LightBlue

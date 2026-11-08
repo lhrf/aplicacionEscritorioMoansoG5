@@ -78,7 +78,7 @@ namespace CEIBIO.Presentacion.Formalizacion
             Label lblCodigo = new Label
             {
                 Name = "lblCodigo",
-                Text = "CU-50",
+                Text = "",
                 Location = new Point(1030, 20),
                 AutoSize = true,
                 Font = new Font("Segoe UI", 9),

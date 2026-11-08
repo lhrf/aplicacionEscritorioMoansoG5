@@ -54,7 +54,7 @@ namespace CEIBIO.Presentacion.Formalizacion
 
             Label codigo = new Label
             {
-                Text = "CU-48",
+                Text = "",
                 ForeColor = Color.LightBlue,
                 Location = new Point(925, 20),
                 AutoSize = true

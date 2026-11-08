@@ -75,7 +75,7 @@ namespace CEIBIO.Presentacion.Mantenedores
             Label lblCodigo = new Label
             {
                 Name = "lblCodigo",
-                Text = "CU-54",
+                Text = "",
                 Location = new Point(930, 20),
                 AutoSize = true,
                 Font = new Font("Segoe UI", 9),

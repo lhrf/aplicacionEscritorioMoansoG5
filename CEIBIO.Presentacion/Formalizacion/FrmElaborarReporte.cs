@@ -68,7 +68,7 @@ namespace CEIBIO.Presentacion.Formalizacion
             Label lblCodigo = new Label
             {
                 Name = "lblCodigo",
-                Text = "CU-49",
+                Text = "",
                 AutoSize = true,
                 Location = new Point(1199, 20),
                 Anchor = AnchorStyles.Top | AnchorStyles.Right,
