@@ -10,5 +10,15 @@ namespace CEIBIO.Presentacion.Admision
         {
             InitializeComponent();
         }
+
+        private void btnAgregarExamen_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnGuardar_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
