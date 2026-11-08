@@ -32,17 +32,16 @@
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             pnlEncabezado = new Panel();
             lblTitulo = new Label();
-            lblCodigo = new Label();
             flpBotones = new FlowLayoutPanel();
             btnCerrar = new Button();
             grpFiltros = new GroupBox();
-            lblFechaInicio = new Label();
-            dtpFechaInicio = new DateTimePicker();
-            lblFechaFin = new Label();
-            dateTimePicker1 = new DateTimePicker();
-            lblEstado = new Label();
-            cboEstado = new ComboBox();
             btnBuscar = new Button();
+            cboEstado = new ComboBox();
+            lblEstado = new Label();
+            dateTimePicker1 = new DateTimePicker();
+            lblFechaFin = new Label();
+            dtpFechaInicio = new DateTimePicker();
+            lblFechaInicio = new Label();
             grpTransito = new GroupBox();
             dgvTransito = new DataGridView();
             colCodigo = new DataGridViewTextBoxColumn();
@@ -77,19 +76,6 @@
             lblTitulo.Size = new Size(284, 25);
             lblTitulo.TabIndex = 1;
             lblTitulo.Text = "Consultar tránsito de muestras";
-            // 
-            // lblCodigo
-            // 
-            lblCodigo.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            lblCodigo.AutoSize = true;
-            lblCodigo.BackColor = Color.Transparent;
-            lblCodigo.Font = new Font("Segoe UI", 9F);
-            lblCodigo.ForeColor = Color.FromArgb(191, 215, 238);
-            lblCodigo.Location = new Point(939, 20);
-            lblCodigo.Name = "lblCodigo";
-            lblCodigo.Size = new Size(40, 15);
-            lblCodigo.TabIndex = 2;
-            lblCodigo.Text = "CU-37";
             // 
             // flpBotones
             // 
@@ -139,73 +125,6 @@
             grpFiltros.TabStop = false;
             grpFiltros.Text = "Filtros";
             // 
-            // lblFechaInicio
-            // 
-            lblFechaInicio.AutoSize = true;
-            lblFechaInicio.BackColor = Color.Transparent;
-            lblFechaInicio.ForeColor = Color.FromArgb(31, 35, 40);
-            lblFechaInicio.Location = new Point(25, 42);
-            lblFechaInicio.Name = "lblFechaInicio";
-            lblFechaInicio.Size = new Size(90, 19);
-            lblFechaInicio.TabIndex = 5;
-            lblFechaInicio.Text = "Fecha inicial";
-            // 
-            // dtpFechaInicio
-            // 
-            dtpFechaInicio.CalendarForeColor = Color.FromArgb(31, 35, 40);
-            dtpFechaInicio.Format = DateTimePickerFormat.Short;
-            dtpFechaInicio.Location = new Point(140, 42);
-            dtpFechaInicio.Name = "dtpFechaInicio";
-            dtpFechaInicio.Size = new Size(200, 25);
-            dtpFechaInicio.TabIndex = 5;
-            // 
-            // lblFechaFin
-            // 
-            lblFechaFin.AutoSize = true;
-            lblFechaFin.BackColor = Color.Transparent;
-            lblFechaFin.ForeColor = Color.FromArgb(31, 35, 40);
-            lblFechaFin.Location = new Point(25, 82);
-            lblFechaFin.Name = "lblFechaFin";
-            lblFechaFin.Size = new Size(80, 19);
-            lblFechaFin.TabIndex = 5;
-            lblFechaFin.Text = "Fecha final";
-            // 
-            // dateTimePicker1
-            // 
-            dateTimePicker1.CalendarForeColor = Color.FromArgb(31, 35, 40);
-            dateTimePicker1.Font = new Font("Segoe UI", 10F);
-            dateTimePicker1.Format = DateTimePickerFormat.Short;
-            dateTimePicker1.Location = new Point(140, 76);
-            dateTimePicker1.Name = "dateTimePicker1";
-            dateTimePicker1.Size = new Size(200, 25);
-            dateTimePicker1.TabIndex = 6;
-            // 
-            // lblEstado
-            // 
-            lblEstado.AutoSize = true;
-            lblEstado.BackColor = Color.Transparent;
-            lblEstado.Font = new Font("Segoe UI", 10F);
-            lblEstado.ForeColor = Color.FromArgb(31, 35, 40);
-            lblEstado.Location = new Point(495, 35);
-            lblEstado.Name = "lblEstado";
-            lblEstado.Size = new Size(50, 19);
-            lblEstado.TabIndex = 7;
-            lblEstado.Text = "Estado";
-            // 
-            // cboEstado
-            // 
-            cboEstado.BackColor = Color.White;
-            cboEstado.DropDownStyle = ComboBoxStyle.DropDownList;
-            cboEstado.FlatStyle = FlatStyle.Flat;
-            cboEstado.Font = new Font("Segoe UI", 10F);
-            cboEstado.ForeColor = Color.FromArgb(31, 35, 40);
-            cboEstado.FormattingEnabled = true;
-            cboEstado.Items.AddRange(new object[] { "(Todos)", "Muestra recolectada", "Muestra Acondicionada", "Recibida para análisis" });
-            cboEstado.Location = new Point(605, 32);
-            cboEstado.Name = "cboEstado";
-            cboEstado.Size = new Size(220, 25);
-            cboEstado.TabIndex = 8;
-            // 
             // btnBuscar
             // 
             btnBuscar.BackColor = Color.White;
@@ -221,6 +140,73 @@
             btnBuscar.TabIndex = 5;
             btnBuscar.Text = "Buscar";
             btnBuscar.UseVisualStyleBackColor = false;
+            // 
+            // cboEstado
+            // 
+            cboEstado.BackColor = Color.White;
+            cboEstado.DropDownStyle = ComboBoxStyle.DropDownList;
+            cboEstado.FlatStyle = FlatStyle.Flat;
+            cboEstado.Font = new Font("Segoe UI", 10F);
+            cboEstado.ForeColor = Color.FromArgb(31, 35, 40);
+            cboEstado.FormattingEnabled = true;
+            cboEstado.Items.AddRange(new object[] { "(Todos)", "Muestra recolectada", "Muestra Acondicionada", "Recibida para análisis" });
+            cboEstado.Location = new Point(605, 32);
+            cboEstado.Name = "cboEstado";
+            cboEstado.Size = new Size(220, 25);
+            cboEstado.TabIndex = 8;
+            // 
+            // lblEstado
+            // 
+            lblEstado.AutoSize = true;
+            lblEstado.BackColor = Color.Transparent;
+            lblEstado.Font = new Font("Segoe UI", 10F);
+            lblEstado.ForeColor = Color.FromArgb(31, 35, 40);
+            lblEstado.Location = new Point(495, 35);
+            lblEstado.Name = "lblEstado";
+            lblEstado.Size = new Size(50, 19);
+            lblEstado.TabIndex = 7;
+            lblEstado.Text = "Estado";
+            // 
+            // dateTimePicker1
+            // 
+            dateTimePicker1.CalendarForeColor = Color.FromArgb(31, 35, 40);
+            dateTimePicker1.Font = new Font("Segoe UI", 10F);
+            dateTimePicker1.Format = DateTimePickerFormat.Short;
+            dateTimePicker1.Location = new Point(140, 76);
+            dateTimePicker1.Name = "dateTimePicker1";
+            dateTimePicker1.Size = new Size(200, 25);
+            dateTimePicker1.TabIndex = 6;
+            // 
+            // lblFechaFin
+            // 
+            lblFechaFin.AutoSize = true;
+            lblFechaFin.BackColor = Color.Transparent;
+            lblFechaFin.ForeColor = Color.FromArgb(31, 35, 40);
+            lblFechaFin.Location = new Point(25, 82);
+            lblFechaFin.Name = "lblFechaFin";
+            lblFechaFin.Size = new Size(80, 19);
+            lblFechaFin.TabIndex = 5;
+            lblFechaFin.Text = "Fecha final";
+            // 
+            // dtpFechaInicio
+            // 
+            dtpFechaInicio.CalendarForeColor = Color.FromArgb(31, 35, 40);
+            dtpFechaInicio.Format = DateTimePickerFormat.Short;
+            dtpFechaInicio.Location = new Point(140, 42);
+            dtpFechaInicio.Name = "dtpFechaInicio";
+            dtpFechaInicio.Size = new Size(200, 25);
+            dtpFechaInicio.TabIndex = 5;
+            // 
+            // lblFechaInicio
+            // 
+            lblFechaInicio.AutoSize = true;
+            lblFechaInicio.BackColor = Color.Transparent;
+            lblFechaInicio.ForeColor = Color.FromArgb(31, 35, 40);
+            lblFechaInicio.Location = new Point(25, 42);
+            lblFechaInicio.Name = "lblFechaInicio";
+            lblFechaInicio.Size = new Size(90, 19);
+            lblFechaInicio.TabIndex = 5;
+            lblFechaInicio.Text = "Fecha inicial";
             // 
             // grpTransito
             // 
@@ -320,7 +306,6 @@
             Controls.Add(grpTransito);
             Controls.Add(grpFiltros);
             Controls.Add(flpBotones);
-            Controls.Add(lblCodigo);
             Controls.Add(lblTitulo);
             Controls.Add(pnlEncabezado);
             Font = new Font("Segoe UI", 10F);
@@ -342,7 +327,6 @@
 
         private Panel pnlEncabezado;
         private Label lblTitulo;
-        private Label lblCodigo;
         private FlowLayoutPanel flpBotones;
         private Button btnCerrar;
         private GroupBox grpFiltros;

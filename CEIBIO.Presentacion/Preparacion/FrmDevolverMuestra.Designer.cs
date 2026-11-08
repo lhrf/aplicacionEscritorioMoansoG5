@@ -30,17 +30,16 @@
         {
             pnlEncabezado = new Panel();
             lblTitulo = new Label();
-            label1 = new Label();
             flpBotones = new FlowLayoutPanel();
             btnCancelar = new Button();
             btnDevolver = new Button();
             grpDevolucion = new GroupBox();
-            lblCodigo = new Label();
-            txtCodigo = new TextBox();
-            lblPaciente = new Label();
-            txtPaciente = new TextBox();
-            lblDiferencia = new Label();
             txtDiferencia = new TextBox();
+            lblDiferencia = new Label();
+            txtPaciente = new TextBox();
+            lblPaciente = new Label();
+            txtCodigo = new TextBox();
+            lblCodigo = new Label();
             flpBotones.SuspendLayout();
             grpDevolucion.SuspendLayout();
             SuspendLayout();
@@ -65,19 +64,6 @@
             lblTitulo.Size = new Size(265, 21);
             lblTitulo.TabIndex = 1;
             lblTitulo.Text = "Devolver muestra con diferencias";
-            // 
-            // label1
-            // 
-            label1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            label1.AutoSize = true;
-            label1.BackColor = Color.Transparent;
-            label1.Font = new Font("Segoe UI", 9F);
-            label1.ForeColor = Color.FromArgb(191, 215, 238);
-            label1.Location = new Point(459, 15);
-            label1.Name = "label1";
-            label1.Size = new Size(40, 15);
-            label1.TabIndex = 2;
-            label1.Text = "CU-36";
             // 
             // flpBotones
             // 
@@ -143,42 +129,30 @@
             grpDevolucion.TabStop = false;
             grpDevolucion.Text = "Devolución";
             // 
-            // lblCodigo
+            // txtDiferencia
             // 
-            lblCodigo.AutoSize = true;
-            lblCodigo.BackColor = Color.Transparent;
-            lblCodigo.Font = new Font("Segoe UI", 10F);
-            lblCodigo.ForeColor = Color.FromArgb(31, 35, 40);
-            lblCodigo.Location = new Point(15, 35);
-            lblCodigo.Name = "lblCodigo";
-            lblCodigo.Size = new Size(53, 19);
-            lblCodigo.TabIndex = 0;
-            lblCodigo.Text = "Código";
+            txtDiferencia.BackColor = Color.White;
+            txtDiferencia.BorderStyle = BorderStyle.FixedSingle;
+            txtDiferencia.Font = new Font("Segoe UI", 10F);
+            txtDiferencia.ForeColor = Color.FromArgb(31, 35, 40);
+            txtDiferencia.Location = new Point(215, 108);
+            txtDiferencia.Multiline = true;
+            txtDiferencia.Name = "txtDiferencia";
+            txtDiferencia.ScrollBars = ScrollBars.Vertical;
+            txtDiferencia.Size = new Size(250, 60);
+            txtDiferencia.TabIndex = 5;
             // 
-            // txtCodigo
+            // lblDiferencia
             // 
-            txtCodigo.BackColor = Color.FromArgb(233, 238, 243);
-            txtCodigo.BorderStyle = BorderStyle.FixedSingle;
-            txtCodigo.Font = new Font("Segoe UI", 10F);
-            txtCodigo.ForeColor = Color.FromArgb(31, 35, 40);
-            txtCodigo.Location = new Point(215, 32);
-            txtCodigo.Name = "txtCodigo";
-            txtCodigo.ReadOnly = true;
-            txtCodigo.Size = new Size(150, 25);
-            txtCodigo.TabIndex = 1;
-            txtCodigo.TabStop = false;
-            // 
-            // lblPaciente
-            // 
-            lblPaciente.AutoSize = true;
-            lblPaciente.BackColor = Color.Transparent;
-            lblPaciente.Font = new Font("Segoe UI", 10F);
-            lblPaciente.ForeColor = Color.FromArgb(31, 35, 40);
-            lblPaciente.Location = new Point(15, 73);
-            lblPaciente.Name = "lblPaciente";
-            lblPaciente.Size = new Size(60, 19);
-            lblPaciente.TabIndex = 2;
-            lblPaciente.Text = "Paciente";
+            lblDiferencia.AutoSize = true;
+            lblDiferencia.BackColor = Color.Transparent;
+            lblDiferencia.Font = new Font("Segoe UI", 10F);
+            lblDiferencia.ForeColor = Color.FromArgb(31, 35, 40);
+            lblDiferencia.Location = new Point(15, 111);
+            lblDiferencia.Name = "lblDiferencia";
+            lblDiferencia.Size = new Size(152, 19);
+            lblDiferencia.TabIndex = 4;
+            lblDiferencia.Text = "Diferencia encontrada *";
             // 
             // txtPaciente
             // 
@@ -193,30 +167,42 @@
             txtPaciente.TabIndex = 3;
             txtPaciente.TabStop = false;
             // 
-            // lblDiferencia
+            // lblPaciente
             // 
-            lblDiferencia.AutoSize = true;
-            lblDiferencia.BackColor = Color.Transparent;
-            lblDiferencia.Font = new Font("Segoe UI", 10F);
-            lblDiferencia.ForeColor = Color.FromArgb(31, 35, 40);
-            lblDiferencia.Location = new Point(15, 111);
-            lblDiferencia.Name = "lblDiferencia";
-            lblDiferencia.Size = new Size(152, 19);
-            lblDiferencia.TabIndex = 4;
-            lblDiferencia.Text = "Diferencia encontrada *";
+            lblPaciente.AutoSize = true;
+            lblPaciente.BackColor = Color.Transparent;
+            lblPaciente.Font = new Font("Segoe UI", 10F);
+            lblPaciente.ForeColor = Color.FromArgb(31, 35, 40);
+            lblPaciente.Location = new Point(15, 73);
+            lblPaciente.Name = "lblPaciente";
+            lblPaciente.Size = new Size(60, 19);
+            lblPaciente.TabIndex = 2;
+            lblPaciente.Text = "Paciente";
             // 
-            // txtDiferencia
+            // txtCodigo
             // 
-            txtDiferencia.BackColor = Color.White;
-            txtDiferencia.BorderStyle = BorderStyle.FixedSingle;
-            txtDiferencia.Font = new Font("Segoe UI", 10F);
-            txtDiferencia.ForeColor = Color.FromArgb(31, 35, 40);
-            txtDiferencia.Location = new Point(215, 108);
-            txtDiferencia.Multiline = true;
-            txtDiferencia.Name = "txtDiferencia";
-            txtDiferencia.ScrollBars = ScrollBars.Vertical;
-            txtDiferencia.Size = new Size(250, 60);
-            txtDiferencia.TabIndex = 5;
+            txtCodigo.BackColor = Color.FromArgb(233, 238, 243);
+            txtCodigo.BorderStyle = BorderStyle.FixedSingle;
+            txtCodigo.Font = new Font("Segoe UI", 10F);
+            txtCodigo.ForeColor = Color.FromArgb(31, 35, 40);
+            txtCodigo.Location = new Point(215, 32);
+            txtCodigo.Name = "txtCodigo";
+            txtCodigo.ReadOnly = true;
+            txtCodigo.Size = new Size(150, 25);
+            txtCodigo.TabIndex = 1;
+            txtCodigo.TabStop = false;
+            // 
+            // lblCodigo
+            // 
+            lblCodigo.AutoSize = true;
+            lblCodigo.BackColor = Color.Transparent;
+            lblCodigo.Font = new Font("Segoe UI", 10F);
+            lblCodigo.ForeColor = Color.FromArgb(31, 35, 40);
+            lblCodigo.Location = new Point(15, 35);
+            lblCodigo.Name = "lblCodigo";
+            lblCodigo.Size = new Size(53, 19);
+            lblCodigo.TabIndex = 0;
+            lblCodigo.Text = "Código";
             // 
             // FrmDevolverMuestra
             // 
@@ -226,7 +212,6 @@
             ClientSize = new Size(504, 321);
             Controls.Add(grpDevolucion);
             Controls.Add(flpBotones);
-            Controls.Add(label1);
             Controls.Add(lblTitulo);
             Controls.Add(pnlEncabezado);
             Font = new Font("Segoe UI", 10F);
@@ -248,7 +233,6 @@
 
         private Panel pnlEncabezado;
         private Label lblTitulo;
-        private Label label1;
         private FlowLayoutPanel flpBotones;
         private Button btnCancelar;
         private Button btnDevolver;

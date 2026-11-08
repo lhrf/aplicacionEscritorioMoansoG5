@@ -33,7 +33,6 @@
             DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             pnlEncabezado = new Panel();
-            lblCodigo = new Label();
             lblTitulo = new Label();
             flpBotones = new FlowLayoutPanel();
             btnCerrar = new Button();
@@ -57,26 +56,12 @@
             // pnlEncabezado
             // 
             pnlEncabezado.BackColor = Color.FromArgb(11, 61, 110);
-            pnlEncabezado.Controls.Add(lblCodigo);
             pnlEncabezado.Controls.Add(lblTitulo);
             pnlEncabezado.Dock = DockStyle.Top;
             pnlEncabezado.Location = new Point(0, 0);
             pnlEncabezado.Name = "pnlEncabezado";
             pnlEncabezado.Size = new Size(984, 49);
             pnlEncabezado.TabIndex = 0;
-            // 
-            // lblCodigo
-            // 
-            lblCodigo.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            lblCodigo.AutoSize = true;
-            lblCodigo.BackColor = Color.Transparent;
-            lblCodigo.Font = new Font("Segoe UI", 9F);
-            lblCodigo.Location = new Point(934, 17);
-            lblCodigo.Name = "lblCodigo";
-            lblCodigo.Size = new Size(40, 15);
-            lblCodigo.TabIndex = 1;
-            lblCodigo.Text = "CU-26";
-            lblCodigo.Click += lblCodigo_Click;
             // 
             // lblTitulo
             // 
@@ -289,7 +274,6 @@
 
         private Panel pnlEncabezado;
         private Label lblTitulo;
-        private Label lblCodigo;
         private FlowLayoutPanel flpBotones;
         private Button btnCerrar;
         private Button btnAsignar;

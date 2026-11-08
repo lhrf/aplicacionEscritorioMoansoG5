@@ -30,7 +30,6 @@
         {
             panel1 = new Panel();
             label1 = new Label();
-            label2 = new Label();
             flowLayoutPanel1 = new FlowLayoutPanel();
             button1 = new Button();
             button2 = new Button();
@@ -43,21 +42,21 @@
             button5 = new Button();
             label3 = new Label();
             groupBox2 = new GroupBox();
+            txtTubos = new TextBox();
+            lblTubos = new Label();
+            txtExamenes = new TextBox();
+            lblExamenes = new Label();
+            textBox4 = new TextBox();
+            textBox3 = new TextBox();
             label6 = new Label();
             label5 = new Label();
-            textBox3 = new TextBox();
-            textBox4 = new TextBox();
-            lblExamenes = new Label();
-            txtExamenes = new TextBox();
-            lblTubos = new Label();
-            txtTubos = new TextBox();
             grpAcondicionamiento = new GroupBox();
-            lblConservacion = new Label();
-            cboConservacion = new ComboBox();
-            lblMinutos = new Label();
-            nudMinutos = new NumericUpDown();
-            lblMotivoCorreccion = new Label();
             txtMotivoCorreccion = new TextBox();
+            lblMotivoCorreccion = new Label();
+            nudMinutos = new NumericUpDown();
+            lblMinutos = new Label();
+            cboConservacion = new ComboBox();
+            lblConservacion = new Label();
             panel1.SuspendLayout();
             flowLayoutPanel1.SuspendLayout();
             groupBox1.SuspendLayout();
@@ -70,7 +69,6 @@
             // 
             panel1.BackColor = Color.FromArgb(11, 61, 110);
             panel1.Controls.Add(label1);
-            panel1.Controls.Add(label2);
             panel1.Dock = DockStyle.Top;
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
@@ -88,19 +86,6 @@
             label1.Size = new Size(392, 25);
             label1.TabIndex = 1;
             label1.Text = "Registrar acondicionamiento de la muestra";
-            // 
-            // label2
-            // 
-            label2.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            label2.AutoSize = true;
-            label2.BackColor = Color.Transparent;
-            label2.Font = new Font("Segoe UI", 9F);
-            label2.ForeColor = Color.FromArgb(191, 215, 238);
-            label2.Location = new Point(932, 22);
-            label2.Name = "label2";
-            label2.Size = new Size(40, 15);
-            label2.TabIndex = 2;
-            label2.Text = "CU-34";
             // 
             // flowLayoutPanel1
             // 
@@ -278,6 +263,82 @@
             groupBox2.TabStop = false;
             groupBox2.Text = "Datos de la atención";
             // 
+            // txtTubos
+            // 
+            txtTubos.BackColor = Color.FromArgb(233, 238, 243);
+            txtTubos.BorderStyle = BorderStyle.FixedSingle;
+            txtTubos.Font = new Font("Segoe UI", 10F);
+            txtTubos.ForeColor = Color.FromArgb(31, 35, 40);
+            txtTubos.Location = new Point(629, 70);
+            txtTubos.Name = "txtTubos";
+            txtTubos.ReadOnly = true;
+            txtTubos.Size = new Size(300, 25);
+            txtTubos.TabIndex = 11;
+            txtTubos.TabStop = false;
+            // 
+            // lblTubos
+            // 
+            lblTubos.AutoSize = true;
+            lblTubos.BackColor = Color.Transparent;
+            lblTubos.Font = new Font("Segoe UI", 10F);
+            lblTubos.ForeColor = Color.FromArgb(31, 35, 40);
+            lblTubos.Location = new Point(495, 73);
+            lblTubos.Name = "lblTubos";
+            lblTubos.Size = new Size(112, 19);
+            lblTubos.TabIndex = 10;
+            lblTubos.Text = "Tubos esperados";
+            // 
+            // txtExamenes
+            // 
+            txtExamenes.BackColor = Color.FromArgb(233, 238, 243);
+            txtExamenes.BorderStyle = BorderStyle.FixedSingle;
+            txtExamenes.Font = new Font("Segoe UI", 10F);
+            txtExamenes.ForeColor = Color.FromArgb(31, 35, 40);
+            txtExamenes.Location = new Point(629, 32);
+            txtExamenes.Name = "txtExamenes";
+            txtExamenes.ReadOnly = true;
+            txtExamenes.Size = new Size(300, 25);
+            txtExamenes.TabIndex = 9;
+            txtExamenes.TabStop = false;
+            // 
+            // lblExamenes
+            // 
+            lblExamenes.AutoSize = true;
+            lblExamenes.BackColor = Color.Transparent;
+            lblExamenes.Font = new Font("Segoe UI", 10F);
+            lblExamenes.ForeColor = Color.FromArgb(31, 35, 40);
+            lblExamenes.Location = new Point(495, 35);
+            lblExamenes.Name = "lblExamenes";
+            lblExamenes.Size = new Size(69, 19);
+            lblExamenes.TabIndex = 8;
+            lblExamenes.Text = "Exámenes";
+            // 
+            // textBox4
+            // 
+            textBox4.BackColor = Color.FromArgb(233, 238, 243);
+            textBox4.BorderStyle = BorderStyle.FixedSingle;
+            textBox4.Font = new Font("Segoe UI", 10F);
+            textBox4.ForeColor = Color.FromArgb(31, 35, 40);
+            textBox4.Location = new Point(125, 70);
+            textBox4.Name = "textBox4";
+            textBox4.ReadOnly = true;
+            textBox4.Size = new Size(150, 25);
+            textBox4.TabIndex = 6;
+            textBox4.TabStop = false;
+            // 
+            // textBox3
+            // 
+            textBox3.BackColor = Color.FromArgb(233, 238, 243);
+            textBox3.BorderStyle = BorderStyle.FixedSingle;
+            textBox3.Font = new Font("Segoe UI", 10F);
+            textBox3.ForeColor = Color.FromArgb(31, 35, 40);
+            textBox3.Location = new Point(128, 39);
+            textBox3.Name = "textBox3";
+            textBox3.ReadOnly = true;
+            textBox3.Size = new Size(300, 25);
+            textBox3.TabIndex = 6;
+            textBox3.TabStop = false;
+            // 
             // label6
             // 
             label6.AutoSize = true;
@@ -302,82 +363,6 @@
             label5.TabIndex = 6;
             label5.Text = "Paciente";
             // 
-            // textBox3
-            // 
-            textBox3.BackColor = Color.FromArgb(233, 238, 243);
-            textBox3.BorderStyle = BorderStyle.FixedSingle;
-            textBox3.Font = new Font("Segoe UI", 10F);
-            textBox3.ForeColor = Color.FromArgb(31, 35, 40);
-            textBox3.Location = new Point(128, 39);
-            textBox3.Name = "textBox3";
-            textBox3.ReadOnly = true;
-            textBox3.Size = new Size(300, 25);
-            textBox3.TabIndex = 6;
-            textBox3.TabStop = false;
-            // 
-            // textBox4
-            // 
-            textBox4.BackColor = Color.FromArgb(233, 238, 243);
-            textBox4.BorderStyle = BorderStyle.FixedSingle;
-            textBox4.Font = new Font("Segoe UI", 10F);
-            textBox4.ForeColor = Color.FromArgb(31, 35, 40);
-            textBox4.Location = new Point(125, 70);
-            textBox4.Name = "textBox4";
-            textBox4.ReadOnly = true;
-            textBox4.Size = new Size(150, 25);
-            textBox4.TabIndex = 6;
-            textBox4.TabStop = false;
-            // 
-            // lblExamenes
-            // 
-            lblExamenes.AutoSize = true;
-            lblExamenes.BackColor = Color.Transparent;
-            lblExamenes.Font = new Font("Segoe UI", 10F);
-            lblExamenes.ForeColor = Color.FromArgb(31, 35, 40);
-            lblExamenes.Location = new Point(495, 35);
-            lblExamenes.Name = "lblExamenes";
-            lblExamenes.Size = new Size(69, 19);
-            lblExamenes.TabIndex = 8;
-            lblExamenes.Text = "Exámenes";
-            // 
-            // txtExamenes
-            // 
-            txtExamenes.BackColor = Color.FromArgb(233, 238, 243);
-            txtExamenes.BorderStyle = BorderStyle.FixedSingle;
-            txtExamenes.Font = new Font("Segoe UI", 10F);
-            txtExamenes.ForeColor = Color.FromArgb(31, 35, 40);
-            txtExamenes.Location = new Point(629, 32);
-            txtExamenes.Name = "txtExamenes";
-            txtExamenes.ReadOnly = true;
-            txtExamenes.Size = new Size(300, 25);
-            txtExamenes.TabIndex = 9;
-            txtExamenes.TabStop = false;
-            // 
-            // lblTubos
-            // 
-            lblTubos.AutoSize = true;
-            lblTubos.BackColor = Color.Transparent;
-            lblTubos.Font = new Font("Segoe UI", 10F);
-            lblTubos.ForeColor = Color.FromArgb(31, 35, 40);
-            lblTubos.Location = new Point(495, 73);
-            lblTubos.Name = "lblTubos";
-            lblTubos.Size = new Size(112, 19);
-            lblTubos.TabIndex = 10;
-            lblTubos.Text = "Tubos esperados";
-            // 
-            // txtTubos
-            // 
-            txtTubos.BackColor = Color.FromArgb(233, 238, 243);
-            txtTubos.BorderStyle = BorderStyle.FixedSingle;
-            txtTubos.Font = new Font("Segoe UI", 10F);
-            txtTubos.ForeColor = Color.FromArgb(31, 35, 40);
-            txtTubos.Location = new Point(629, 70);
-            txtTubos.Name = "txtTubos";
-            txtTubos.ReadOnly = true;
-            txtTubos.Size = new Size(300, 25);
-            txtTubos.TabIndex = 11;
-            txtTubos.TabStop = false;
-            // 
             // grpAcondicionamiento
             // 
             grpAcondicionamiento.BackColor = Color.White;
@@ -396,17 +381,55 @@
             grpAcondicionamiento.TabStop = false;
             grpAcondicionamiento.Text = "Acondicionamiento";
             // 
-            // lblConservacion
+            // txtMotivoCorreccion
             // 
-            lblConservacion.AutoSize = true;
-            lblConservacion.BackColor = Color.Transparent;
-            lblConservacion.Font = new Font("Segoe UI", 10F);
-            lblConservacion.ForeColor = Color.FromArgb(31, 35, 40);
-            lblConservacion.Location = new Point(15, 35);
-            lblConservacion.Name = "lblConservacion";
-            lblConservacion.Size = new Size(162, 19);
-            lblConservacion.TabIndex = 0;
-            lblConservacion.Text = "Estado de conservación *";
+            txtMotivoCorreccion.BackColor = Color.White;
+            txtMotivoCorreccion.BorderStyle = BorderStyle.FixedSingle;
+            txtMotivoCorreccion.Font = new Font("Segoe UI", 10F);
+            txtMotivoCorreccion.ForeColor = Color.FromArgb(31, 35, 40);
+            txtMotivoCorreccion.Location = new Point(671, 32);
+            txtMotivoCorreccion.Multiline = true;
+            txtMotivoCorreccion.Name = "txtMotivoCorreccion";
+            txtMotivoCorreccion.ScrollBars = ScrollBars.Vertical;
+            txtMotivoCorreccion.Size = new Size(274, 60);
+            txtMotivoCorreccion.TabIndex = 5;
+            // 
+            // lblMotivoCorreccion
+            // 
+            lblMotivoCorreccion.AutoSize = true;
+            lblMotivoCorreccion.BackColor = Color.Transparent;
+            lblMotivoCorreccion.Font = new Font("Segoe UI", 10F);
+            lblMotivoCorreccion.ForeColor = Color.FromArgb(31, 35, 40);
+            lblMotivoCorreccion.Location = new Point(495, 35);
+            lblMotivoCorreccion.Name = "lblMotivoCorreccion";
+            lblMotivoCorreccion.Size = new Size(138, 19);
+            lblMotivoCorreccion.TabIndex = 4;
+            lblMotivoCorreccion.Text = "Motivo de corrección";
+            // 
+            // nudMinutos
+            // 
+            nudMinutos.BackColor = Color.White;
+            nudMinutos.BorderStyle = BorderStyle.FixedSingle;
+            nudMinutos.Font = new Font("Segoe UI", 10F);
+            nudMinutos.ForeColor = Color.FromArgb(31, 35, 40);
+            nudMinutos.Location = new Point(224, 70);
+            nudMinutos.Maximum = new decimal(new int[] { 999, 0, 0, 0 });
+            nudMinutos.Name = "nudMinutos";
+            nudMinutos.Size = new Size(80, 25);
+            nudMinutos.TabIndex = 3;
+            nudMinutos.TextAlign = HorizontalAlignment.Right;
+            // 
+            // lblMinutos
+            // 
+            lblMinutos.AutoSize = true;
+            lblMinutos.BackColor = Color.Transparent;
+            lblMinutos.Font = new Font("Segoe UI", 10F);
+            lblMinutos.ForeColor = Color.FromArgb(31, 35, 40);
+            lblMinutos.Location = new Point(15, 73);
+            lblMinutos.Name = "lblMinutos";
+            lblMinutos.Size = new Size(160, 19);
+            lblMinutos.TabIndex = 2;
+            lblMinutos.Text = "Centrifugación (minutos)";
             // 
             // cboConservacion
             // 
@@ -422,55 +445,17 @@
             cboConservacion.Size = new Size(200, 25);
             cboConservacion.TabIndex = 1;
             // 
-            // lblMinutos
+            // lblConservacion
             // 
-            lblMinutos.AutoSize = true;
-            lblMinutos.BackColor = Color.Transparent;
-            lblMinutos.Font = new Font("Segoe UI", 10F);
-            lblMinutos.ForeColor = Color.FromArgb(31, 35, 40);
-            lblMinutos.Location = new Point(15, 73);
-            lblMinutos.Name = "lblMinutos";
-            lblMinutos.Size = new Size(160, 19);
-            lblMinutos.TabIndex = 2;
-            lblMinutos.Text = "Centrifugación (minutos)";
-            // 
-            // nudMinutos
-            // 
-            nudMinutos.BackColor = Color.White;
-            nudMinutos.BorderStyle = BorderStyle.FixedSingle;
-            nudMinutos.Font = new Font("Segoe UI", 10F);
-            nudMinutos.ForeColor = Color.FromArgb(31, 35, 40);
-            nudMinutos.Location = new Point(224, 70);
-            nudMinutos.Maximum = new decimal(new int[] { 999, 0, 0, 0 });
-            nudMinutos.Name = "nudMinutos";
-            nudMinutos.Size = new Size(80, 25);
-            nudMinutos.TabIndex = 3;
-            nudMinutos.TextAlign = HorizontalAlignment.Right;
-            // 
-            // lblMotivoCorreccion
-            // 
-            lblMotivoCorreccion.AutoSize = true;
-            lblMotivoCorreccion.BackColor = Color.Transparent;
-            lblMotivoCorreccion.Font = new Font("Segoe UI", 10F);
-            lblMotivoCorreccion.ForeColor = Color.FromArgb(31, 35, 40);
-            lblMotivoCorreccion.Location = new Point(495, 35);
-            lblMotivoCorreccion.Name = "lblMotivoCorreccion";
-            lblMotivoCorreccion.Size = new Size(138, 19);
-            lblMotivoCorreccion.TabIndex = 4;
-            lblMotivoCorreccion.Text = "Motivo de corrección";
-            // 
-            // txtMotivoCorreccion
-            // 
-            txtMotivoCorreccion.BackColor = Color.White;
-            txtMotivoCorreccion.BorderStyle = BorderStyle.FixedSingle;
-            txtMotivoCorreccion.Font = new Font("Segoe UI", 10F);
-            txtMotivoCorreccion.ForeColor = Color.FromArgb(31, 35, 40);
-            txtMotivoCorreccion.Location = new Point(671, 32);
-            txtMotivoCorreccion.Multiline = true;
-            txtMotivoCorreccion.Name = "txtMotivoCorreccion";
-            txtMotivoCorreccion.ScrollBars = ScrollBars.Vertical;
-            txtMotivoCorreccion.Size = new Size(274, 60);
-            txtMotivoCorreccion.TabIndex = 5;
+            lblConservacion.AutoSize = true;
+            lblConservacion.BackColor = Color.Transparent;
+            lblConservacion.Font = new Font("Segoe UI", 10F);
+            lblConservacion.ForeColor = Color.FromArgb(31, 35, 40);
+            lblConservacion.Location = new Point(15, 35);
+            lblConservacion.Name = "lblConservacion";
+            lblConservacion.Size = new Size(162, 19);
+            lblConservacion.TabIndex = 0;
+            lblConservacion.Text = "Estado de conservación *";
             // 
             // FrmAcondicionarMuestra
             // 
@@ -510,7 +495,6 @@
 
         private Panel panel1;
         private Label label1;
-        private Label label2;
         private FlowLayoutPanel flowLayoutPanel1;
         private Button button1;
         private Button button2;

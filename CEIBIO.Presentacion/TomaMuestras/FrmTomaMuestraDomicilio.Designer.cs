@@ -28,13 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle7 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle8 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
             panel1 = new Panel();
             label1 = new Label();
-            label2 = new Label();
             flowLayoutPanel1 = new FlowLayoutPanel();
             btnCerrar = new Button();
             btnRegistrarRetorno = new Button();
@@ -53,14 +52,14 @@
             colTuboRecipiente = new DataGridViewTextBoxColumn();
             colCantidad = new DataGridViewTextBoxColumn();
             groupBox3 = new GroupBox();
-            textBox1 = new TextBox();
-            label3 = new Label();
-            label4 = new Label();
-            dateTimePicker1 = new DateTimePicker();
-            label5 = new Label();
-            textBox2 = new TextBox();
-            label6 = new Label();
             textBox3 = new TextBox();
+            label6 = new Label();
+            textBox2 = new TextBox();
+            label5 = new Label();
+            dateTimePicker1 = new DateTimePicker();
+            label4 = new Label();
+            label3 = new Label();
+            textBox1 = new TextBox();
             panel1.SuspendLayout();
             flowLayoutPanel1.SuspendLayout();
             groupBox1.SuspendLayout();
@@ -94,19 +93,6 @@
             label1.TabIndex = 1;
             label1.Text = "Registrar toma de muestra a domicilio";
             label1.Click += label1_Click;
-            // 
-            // label2
-            // 
-            label2.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            label2.AutoSize = true;
-            label2.BackColor = Color.Transparent;
-            label2.Font = new Font("Segoe UI", 9F);
-            label2.ForeColor = Color.FromArgb(191, 215, 238);
-            label2.Location = new Point(892, 20);
-            label2.Name = "label2";
-            label2.Size = new Size(79, 15);
-            label2.TabIndex = 1;
-            label2.Text = "CU-30, CU-28";
             // 
             // flowLayoutPanel1
             // 
@@ -225,25 +211,25 @@
             dataGridView1.AllowUserToResizeRows = false;
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridView1.BackgroundColor = Color.White;
-            dataGridViewCellStyle5.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = Color.FromArgb(11, 61, 110);
-            dataGridViewCellStyle5.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            dataGridViewCellStyle5.ForeColor = Color.White;
-            dataGridViewCellStyle5.SelectionBackColor = Color.FromArgb(11, 61, 110);
-            dataGridViewCellStyle5.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = DataGridViewTriState.True;
-            dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = Color.FromArgb(11, 61, 110);
+            dataGridViewCellStyle1.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            dataGridViewCellStyle1.ForeColor = Color.White;
+            dataGridViewCellStyle1.SelectionBackColor = Color.FromArgb(11, 61, 110);
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+            dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dataGridView1.ColumnHeadersHeight = 34;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             dataGridView1.Columns.AddRange(new DataGridViewColumn[] { colNAtencion, colPaciente, colDireccion, colExamenes });
-            dataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = Color.FromArgb(207, 226, 243);
-            dataGridViewCellStyle6.Font = new Font("Segoe UI", 10F);
-            dataGridViewCellStyle6.ForeColor = Color.FromArgb(11, 61, 110);
-            dataGridViewCellStyle6.SelectionBackColor = Color.FromArgb(242, 246, 250);
-            dataGridViewCellStyle6.SelectionForeColor = Color.FromArgb(31, 35, 40);
-            dataGridViewCellStyle6.WrapMode = DataGridViewTriState.False;
-            dataGridView1.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = Color.FromArgb(207, 226, 243);
+            dataGridViewCellStyle2.Font = new Font("Segoe UI", 10F);
+            dataGridViewCellStyle2.ForeColor = Color.FromArgb(11, 61, 110);
+            dataGridViewCellStyle2.SelectionBackColor = Color.FromArgb(242, 246, 250);
+            dataGridViewCellStyle2.SelectionForeColor = Color.FromArgb(31, 35, 40);
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
+            dataGridView1.DefaultCellStyle = dataGridViewCellStyle2;
             dataGridView1.EnableHeadersVisualStyles = false;
             dataGridView1.GridColor = Color.FromArgb(208, 215, 222);
             dataGridView1.Location = new Point(10, 25);
@@ -302,25 +288,25 @@
             dataGridView2.AllowUserToResizeRows = false;
             dataGridView2.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridView2.BackgroundColor = Color.White;
-            dataGridViewCellStyle7.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = Color.FromArgb(11, 61, 110);
-            dataGridViewCellStyle7.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            dataGridViewCellStyle7.ForeColor = Color.White;
-            dataGridViewCellStyle7.SelectionBackColor = Color.FromArgb(11, 61, 110);
-            dataGridViewCellStyle7.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle7.WrapMode = DataGridViewTriState.True;
-            dataGridView2.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = Color.FromArgb(11, 61, 110);
+            dataGridViewCellStyle3.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            dataGridViewCellStyle3.ForeColor = Color.White;
+            dataGridViewCellStyle3.SelectionBackColor = Color.FromArgb(11, 61, 110);
+            dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
+            dataGridView2.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             dataGridView2.ColumnHeadersHeight = 34;
             dataGridView2.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             dataGridView2.Columns.AddRange(new DataGridViewColumn[] { colExamen, colTuboRecipiente, colCantidad });
-            dataGridViewCellStyle8.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.BackColor = Color.FromArgb(242, 246, 250);
-            dataGridViewCellStyle8.Font = new Font("Segoe UI", 10F);
-            dataGridViewCellStyle8.ForeColor = Color.FromArgb(31, 35, 40);
-            dataGridViewCellStyle8.SelectionBackColor = Color.FromArgb(31, 35, 40);
-            dataGridViewCellStyle8.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle8.WrapMode = DataGridViewTriState.False;
-            dataGridView2.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = Color.FromArgb(242, 246, 250);
+            dataGridViewCellStyle4.Font = new Font("Segoe UI", 10F);
+            dataGridViewCellStyle4.ForeColor = Color.FromArgb(11, 61, 110);
+            dataGridViewCellStyle4.SelectionBackColor = Color.FromArgb(31, 35, 40);
+            dataGridViewCellStyle4.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.False;
+            dataGridView2.DefaultCellStyle = dataGridViewCellStyle4;
             dataGridView2.Dock = DockStyle.Fill;
             dataGridView2.EnableHeadersVisualStyles = false;
             dataGridView2.GridColor = Color.FromArgb(208, 215, 222);
@@ -372,76 +358,18 @@
             groupBox3.TabStop = false;
             groupBox3.Text = "Registro al retornar a la sede";
             // 
-            // textBox1
+            // textBox3
             // 
-            textBox1.BackColor = Color.FromArgb(233, 238, 243);
-            textBox1.BorderStyle = BorderStyle.FixedSingle;
-            textBox1.Font = new Font("Segoe UI", 10F);
-            textBox1.Location = new Point(191, 32);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(150, 25);
-            textBox1.TabIndex = 0;
-            textBox1.TabStop = false;
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.BackColor = Color.Transparent;
-            label3.Font = new Font("Segoe UI", 10F);
-            label3.ForeColor = Color.FromArgb(31, 35, 40);
-            label3.Location = new Point(15, 35);
-            label3.Name = "label3";
-            label3.Size = new Size(121, 19);
-            label3.TabIndex = 1;
-            label3.Text = "Código correlativo";
-            // 
-            // label4
-            // 
-            label4.AutoSize = true;
-            label4.BackColor = Color.Transparent;
-            label4.Font = new Font("Segoe UI", 10F);
-            label4.ForeColor = Color.FromArgb(31, 35, 40);
-            label4.Location = new Point(15, 73);
-            label4.Name = "label4";
-            label4.Size = new Size(133, 19);
-            label4.TabIndex = 2;
-            label4.Text = "Hora de extracción *";
-            // 
-            // dateTimePicker1
-            // 
-            dateTimePicker1.CalendarTrailingForeColor = Color.FromArgb(31, 35, 40);
-            dateTimePicker1.Font = new Font("Segoe UI", 10F);
-            dateTimePicker1.Format = DateTimePickerFormat.Time;
-            dateTimePicker1.Location = new Point(191, 70);
-            dateTimePicker1.Name = "dateTimePicker1";
-            dateTimePicker1.ShowUpDown = true;
-            dateTimePicker1.Size = new Size(200, 25);
-            dateTimePicker1.TabIndex = 3;
-            // 
-            // label5
-            // 
-            label5.AutoSize = true;
-            label5.BackColor = Color.Transparent;
-            label5.Font = new Font("Segoe UI", 10F);
-            label5.ForeColor = Color.FromArgb(31, 35, 40);
-            label5.Location = new Point(517, 48);
-            label5.Name = "label5";
-            label5.Size = new Size(151, 19);
-            label5.TabIndex = 4;
-            label5.Text = "Condiciones declaradas";
-            // 
-            // textBox2
-            // 
-            textBox2.BackColor = Color.White;
-            textBox2.BorderStyle = BorderStyle.FixedSingle;
-            textBox2.Font = new Font("Segoe UI", 10F);
-            textBox2.ForeColor = Color.FromArgb(31, 35, 40);
-            textBox2.Location = new Point(696, 24);
-            textBox2.Multiline = true;
-            textBox2.Name = "textBox2";
-            textBox2.ScrollBars = ScrollBars.Vertical;
-            textBox2.Size = new Size(258, 57);
-            textBox2.TabIndex = 5;
+            textBox3.BackColor = Color.White;
+            textBox3.BorderStyle = BorderStyle.FixedSingle;
+            textBox3.Font = new Font("Segoe UI", 10F);
+            textBox3.ForeColor = Color.FromArgb(31, 35, 40);
+            textBox3.Location = new Point(692, 91);
+            textBox3.Multiline = true;
+            textBox3.Name = "textBox3";
+            textBox3.ScrollBars = ScrollBars.Vertical;
+            textBox3.Size = new Size(258, 50);
+            textBox3.TabIndex = 7;
             // 
             // label6
             // 
@@ -456,18 +384,76 @@
             label6.Text = "Rechazos ocurridos";
             label6.Click += label6_Click;
             // 
-            // textBox3
+            // textBox2
             // 
-            textBox3.BackColor = Color.White;
-            textBox3.BorderStyle = BorderStyle.FixedSingle;
-            textBox3.Font = new Font("Segoe UI", 10F);
-            textBox3.ForeColor = Color.FromArgb(31, 35, 40);
-            textBox3.Location = new Point(692, 91);
-            textBox3.Multiline = true;
-            textBox3.Name = "textBox3";
-            textBox3.ScrollBars = ScrollBars.Vertical;
-            textBox3.Size = new Size(258, 50);
-            textBox3.TabIndex = 7;
+            textBox2.BackColor = Color.White;
+            textBox2.BorderStyle = BorderStyle.FixedSingle;
+            textBox2.Font = new Font("Segoe UI", 10F);
+            textBox2.ForeColor = Color.FromArgb(31, 35, 40);
+            textBox2.Location = new Point(696, 24);
+            textBox2.Multiline = true;
+            textBox2.Name = "textBox2";
+            textBox2.ScrollBars = ScrollBars.Vertical;
+            textBox2.Size = new Size(258, 57);
+            textBox2.TabIndex = 5;
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.BackColor = Color.Transparent;
+            label5.Font = new Font("Segoe UI", 10F);
+            label5.ForeColor = Color.FromArgb(31, 35, 40);
+            label5.Location = new Point(517, 48);
+            label5.Name = "label5";
+            label5.Size = new Size(151, 19);
+            label5.TabIndex = 4;
+            label5.Text = "Condiciones declaradas";
+            // 
+            // dateTimePicker1
+            // 
+            dateTimePicker1.CalendarTrailingForeColor = Color.FromArgb(31, 35, 40);
+            dateTimePicker1.Font = new Font("Segoe UI", 10F);
+            dateTimePicker1.Format = DateTimePickerFormat.Time;
+            dateTimePicker1.Location = new Point(191, 70);
+            dateTimePicker1.Name = "dateTimePicker1";
+            dateTimePicker1.ShowUpDown = true;
+            dateTimePicker1.Size = new Size(200, 25);
+            dateTimePicker1.TabIndex = 3;
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.BackColor = Color.Transparent;
+            label4.Font = new Font("Segoe UI", 10F);
+            label4.ForeColor = Color.FromArgb(31, 35, 40);
+            label4.Location = new Point(15, 73);
+            label4.Name = "label4";
+            label4.Size = new Size(133, 19);
+            label4.TabIndex = 2;
+            label4.Text = "Hora de extracción *";
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.BackColor = Color.Transparent;
+            label3.Font = new Font("Segoe UI", 10F);
+            label3.ForeColor = Color.FromArgb(31, 35, 40);
+            label3.Location = new Point(15, 35);
+            label3.Name = "label3";
+            label3.Size = new Size(121, 19);
+            label3.TabIndex = 1;
+            label3.Text = "Código correlativo";
+            // 
+            // textBox1
+            // 
+            textBox1.BackColor = Color.FromArgb(233, 238, 243);
+            textBox1.BorderStyle = BorderStyle.FixedSingle;
+            textBox1.Font = new Font("Segoe UI", 10F);
+            textBox1.Location = new Point(191, 32);
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(150, 25);
+            textBox1.TabIndex = 0;
+            textBox1.TabStop = false;
             // 
             // FrmTomaMuestraDomicilio
             // 
@@ -481,7 +467,6 @@
             Controls.Add(groupBox2);
             Controls.Add(groupBox1);
             Controls.Add(flowLayoutPanel1);
-            Controls.Add(label2);
             Controls.Add(panel1);
             Font = new Font("Segoe UI", 10F);
             ForeColor = SystemColors.ControlText;
@@ -500,14 +485,12 @@
             groupBox3.ResumeLayout(false);
             groupBox3.PerformLayout();
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
 
         private Panel panel1;
         private Label label1;
-        private Label label2;
         private FlowLayoutPanel flowLayoutPanel1;
         private Button btnCerrar;
         private Button btnRegistrarRetorno;

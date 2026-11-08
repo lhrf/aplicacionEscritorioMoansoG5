@@ -32,7 +32,6 @@
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             pnlEncabezado = new Panel();
             lblTitulo = new Label();
-            label1 = new Label();
             flpBotones = new FlowLayoutPanel();
             button1 = new Button();
             button2 = new Button();
@@ -67,19 +66,6 @@
             lblTitulo.Size = new Size(344, 25);
             lblTitulo.TabIndex = 1;
             lblTitulo.Text = "Muestras pendientes de acondicionar";
-            // 
-            // label1
-            // 
-            label1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            label1.AutoSize = true;
-            label1.BackColor = Color.Transparent;
-            label1.Font = new Font("Segoe UI", 9F);
-            label1.ForeColor = Color.FromArgb(191, 215, 238);
-            label1.Location = new Point(939, 20);
-            label1.Name = "label1";
-            label1.Size = new Size(40, 15);
-            label1.TabIndex = 2;
-            label1.Text = "CU-38";
             // 
             // flpBotones
             // 
@@ -163,7 +149,7 @@
             dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = Color.FromArgb(242, 246, 250);
             dataGridViewCellStyle2.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            dataGridViewCellStyle2.ForeColor = Color.FromArgb(31, 35, 40);
+            dataGridViewCellStyle2.ForeColor = Color.FromArgb(11, 61, 110);
             dataGridViewCellStyle2.SelectionBackColor = Color.FromArgb(207, 226, 243);
             dataGridViewCellStyle2.SelectionForeColor = Color.FromArgb(31, 35, 40);
             dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
@@ -213,7 +199,6 @@
             ClientSize = new Size(984, 581);
             Controls.Add(groupBox1);
             Controls.Add(flpBotones);
-            Controls.Add(label1);
             Controls.Add(lblTitulo);
             Controls.Add(pnlEncabezado);
             Font = new Font("Segoe UI", 10F);
@@ -233,7 +218,6 @@
 
         private Panel pnlEncabezado;
         private Label lblTitulo;
-        private Label label1;
         private FlowLayoutPanel flpBotones;
         private Button button1;
         private Button button2;

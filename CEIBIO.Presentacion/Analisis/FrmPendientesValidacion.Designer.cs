@@ -28,33 +28,21 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(242, 246, 250);
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(11, 61, 110);
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(255, 255, 255);
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(11, 61, 110);
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.FromArgb(255, 255, 255);
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 10F);
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(31, 35, 40);
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(207, 226, 243);
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(31, 35, 40);
-            pnlEncabezado = new System.Windows.Forms.Panel();
-            lblTitulo = new System.Windows.Forms.Label();
-            lblCodigo = new System.Windows.Forms.Label();
-            flpBotones = new System.Windows.Forms.FlowLayoutPanel();
-            btnCerrar = new System.Windows.Forms.Button();
-            btnValidar = new System.Windows.Forms.Button();
-            grpPendientes = new System.Windows.Forms.GroupBox();
-            dgvPendientes = new System.Windows.Forms.DataGridView();
-            colNAtencion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            colPaciente = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            colExamenes = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            colTecnico = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            colFechaDeEnvio = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            pnlEncabezado = new Panel();
+            lblTitulo = new Label();
+            flpBotones = new FlowLayoutPanel();
+            btnCerrar = new Button();
+            btnValidar = new Button();
+            grpPendientes = new GroupBox();
+            dgvPendientes = new DataGridView();
+            colNAtencion = new DataGridViewTextBoxColumn();
+            colPaciente = new DataGridViewTextBoxColumn();
+            colExamenes = new DataGridViewTextBoxColumn();
+            colTecnico = new DataGridViewTextBoxColumn();
+            colFechaDeEnvio = new DataGridViewTextBoxColumn();
             pnlEncabezado.SuspendLayout();
             flpBotones.SuspendLayout();
             grpPendientes.SuspendLayout();
@@ -63,99 +51,82 @@
             // 
             // pnlEncabezado
             // 
-            pnlEncabezado.BackColor = System.Drawing.Color.FromArgb(11, 61, 110);
-            pnlEncabezado.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            pnlEncabezado.Controls.Add(lblCodigo);
+            pnlEncabezado.BackColor = Color.FromArgb(11, 61, 110);
             pnlEncabezado.Controls.Add(lblTitulo);
-            pnlEncabezado.Dock = System.Windows.Forms.DockStyle.Top;
-            pnlEncabezado.Location = new System.Drawing.Point(0, 0);
+            pnlEncabezado.Dock = DockStyle.Top;
+            pnlEncabezado.Location = new Point(0, 0);
             pnlEncabezado.Name = "pnlEncabezado";
-            pnlEncabezado.Size = new System.Drawing.Size(1000, 56);
+            pnlEncabezado.Size = new Size(1000, 56);
             pnlEncabezado.TabIndex = 0;
             // 
             // lblTitulo
             // 
             lblTitulo.AutoSize = true;
-            lblTitulo.BackColor = System.Drawing.Color.Transparent;
-            lblTitulo.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold);
-            lblTitulo.ForeColor = System.Drawing.Color.FromArgb(255, 255, 255);
-            lblTitulo.Location = new System.Drawing.Point(20, 14);
+            lblTitulo.BackColor = Color.Transparent;
+            lblTitulo.Font = new Font("Segoe UI", 14F, FontStyle.Bold);
+            lblTitulo.ForeColor = Color.FromArgb(255, 255, 255);
+            lblTitulo.Location = new Point(20, 14);
             lblTitulo.Name = "lblTitulo";
-            lblTitulo.Size = new System.Drawing.Size(344, 25);
+            lblTitulo.Size = new Size(333, 25);
             lblTitulo.TabIndex = 0;
             lblTitulo.Text = "Resultados pendientes de validación";
             // 
-            // lblCodigo
-            // 
-            lblCodigo.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
-            lblCodigo.AutoSize = true;
-            lblCodigo.BackColor = System.Drawing.Color.Transparent;
-            lblCodigo.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular);
-            lblCodigo.ForeColor = System.Drawing.Color.FromArgb(191, 215, 238);
-            lblCodigo.Location = new System.Drawing.Point(939, 20);
-            lblCodigo.Name = "lblCodigo";
-            lblCodigo.Size = new System.Drawing.Size(41, 15);
-            lblCodigo.TabIndex = 1;
-            lblCodigo.Text = "CU-40";
-            // 
             // flpBotones
             // 
-            flpBotones.BackColor = System.Drawing.Color.FromArgb(255, 255, 255);
+            flpBotones.BackColor = Color.FromArgb(255, 255, 255);
             flpBotones.Controls.Add(btnCerrar);
             flpBotones.Controls.Add(btnValidar);
-            flpBotones.Dock = System.Windows.Forms.DockStyle.Bottom;
-            flpBotones.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            flpBotones.Location = new System.Drawing.Point(0, 590);
+            flpBotones.Dock = DockStyle.Bottom;
+            flpBotones.FlowDirection = FlowDirection.RightToLeft;
+            flpBotones.Location = new Point(0, 590);
             flpBotones.Name = "flpBotones";
-            flpBotones.Padding = new System.Windows.Forms.Padding(10, 12, 10, 12);
-            flpBotones.Size = new System.Drawing.Size(1000, 60);
+            flpBotones.Padding = new Padding(10, 12, 10, 12);
+            flpBotones.Size = new Size(1000, 60);
             flpBotones.TabIndex = 2;
             flpBotones.WrapContents = false;
             // 
             // btnCerrar
             // 
-            btnCerrar.BackColor = System.Drawing.Color.FromArgb(229, 231, 235);
-            btnCerrar.Cursor = System.Windows.Forms.Cursors.Hand;
+            btnCerrar.BackColor = Color.FromArgb(229, 231, 235);
+            btnCerrar.Cursor = Cursors.Hand;
             btnCerrar.FlatAppearance.BorderSize = 0;
-            btnCerrar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(209, 213, 219);
-            btnCerrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            btnCerrar.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
-            btnCerrar.ForeColor = System.Drawing.Color.FromArgb(31, 35, 40);
-            btnCerrar.Location = new System.Drawing.Point(860, 12);
+            btnCerrar.FlatAppearance.MouseOverBackColor = Color.FromArgb(209, 213, 219);
+            btnCerrar.FlatStyle = FlatStyle.Flat;
+            btnCerrar.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            btnCerrar.ForeColor = Color.FromArgb(31, 35, 40);
+            btnCerrar.Location = new Point(847, 15);
             btnCerrar.Name = "btnCerrar";
-            btnCerrar.Size = new System.Drawing.Size(130, 36);
+            btnCerrar.Size = new Size(130, 36);
             btnCerrar.TabIndex = 0;
-            btnCerrar.TabStop = true;
             btnCerrar.Text = "Cerrar";
             btnCerrar.UseVisualStyleBackColor = false;
             // 
             // btnValidar
             // 
-            btnValidar.BackColor = System.Drawing.Color.FromArgb(11, 61, 110);
-            btnValidar.Cursor = System.Windows.Forms.Cursors.Hand;
+            btnValidar.BackColor = Color.FromArgb(11, 61, 110);
+            btnValidar.Cursor = Cursors.Hand;
             btnValidar.FlatAppearance.BorderSize = 0;
-            btnValidar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(20, 90, 158);
-            btnValidar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            btnValidar.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
-            btnValidar.ForeColor = System.Drawing.Color.FromArgb(255, 255, 255);
-            btnValidar.Location = new System.Drawing.Point(724, 12);
+            btnValidar.FlatAppearance.MouseOverBackColor = Color.FromArgb(20, 90, 158);
+            btnValidar.FlatStyle = FlatStyle.Flat;
+            btnValidar.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            btnValidar.ForeColor = Color.FromArgb(255, 255, 255);
+            btnValidar.Location = new Point(711, 15);
             btnValidar.Name = "btnValidar";
-            btnValidar.Size = new System.Drawing.Size(130, 36);
+            btnValidar.Size = new Size(130, 36);
             btnValidar.TabIndex = 1;
-            btnValidar.TabStop = true;
             btnValidar.Text = "Validar";
             btnValidar.UseVisualStyleBackColor = false;
             // 
             // grpPendientes
             // 
-            grpPendientes.BackColor = System.Drawing.Color.FromArgb(255, 255, 255);
+            grpPendientes.BackColor = Color.FromArgb(255, 255, 255);
             grpPendientes.Controls.Add(dgvPendientes);
-            grpPendientes.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
-            grpPendientes.ForeColor = System.Drawing.Color.FromArgb(11, 61, 110);
-            grpPendientes.Location = new System.Drawing.Point(20, 70);
+            grpPendientes.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            grpPendientes.ForeColor = Color.FromArgb(11, 61, 110);
+            grpPendientes.Location = new Point(20, 70);
             grpPendientes.Name = "grpPendientes";
-            grpPendientes.Padding = new System.Windows.Forms.Padding(10, 8, 10, 10);
-            grpPendientes.Size = new System.Drawing.Size(960, 510);
+            grpPendientes.Padding = new Padding(10, 8, 10, 10);
+            grpPendientes.Size = new Size(960, 510);
             grpPendientes.TabIndex = 1;
             grpPendientes.TabStop = false;
             grpPendientes.Text = "Resultados pendientes de validación";
@@ -165,26 +136,40 @@
             dgvPendientes.AllowUserToAddRows = false;
             dgvPendientes.AllowUserToDeleteRows = false;
             dgvPendientes.AllowUserToResizeRows = false;
+            dataGridViewCellStyle1.BackColor = Color.FromArgb(242, 246, 250);
             dgvPendientes.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            dgvPendientes.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            dgvPendientes.BackgroundColor = System.Drawing.Color.FromArgb(255, 255, 255);
-            dgvPendientes.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            dgvPendientes.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvPendientes.BackgroundColor = Color.FromArgb(255, 255, 255);
+            dgvPendientes.BorderStyle = BorderStyle.None;
+            dataGridViewCellStyle2.BackColor = Color.FromArgb(11, 61, 110);
+            dataGridViewCellStyle2.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            dataGridViewCellStyle2.ForeColor = Color.FromArgb(255, 255, 255);
+            dataGridViewCellStyle2.SelectionBackColor = Color.FromArgb(11, 61, 110);
+            dataGridViewCellStyle2.SelectionForeColor = Color.FromArgb(255, 255, 255);
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
             dgvPendientes.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             dgvPendientes.ColumnHeadersHeight = 34;
-            dgvPendientes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dgvPendientes.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { colNAtencion, colPaciente, colExamenes, colTecnico, colFechaDeEnvio });
+            dgvPendientes.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            dgvPendientes.Columns.AddRange(new DataGridViewColumn[] { colNAtencion, colPaciente, colExamenes, colTecnico, colFechaDeEnvio });
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = SystemColors.Window;
+            dataGridViewCellStyle3.Font = new Font("Segoe UI", 10F);
+            dataGridViewCellStyle3.ForeColor = Color.FromArgb(31, 35, 40);
+            dataGridViewCellStyle3.SelectionBackColor = Color.FromArgb(207, 226, 243);
+            dataGridViewCellStyle3.SelectionForeColor = Color.FromArgb(31, 35, 40);
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
             dgvPendientes.DefaultCellStyle = dataGridViewCellStyle3;
-            dgvPendientes.Dock = System.Windows.Forms.DockStyle.Fill;
+            dgvPendientes.Dock = DockStyle.Fill;
             dgvPendientes.EnableHeadersVisualStyles = false;
-            dgvPendientes.GridColor = System.Drawing.Color.FromArgb(208, 215, 222);
-            dgvPendientes.Location = new System.Drawing.Point(10, 31);
+            dgvPendientes.GridColor = Color.FromArgb(208, 215, 222);
+            dgvPendientes.Location = new Point(10, 26);
             dgvPendientes.MultiSelect = false;
             dgvPendientes.Name = "dgvPendientes";
             dgvPendientes.ReadOnly = true;
             dgvPendientes.RowHeadersVisible = false;
             dgvPendientes.RowTemplate.Height = 28;
-            dgvPendientes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            dgvPendientes.Size = new System.Drawing.Size(940, 469);
+            dgvPendientes.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvPendientes.Size = new Size(940, 474);
             dgvPendientes.TabIndex = 0;
             // 
             // colNAtencion
@@ -220,19 +205,19 @@
             // FrmPendientesValidacion
             // 
             AcceptButton = btnValidar;
-            AutoScaleDimensions = new System.Drawing.SizeF(9F, 23F);
-            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            BackColor = System.Drawing.Color.FromArgb(244, 246, 249);
+            AutoScaleDimensions = new SizeF(7F, 17F);
+            AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.FromArgb(244, 246, 249);
             CancelButton = btnCerrar;
-            ClientSize = new System.Drawing.Size(1000, 650);
+            ClientSize = new Size(1000, 650);
             Controls.Add(grpPendientes);
             Controls.Add(flpBotones);
             Controls.Add(pnlEncabezado);
-            Font = new System.Drawing.Font("Segoe UI", 10F);
-            FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            Font = new Font("Segoe UI", 10F);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             MaximizeBox = false;
             Name = "FrmPendientesValidacion";
-            StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Resultados pendientes de validación";
             pnlEncabezado.ResumeLayout(false);
             pnlEncabezado.PerformLayout();
@@ -246,7 +231,6 @@
 
         private System.Windows.Forms.Panel pnlEncabezado;
         private System.Windows.Forms.Label lblTitulo;
-        private System.Windows.Forms.Label lblCodigo;
         private System.Windows.Forms.FlowLayoutPanel flpBotones;
         private System.Windows.Forms.Button btnCerrar;
         private System.Windows.Forms.Button btnValidar;

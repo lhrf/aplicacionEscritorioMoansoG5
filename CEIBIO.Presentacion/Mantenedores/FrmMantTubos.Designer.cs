@@ -28,11 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle9 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle10 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             panel1 = new Panel();
             label1 = new Label();
-            label2 = new Label();
             flowLayoutPanel1 = new FlowLayoutPanel();
             button1 = new Button();
             button2 = new Button();
@@ -41,9 +40,9 @@
             btnEditar = new Button();
             btnNuevo = new Button();
             grpBusqueda = new GroupBox();
-            lblBuscar = new Label();
-            txtBuscar = new TextBox();
             button3 = new Button();
+            txtBuscar = new TextBox();
+            lblBuscar = new Label();
             grpRegistros = new GroupBox();
             dataGridView1 = new DataGridView();
             colTipo = new DataGridViewTextBoxColumn();
@@ -52,16 +51,16 @@
             colCentrifugacionMin = new DataGridViewTextBoxColumn();
             colEstado = new DataGridViewTextBoxColumn();
             grpDatos = new GroupBox();
-            label3 = new Label();
-            label4 = new Label();
-            label5 = new Label();
-            label6 = new Label();
-            label7 = new Label();
-            textBox1 = new TextBox();
-            textBox2 = new TextBox();
-            textBox3 = new TextBox();
-            numericUpDown1 = new NumericUpDown();
             clbExamenes = new CheckedListBox();
+            numericUpDown1 = new NumericUpDown();
+            textBox3 = new TextBox();
+            textBox2 = new TextBox();
+            textBox1 = new TextBox();
+            label7 = new Label();
+            label6 = new Label();
+            label5 = new Label();
+            label4 = new Label();
+            label3 = new Label();
             panel1.SuspendLayout();
             flowLayoutPanel1.SuspendLayout();
             grpBusqueda.SuspendLayout();
@@ -92,19 +91,6 @@
             label1.Size = new Size(322, 25);
             label1.TabIndex = 1;
             label1.Text = "Mantenedor de tubos y recipientes";
-            // 
-            // label2
-            // 
-            label2.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            label2.AutoSize = true;
-            label2.BackColor = Color.Transparent;
-            label2.Font = new Font("Segoe UI", 9F);
-            label2.ForeColor = SystemColors.ControlLight;
-            label2.Location = new Point(939, 20);
-            label2.Name = "label2";
-            label2.Size = new Size(40, 15);
-            label2.TabIndex = 2;
-            label2.Text = "CU-31";
             // 
             // flowLayoutPanel1
             // 
@@ -234,27 +220,6 @@
             grpBusqueda.TabStop = false;
             grpBusqueda.Text = "Búsqueda";
             // 
-            // lblBuscar
-            // 
-            lblBuscar.AutoSize = true;
-            lblBuscar.BackColor = Color.Transparent;
-            lblBuscar.ForeColor = Color.FromArgb(31, 35, 40);
-            lblBuscar.Location = new Point(24, 31);
-            lblBuscar.Name = "lblBuscar";
-            lblBuscar.Size = new Size(53, 19);
-            lblBuscar.TabIndex = 5;
-            lblBuscar.Text = "Buscar";
-            // 
-            // txtBuscar
-            // 
-            txtBuscar.BackColor = Color.White;
-            txtBuscar.BorderStyle = BorderStyle.FixedSingle;
-            txtBuscar.ForeColor = Color.FromArgb(31, 35, 40);
-            txtBuscar.Location = new Point(97, 29);
-            txtBuscar.Name = "txtBuscar";
-            txtBuscar.Size = new Size(300, 25);
-            txtBuscar.TabIndex = 5;
-            // 
             // button3
             // 
             button3.Cursor = Cursors.Hand;
@@ -269,6 +234,27 @@
             button3.TabIndex = 5;
             button3.Text = "Buscar";
             button3.UseVisualStyleBackColor = false;
+            // 
+            // txtBuscar
+            // 
+            txtBuscar.BackColor = Color.White;
+            txtBuscar.BorderStyle = BorderStyle.FixedSingle;
+            txtBuscar.ForeColor = Color.FromArgb(31, 35, 40);
+            txtBuscar.Location = new Point(97, 29);
+            txtBuscar.Name = "txtBuscar";
+            txtBuscar.Size = new Size(300, 25);
+            txtBuscar.TabIndex = 5;
+            // 
+            // lblBuscar
+            // 
+            lblBuscar.AutoSize = true;
+            lblBuscar.BackColor = Color.Transparent;
+            lblBuscar.ForeColor = Color.FromArgb(31, 35, 40);
+            lblBuscar.Location = new Point(24, 31);
+            lblBuscar.Name = "lblBuscar";
+            lblBuscar.Size = new Size(53, 19);
+            lblBuscar.TabIndex = 5;
+            lblBuscar.Text = "Buscar";
             // 
             // grpRegistros
             // 
@@ -292,25 +278,25 @@
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridView1.BackgroundColor = Color.White;
             dataGridView1.BorderStyle = BorderStyle.None;
-            dataGridViewCellStyle9.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle9.BackColor = Color.FromArgb(11, 61, 110);
-            dataGridViewCellStyle9.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            dataGridViewCellStyle9.ForeColor = Color.White;
-            dataGridViewCellStyle9.SelectionBackColor = Color.FromArgb(11, 61, 110);
-            dataGridViewCellStyle9.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle9.WrapMode = DataGridViewTriState.True;
-            dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = Color.FromArgb(11, 61, 110);
+            dataGridViewCellStyle1.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            dataGridViewCellStyle1.ForeColor = Color.White;
+            dataGridViewCellStyle1.SelectionBackColor = Color.FromArgb(11, 61, 110);
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+            dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dataGridView1.ColumnHeadersHeight = 34;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             dataGridView1.Columns.AddRange(new DataGridViewColumn[] { colTipo, colColorDeTapa, colAditivo, colCentrifugacionMin, colEstado });
-            dataGridViewCellStyle10.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle10.BackColor = Color.FromArgb(242, 246, 250);
-            dataGridViewCellStyle10.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            dataGridViewCellStyle10.ForeColor = Color.FromArgb(31, 35, 40);
-            dataGridViewCellStyle10.SelectionBackColor = Color.FromArgb(207, 226, 243);
-            dataGridViewCellStyle10.SelectionForeColor = Color.FromArgb(31, 35, 40);
-            dataGridViewCellStyle10.WrapMode = DataGridViewTriState.False;
-            dataGridView1.DefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = Color.FromArgb(242, 246, 250);
+            dataGridViewCellStyle2.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            dataGridViewCellStyle2.ForeColor = Color.FromArgb(11, 61, 110);
+            dataGridViewCellStyle2.SelectionBackColor = Color.FromArgb(207, 226, 243);
+            dataGridViewCellStyle2.SelectionForeColor = Color.FromArgb(31, 35, 40);
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
+            dataGridView1.DefaultCellStyle = dataGridViewCellStyle2;
             dataGridView1.Dock = DockStyle.Fill;
             dataGridView1.EnableHeadersVisualStyles = false;
             dataGridView1.Location = new Point(10, 26);
@@ -373,30 +359,79 @@
             grpDatos.TabStop = false;
             grpDatos.Text = "Datos";
             // 
-            // label3
+            // clbExamenes
             // 
-            label3.AutoSize = true;
-            label3.BackColor = Color.Transparent;
-            label3.Font = new Font("Segoe UI", 10F);
-            label3.ForeColor = Color.FromArgb(31, 35, 40);
-            label3.Location = new Point(25, 40);
-            label3.Name = "label3";
-            label3.Size = new Size(45, 19);
-            label3.TabIndex = 1;
-            label3.Text = "Tipo *";
-            label3.Click += label3_Click;
+            clbExamenes.BackColor = Color.White;
+            clbExamenes.BorderStyle = BorderStyle.FixedSingle;
+            clbExamenes.CheckOnClick = true;
+            clbExamenes.ForeColor = Color.FromArgb(31, 35, 40);
+            clbExamenes.FormattingEnabled = true;
+            clbExamenes.Location = new Point(619, 82);
+            clbExamenes.Name = "clbExamenes";
+            clbExamenes.Size = new Size(181, 62);
+            clbExamenes.TabIndex = 9;
             // 
-            // label4
+            // numericUpDown1
             // 
-            label4.AutoSize = true;
-            label4.BackColor = Color.Transparent;
-            label4.Font = new Font("Segoe UI", 10F);
-            label4.ForeColor = Color.FromArgb(31, 35, 40);
-            label4.Location = new Point(438, 82);
-            label4.Name = "label4";
-            label4.Size = new Size(132, 19);
-            label4.TabIndex = 2;
-            label4.Text = "Exámenes asociados";
+            numericUpDown1.BackColor = Color.White;
+            numericUpDown1.BorderStyle = BorderStyle.FixedSingle;
+            numericUpDown1.ForeColor = Color.FromArgb(31, 35, 40);
+            numericUpDown1.Location = new Point(619, 40);
+            numericUpDown1.Name = "numericUpDown1";
+            numericUpDown1.Size = new Size(120, 25);
+            numericUpDown1.TabIndex = 8;
+            numericUpDown1.TextAlign = HorizontalAlignment.Right;
+            // 
+            // textBox3
+            // 
+            textBox3.BorderStyle = BorderStyle.FixedSingle;
+            textBox3.ForeColor = Color.FromArgb(31, 35, 40);
+            textBox3.Location = new Point(168, 117);
+            textBox3.Name = "textBox3";
+            textBox3.Size = new Size(190, 25);
+            textBox3.TabIndex = 7;
+            // 
+            // textBox2
+            // 
+            textBox2.BorderStyle = BorderStyle.FixedSingle;
+            textBox2.ForeColor = Color.FromArgb(31, 35, 40);
+            textBox2.Location = new Point(168, 80);
+            textBox2.Name = "textBox2";
+            textBox2.Size = new Size(138, 25);
+            textBox2.TabIndex = 6;
+            // 
+            // textBox1
+            // 
+            textBox1.BorderStyle = BorderStyle.FixedSingle;
+            textBox1.ForeColor = Color.FromArgb(31, 35, 40);
+            textBox1.Location = new Point(168, 38);
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(190, 25);
+            textBox1.TabIndex = 1;
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.BackColor = Color.Transparent;
+            label7.Font = new Font("Segoe UI", 10F);
+            label7.ForeColor = Color.FromArgb(31, 35, 40);
+            label7.Location = new Point(438, 40);
+            label7.Name = "label7";
+            label7.Size = new Size(133, 19);
+            label7.TabIndex = 5;
+            label7.Text = "Centrifugación (min)";
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.BackColor = Color.Transparent;
+            label6.Font = new Font("Segoe UI", 10F);
+            label6.ForeColor = Color.FromArgb(31, 35, 40);
+            label6.Location = new Point(18, 119);
+            label6.Name = "label6";
+            label6.Size = new Size(52, 19);
+            label6.TabIndex = 4;
+            label6.Text = "Aditivo";
             // 
             // label5
             // 
@@ -411,79 +446,30 @@
             label5.Text = "Color de Tapa*";
             label5.Click += label5_Click;
             // 
-            // label6
+            // label4
             // 
-            label6.AutoSize = true;
-            label6.BackColor = Color.Transparent;
-            label6.Font = new Font("Segoe UI", 10F);
-            label6.ForeColor = Color.FromArgb(31, 35, 40);
-            label6.Location = new Point(18, 119);
-            label6.Name = "label6";
-            label6.Size = new Size(52, 19);
-            label6.TabIndex = 4;
-            label6.Text = "Aditivo";
+            label4.AutoSize = true;
+            label4.BackColor = Color.Transparent;
+            label4.Font = new Font("Segoe UI", 10F);
+            label4.ForeColor = Color.FromArgb(31, 35, 40);
+            label4.Location = new Point(438, 82);
+            label4.Name = "label4";
+            label4.Size = new Size(132, 19);
+            label4.TabIndex = 2;
+            label4.Text = "Exámenes asociados";
             // 
-            // label7
+            // label3
             // 
-            label7.AutoSize = true;
-            label7.BackColor = Color.Transparent;
-            label7.Font = new Font("Segoe UI", 10F);
-            label7.ForeColor = Color.FromArgb(31, 35, 40);
-            label7.Location = new Point(438, 40);
-            label7.Name = "label7";
-            label7.Size = new Size(133, 19);
-            label7.TabIndex = 5;
-            label7.Text = "Centrifugación (min)";
-            // 
-            // textBox1
-            // 
-            textBox1.BorderStyle = BorderStyle.FixedSingle;
-            textBox1.ForeColor = Color.FromArgb(31, 35, 40);
-            textBox1.Location = new Point(168, 38);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(190, 25);
-            textBox1.TabIndex = 1;
-            // 
-            // textBox2
-            // 
-            textBox2.BorderStyle = BorderStyle.FixedSingle;
-            textBox2.ForeColor = Color.FromArgb(31, 35, 40);
-            textBox2.Location = new Point(168, 80);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(138, 25);
-            textBox2.TabIndex = 6;
-            // 
-            // textBox3
-            // 
-            textBox3.BorderStyle = BorderStyle.FixedSingle;
-            textBox3.ForeColor = Color.FromArgb(31, 35, 40);
-            textBox3.Location = new Point(168, 117);
-            textBox3.Name = "textBox3";
-            textBox3.Size = new Size(190, 25);
-            textBox3.TabIndex = 7;
-            // 
-            // numericUpDown1
-            // 
-            numericUpDown1.BackColor = Color.White;
-            numericUpDown1.BorderStyle = BorderStyle.FixedSingle;
-            numericUpDown1.ForeColor = Color.FromArgb(31, 35, 40);
-            numericUpDown1.Location = new Point(619, 40);
-            numericUpDown1.Name = "numericUpDown1";
-            numericUpDown1.Size = new Size(120, 25);
-            numericUpDown1.TabIndex = 8;
-            numericUpDown1.TextAlign = HorizontalAlignment.Right;
-            // 
-            // clbExamenes
-            // 
-            clbExamenes.BackColor = Color.White;
-            clbExamenes.BorderStyle = BorderStyle.FixedSingle;
-            clbExamenes.CheckOnClick = true;
-            clbExamenes.ForeColor = Color.FromArgb(31, 35, 40);
-            clbExamenes.FormattingEnabled = true;
-            clbExamenes.Location = new Point(619, 82);
-            clbExamenes.Name = "clbExamenes";
-            clbExamenes.Size = new Size(181, 62);
-            clbExamenes.TabIndex = 9;
+            label3.AutoSize = true;
+            label3.BackColor = Color.Transparent;
+            label3.Font = new Font("Segoe UI", 10F);
+            label3.ForeColor = Color.FromArgb(31, 35, 40);
+            label3.Location = new Point(25, 40);
+            label3.Name = "label3";
+            label3.Size = new Size(45, 19);
+            label3.TabIndex = 1;
+            label3.Text = "Tipo *";
+            label3.Click += label3_Click;
             // 
             // FrmMantTubos
             // 
@@ -495,7 +481,6 @@
             Controls.Add(grpRegistros);
             Controls.Add(grpBusqueda);
             Controls.Add(flowLayoutPanel1);
-            Controls.Add(label2);
             Controls.Add(panel1);
             Font = new Font("Segoe UI", 10F);
             FormBorderStyle = FormBorderStyle.FixedSingle;
@@ -514,14 +499,12 @@
             grpDatos.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)numericUpDown1).EndInit();
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
 
         private Panel panel1;
         private Label label1;
-        private Label label2;
         private FlowLayoutPanel flowLayoutPanel1;
         private Button button1;
         private Button button2;

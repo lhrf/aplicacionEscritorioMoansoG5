@@ -28,55 +28,42 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(242, 246, 250);
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(11, 61, 110);
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(255, 255, 255);
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(11, 61, 110);
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.FromArgb(255, 255, 255);
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 10F);
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(31, 35, 40);
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(207, 226, 243);
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(31, 35, 40);
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            pnlEncabezado = new System.Windows.Forms.Panel();
-            lblTitulo = new System.Windows.Forms.Label();
-            lblCodigo = new System.Windows.Forms.Label();
-            flpBotones = new System.Windows.Forms.FlowLayoutPanel();
-            btnCerrar = new System.Windows.Forms.Button();
-            btnCancelar = new System.Windows.Forms.Button();
-            btnGuardar = new System.Windows.Forms.Button();
-            btnInhabilitar = new System.Windows.Forms.Button();
-            btnEditar = new System.Windows.Forms.Button();
-            btnNuevo = new System.Windows.Forms.Button();
-            grpBusqueda = new System.Windows.Forms.GroupBox();
-            lblBuscar = new System.Windows.Forms.Label();
-            txtBuscar = new System.Windows.Forms.TextBox();
-            btnBuscar = new System.Windows.Forms.Button();
-            grpRegistros = new System.Windows.Forms.GroupBox();
-            dgvRegistros = new System.Windows.Forms.DataGridView();
-            colCodigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            colNombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            colTipoDeMuestra = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            colProcedimiento = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            colTarifaS = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            colEstado = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            grpDatos = new System.Windows.Forms.GroupBox();
-            lblCodigoExamen = new System.Windows.Forms.Label();
-            txtCodigo = new System.Windows.Forms.TextBox();
-            lblNombre = new System.Windows.Forms.Label();
-            txtNombre = new System.Windows.Forms.TextBox();
-            lblTipoMuestra = new System.Windows.Forms.Label();
-            cboTipoMuestra = new System.Windows.Forms.ComboBox();
-            lblProcedimiento = new System.Windows.Forms.Label();
-            cboProcedimiento = new System.Windows.Forms.ComboBox();
-            lblTarifa = new System.Windows.Forms.Label();
-            nudTarifa = new System.Windows.Forms.NumericUpDown();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            pnlEncabezado = new Panel();
+            lblTitulo = new Label();
+            flpBotones = new FlowLayoutPanel();
+            btnCerrar = new Button();
+            btnCancelar = new Button();
+            btnGuardar = new Button();
+            btnInhabilitar = new Button();
+            btnEditar = new Button();
+            btnNuevo = new Button();
+            grpBusqueda = new GroupBox();
+            lblBuscar = new Label();
+            txtBuscar = new TextBox();
+            btnBuscar = new Button();
+            grpRegistros = new GroupBox();
+            dgvRegistros = new DataGridView();
+            colCodigo = new DataGridViewTextBoxColumn();
+            colNombre = new DataGridViewTextBoxColumn();
+            colTipoDeMuestra = new DataGridViewTextBoxColumn();
+            colProcedimiento = new DataGridViewTextBoxColumn();
+            colTarifaS = new DataGridViewTextBoxColumn();
+            colEstado = new DataGridViewTextBoxColumn();
+            grpDatos = new GroupBox();
+            lblCodigoExamen = new Label();
+            txtCodigo = new TextBox();
+            lblNombre = new Label();
+            txtNombre = new TextBox();
+            lblTipoMuestra = new Label();
+            cboTipoMuestra = new ComboBox();
+            lblProcedimiento = new Label();
+            cboProcedimiento = new ComboBox();
+            lblTarifa = new Label();
+            nudTarifa = new NumericUpDown();
             pnlEncabezado.SuspendLayout();
             flpBotones.SuspendLayout();
             grpBusqueda.SuspendLayout();
@@ -88,174 +75,151 @@
             // 
             // pnlEncabezado
             // 
-            pnlEncabezado.BackColor = System.Drawing.Color.FromArgb(11, 61, 110);
-            pnlEncabezado.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            pnlEncabezado.Controls.Add(lblCodigo);
+            pnlEncabezado.BackColor = Color.FromArgb(11, 61, 110);
             pnlEncabezado.Controls.Add(lblTitulo);
-            pnlEncabezado.Dock = System.Windows.Forms.DockStyle.Top;
-            pnlEncabezado.Location = new System.Drawing.Point(0, 0);
+            pnlEncabezado.Dock = DockStyle.Top;
+            pnlEncabezado.Location = new Point(0, 0);
             pnlEncabezado.Name = "pnlEncabezado";
-            pnlEncabezado.Size = new System.Drawing.Size(1000, 56);
+            pnlEncabezado.Size = new Size(1000, 56);
             pnlEncabezado.TabIndex = 0;
             // 
             // lblTitulo
             // 
             lblTitulo.AutoSize = true;
-            lblTitulo.BackColor = System.Drawing.Color.Transparent;
-            lblTitulo.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold);
-            lblTitulo.ForeColor = System.Drawing.Color.FromArgb(255, 255, 255);
-            lblTitulo.Location = new System.Drawing.Point(20, 14);
+            lblTitulo.BackColor = Color.Transparent;
+            lblTitulo.Font = new Font("Segoe UI", 14F, FontStyle.Bold);
+            lblTitulo.ForeColor = Color.FromArgb(255, 255, 255);
+            lblTitulo.Location = new Point(20, 14);
             lblTitulo.Name = "lblTitulo";
-            lblTitulo.Size = new System.Drawing.Size(250, 25);
+            lblTitulo.Size = new Size(243, 25);
             lblTitulo.TabIndex = 0;
             lblTitulo.Text = "Mantenedor de exámenes";
             // 
-            // lblCodigo
-            // 
-            lblCodigo.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
-            lblCodigo.AutoSize = true;
-            lblCodigo.BackColor = System.Drawing.Color.Transparent;
-            lblCodigo.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular);
-            lblCodigo.ForeColor = System.Drawing.Color.FromArgb(191, 215, 238);
-            lblCodigo.Location = new System.Drawing.Point(939, 20);
-            lblCodigo.Name = "lblCodigo";
-            lblCodigo.Size = new System.Drawing.Size(41, 15);
-            lblCodigo.TabIndex = 1;
-            lblCodigo.Text = "CU-06";
-            // 
             // flpBotones
             // 
-            flpBotones.BackColor = System.Drawing.Color.FromArgb(255, 255, 255);
+            flpBotones.BackColor = Color.FromArgb(255, 255, 255);
             flpBotones.Controls.Add(btnCerrar);
             flpBotones.Controls.Add(btnCancelar);
             flpBotones.Controls.Add(btnGuardar);
             flpBotones.Controls.Add(btnInhabilitar);
             flpBotones.Controls.Add(btnEditar);
             flpBotones.Controls.Add(btnNuevo);
-            flpBotones.Dock = System.Windows.Forms.DockStyle.Bottom;
-            flpBotones.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            flpBotones.Location = new System.Drawing.Point(0, 570);
+            flpBotones.Dock = DockStyle.Bottom;
+            flpBotones.FlowDirection = FlowDirection.RightToLeft;
+            flpBotones.Location = new Point(0, 570);
             flpBotones.Name = "flpBotones";
-            flpBotones.Padding = new System.Windows.Forms.Padding(10, 12, 10, 12);
-            flpBotones.Size = new System.Drawing.Size(1000, 60);
+            flpBotones.Padding = new Padding(10, 12, 10, 12);
+            flpBotones.Size = new Size(1000, 60);
             flpBotones.TabIndex = 4;
             flpBotones.WrapContents = false;
             // 
             // btnCerrar
             // 
-            btnCerrar.BackColor = System.Drawing.Color.FromArgb(229, 231, 235);
-            btnCerrar.Cursor = System.Windows.Forms.Cursors.Hand;
+            btnCerrar.BackColor = Color.FromArgb(229, 231, 235);
+            btnCerrar.Cursor = Cursors.Hand;
             btnCerrar.FlatAppearance.BorderSize = 0;
-            btnCerrar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(209, 213, 219);
-            btnCerrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            btnCerrar.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
-            btnCerrar.ForeColor = System.Drawing.Color.FromArgb(31, 35, 40);
-            btnCerrar.Location = new System.Drawing.Point(860, 12);
+            btnCerrar.FlatAppearance.MouseOverBackColor = Color.FromArgb(209, 213, 219);
+            btnCerrar.FlatStyle = FlatStyle.Flat;
+            btnCerrar.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            btnCerrar.ForeColor = Color.FromArgb(31, 35, 40);
+            btnCerrar.Location = new Point(847, 15);
             btnCerrar.Name = "btnCerrar";
-            btnCerrar.Size = new System.Drawing.Size(130, 36);
+            btnCerrar.Size = new Size(130, 36);
             btnCerrar.TabIndex = 0;
-            btnCerrar.TabStop = true;
             btnCerrar.Text = "Cerrar";
             btnCerrar.UseVisualStyleBackColor = false;
             // 
             // btnCancelar
             // 
-            btnCancelar.BackColor = System.Drawing.Color.FromArgb(229, 231, 235);
-            btnCancelar.Cursor = System.Windows.Forms.Cursors.Hand;
+            btnCancelar.BackColor = Color.FromArgb(229, 231, 235);
+            btnCancelar.Cursor = Cursors.Hand;
             btnCancelar.FlatAppearance.BorderSize = 0;
-            btnCancelar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(209, 213, 219);
-            btnCancelar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            btnCancelar.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
-            btnCancelar.ForeColor = System.Drawing.Color.FromArgb(31, 35, 40);
-            btnCancelar.Location = new System.Drawing.Point(724, 12);
+            btnCancelar.FlatAppearance.MouseOverBackColor = Color.FromArgb(209, 213, 219);
+            btnCancelar.FlatStyle = FlatStyle.Flat;
+            btnCancelar.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            btnCancelar.ForeColor = Color.FromArgb(31, 35, 40);
+            btnCancelar.Location = new Point(711, 15);
             btnCancelar.Name = "btnCancelar";
-            btnCancelar.Size = new System.Drawing.Size(130, 36);
+            btnCancelar.Size = new Size(130, 36);
             btnCancelar.TabIndex = 1;
-            btnCancelar.TabStop = true;
             btnCancelar.Text = "Cancelar";
             btnCancelar.UseVisualStyleBackColor = false;
             // 
             // btnGuardar
             // 
-            btnGuardar.BackColor = System.Drawing.Color.FromArgb(11, 61, 110);
-            btnGuardar.Cursor = System.Windows.Forms.Cursors.Hand;
+            btnGuardar.BackColor = Color.FromArgb(11, 61, 110);
+            btnGuardar.Cursor = Cursors.Hand;
             btnGuardar.FlatAppearance.BorderSize = 0;
-            btnGuardar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(20, 90, 158);
-            btnGuardar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            btnGuardar.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
-            btnGuardar.ForeColor = System.Drawing.Color.FromArgb(255, 255, 255);
-            btnGuardar.Location = new System.Drawing.Point(588, 12);
+            btnGuardar.FlatAppearance.MouseOverBackColor = Color.FromArgb(20, 90, 158);
+            btnGuardar.FlatStyle = FlatStyle.Flat;
+            btnGuardar.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            btnGuardar.ForeColor = Color.FromArgb(255, 255, 255);
+            btnGuardar.Location = new Point(575, 15);
             btnGuardar.Name = "btnGuardar";
-            btnGuardar.Size = new System.Drawing.Size(130, 36);
+            btnGuardar.Size = new Size(130, 36);
             btnGuardar.TabIndex = 2;
-            btnGuardar.TabStop = true;
             btnGuardar.Text = "Guardar";
             btnGuardar.UseVisualStyleBackColor = false;
             // 
             // btnInhabilitar
             // 
-            btnInhabilitar.BackColor = System.Drawing.Color.FromArgb(180, 35, 24);
-            btnInhabilitar.Cursor = System.Windows.Forms.Cursors.Hand;
+            btnInhabilitar.BackColor = Color.FromArgb(180, 35, 24);
+            btnInhabilitar.Cursor = Cursors.Hand;
             btnInhabilitar.FlatAppearance.BorderSize = 0;
-            btnInhabilitar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(143, 28, 19);
-            btnInhabilitar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            btnInhabilitar.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
-            btnInhabilitar.ForeColor = System.Drawing.Color.FromArgb(255, 255, 255);
-            btnInhabilitar.Location = new System.Drawing.Point(452, 12);
+            btnInhabilitar.FlatAppearance.MouseOverBackColor = Color.FromArgb(143, 28, 19);
+            btnInhabilitar.FlatStyle = FlatStyle.Flat;
+            btnInhabilitar.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            btnInhabilitar.ForeColor = Color.FromArgb(255, 255, 255);
+            btnInhabilitar.Location = new Point(439, 15);
             btnInhabilitar.Name = "btnInhabilitar";
-            btnInhabilitar.Size = new System.Drawing.Size(130, 36);
+            btnInhabilitar.Size = new Size(130, 36);
             btnInhabilitar.TabIndex = 3;
-            btnInhabilitar.TabStop = true;
             btnInhabilitar.Text = "Inhabilitar";
             btnInhabilitar.UseVisualStyleBackColor = false;
             // 
             // btnEditar
             // 
-            btnEditar.BackColor = System.Drawing.Color.FromArgb(255, 255, 255);
-            btnEditar.Cursor = System.Windows.Forms.Cursors.Hand;
-            btnEditar.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(11, 61, 110);
-            btnEditar.FlatAppearance.BorderSize = 1;
-            btnEditar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(238, 244, 251);
-            btnEditar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            btnEditar.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
-            btnEditar.ForeColor = System.Drawing.Color.FromArgb(11, 61, 110);
-            btnEditar.Location = new System.Drawing.Point(316, 12);
+            btnEditar.BackColor = Color.FromArgb(255, 255, 255);
+            btnEditar.Cursor = Cursors.Hand;
+            btnEditar.FlatAppearance.BorderColor = Color.FromArgb(11, 61, 110);
+            btnEditar.FlatAppearance.MouseOverBackColor = Color.FromArgb(238, 244, 251);
+            btnEditar.FlatStyle = FlatStyle.Flat;
+            btnEditar.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            btnEditar.ForeColor = Color.FromArgb(11, 61, 110);
+            btnEditar.Location = new Point(303, 15);
             btnEditar.Name = "btnEditar";
-            btnEditar.Size = new System.Drawing.Size(130, 36);
+            btnEditar.Size = new Size(130, 36);
             btnEditar.TabIndex = 4;
-            btnEditar.TabStop = true;
             btnEditar.Text = "Editar";
             btnEditar.UseVisualStyleBackColor = false;
             // 
             // btnNuevo
             // 
-            btnNuevo.BackColor = System.Drawing.Color.FromArgb(255, 255, 255);
-            btnNuevo.Cursor = System.Windows.Forms.Cursors.Hand;
-            btnNuevo.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(11, 61, 110);
-            btnNuevo.FlatAppearance.BorderSize = 1;
-            btnNuevo.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(238, 244, 251);
-            btnNuevo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            btnNuevo.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
-            btnNuevo.ForeColor = System.Drawing.Color.FromArgb(11, 61, 110);
-            btnNuevo.Location = new System.Drawing.Point(180, 12);
+            btnNuevo.BackColor = Color.FromArgb(255, 255, 255);
+            btnNuevo.Cursor = Cursors.Hand;
+            btnNuevo.FlatAppearance.BorderColor = Color.FromArgb(11, 61, 110);
+            btnNuevo.FlatAppearance.MouseOverBackColor = Color.FromArgb(238, 244, 251);
+            btnNuevo.FlatStyle = FlatStyle.Flat;
+            btnNuevo.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            btnNuevo.ForeColor = Color.FromArgb(11, 61, 110);
+            btnNuevo.Location = new Point(167, 15);
             btnNuevo.Name = "btnNuevo";
-            btnNuevo.Size = new System.Drawing.Size(130, 36);
+            btnNuevo.Size = new Size(130, 36);
             btnNuevo.TabIndex = 5;
-            btnNuevo.TabStop = true;
             btnNuevo.Text = "Nuevo";
             btnNuevo.UseVisualStyleBackColor = false;
             // 
             // grpBusqueda
             // 
-            grpBusqueda.BackColor = System.Drawing.Color.FromArgb(255, 255, 255);
+            grpBusqueda.BackColor = Color.FromArgb(255, 255, 255);
             grpBusqueda.Controls.Add(lblBuscar);
             grpBusqueda.Controls.Add(txtBuscar);
             grpBusqueda.Controls.Add(btnBuscar);
-            grpBusqueda.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
-            grpBusqueda.ForeColor = System.Drawing.Color.FromArgb(11, 61, 110);
-            grpBusqueda.Location = new System.Drawing.Point(20, 70);
+            grpBusqueda.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            grpBusqueda.ForeColor = Color.FromArgb(11, 61, 110);
+            grpBusqueda.Location = new Point(20, 70);
             grpBusqueda.Name = "grpBusqueda";
-            grpBusqueda.Size = new System.Drawing.Size(960, 78);
+            grpBusqueda.Size = new Size(960, 78);
             grpBusqueda.TabIndex = 1;
             grpBusqueda.TabStop = false;
             grpBusqueda.Text = "Búsqueda";
@@ -263,54 +227,52 @@
             // lblBuscar
             // 
             lblBuscar.AutoSize = true;
-            lblBuscar.BackColor = System.Drawing.Color.Transparent;
-            lblBuscar.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular);
-            lblBuscar.ForeColor = System.Drawing.Color.FromArgb(31, 35, 40);
-            lblBuscar.Location = new System.Drawing.Point(15, 35);
+            lblBuscar.BackColor = Color.Transparent;
+            lblBuscar.Font = new Font("Segoe UI", 10F);
+            lblBuscar.ForeColor = Color.FromArgb(31, 35, 40);
+            lblBuscar.Location = new Point(15, 35);
             lblBuscar.Name = "lblBuscar";
-            lblBuscar.Size = new System.Drawing.Size(51, 19);
+            lblBuscar.Size = new Size(49, 19);
             lblBuscar.TabIndex = 0;
             lblBuscar.Text = "Buscar";
             // 
             // txtBuscar
             // 
-            txtBuscar.BackColor = System.Drawing.Color.FromArgb(255, 255, 255);
-            txtBuscar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            txtBuscar.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular);
-            txtBuscar.ForeColor = System.Drawing.Color.FromArgb(31, 35, 40);
-            txtBuscar.Location = new System.Drawing.Point(125, 32);
+            txtBuscar.BackColor = Color.FromArgb(255, 255, 255);
+            txtBuscar.BorderStyle = BorderStyle.FixedSingle;
+            txtBuscar.Font = new Font("Segoe UI", 10F);
+            txtBuscar.ForeColor = Color.FromArgb(31, 35, 40);
+            txtBuscar.Location = new Point(125, 32);
             txtBuscar.Name = "txtBuscar";
-            txtBuscar.Size = new System.Drawing.Size(300, 25);
+            txtBuscar.Size = new Size(300, 25);
             txtBuscar.TabIndex = 1;
             // 
             // btnBuscar
             // 
-            btnBuscar.BackColor = System.Drawing.Color.FromArgb(255, 255, 255);
-            btnBuscar.Cursor = System.Windows.Forms.Cursors.Hand;
-            btnBuscar.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(11, 61, 110);
-            btnBuscar.FlatAppearance.BorderSize = 1;
-            btnBuscar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(238, 244, 251);
-            btnBuscar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            btnBuscar.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
-            btnBuscar.ForeColor = System.Drawing.Color.FromArgb(11, 61, 110);
-            btnBuscar.Location = new System.Drawing.Point(435, 28);
+            btnBuscar.BackColor = Color.FromArgb(255, 255, 255);
+            btnBuscar.Cursor = Cursors.Hand;
+            btnBuscar.FlatAppearance.BorderColor = Color.FromArgb(11, 61, 110);
+            btnBuscar.FlatAppearance.MouseOverBackColor = Color.FromArgb(238, 244, 251);
+            btnBuscar.FlatStyle = FlatStyle.Flat;
+            btnBuscar.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            btnBuscar.ForeColor = Color.FromArgb(11, 61, 110);
+            btnBuscar.Location = new Point(435, 28);
             btnBuscar.Name = "btnBuscar";
-            btnBuscar.Size = new System.Drawing.Size(110, 34);
+            btnBuscar.Size = new Size(110, 34);
             btnBuscar.TabIndex = 2;
-            btnBuscar.TabStop = true;
             btnBuscar.Text = "Buscar";
             btnBuscar.UseVisualStyleBackColor = false;
             // 
             // grpRegistros
             // 
-            grpRegistros.BackColor = System.Drawing.Color.FromArgb(255, 255, 255);
+            grpRegistros.BackColor = Color.FromArgb(255, 255, 255);
             grpRegistros.Controls.Add(dgvRegistros);
-            grpRegistros.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
-            grpRegistros.ForeColor = System.Drawing.Color.FromArgb(11, 61, 110);
-            grpRegistros.Location = new System.Drawing.Point(20, 158);
+            grpRegistros.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            grpRegistros.ForeColor = Color.FromArgb(11, 61, 110);
+            grpRegistros.Location = new Point(20, 158);
             grpRegistros.Name = "grpRegistros";
-            grpRegistros.Padding = new System.Windows.Forms.Padding(10, 8, 10, 10);
-            grpRegistros.Size = new System.Drawing.Size(960, 238);
+            grpRegistros.Padding = new Padding(10, 8, 10, 10);
+            grpRegistros.Size = new Size(960, 238);
             grpRegistros.TabIndex = 2;
             grpRegistros.TabStop = false;
             grpRegistros.Text = "Registros";
@@ -320,26 +282,40 @@
             dgvRegistros.AllowUserToAddRows = false;
             dgvRegistros.AllowUserToDeleteRows = false;
             dgvRegistros.AllowUserToResizeRows = false;
+            dataGridViewCellStyle1.BackColor = Color.FromArgb(242, 246, 250);
             dgvRegistros.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            dgvRegistros.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            dgvRegistros.BackgroundColor = System.Drawing.Color.FromArgb(255, 255, 255);
-            dgvRegistros.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            dgvRegistros.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvRegistros.BackgroundColor = Color.FromArgb(255, 255, 255);
+            dgvRegistros.BorderStyle = BorderStyle.None;
+            dataGridViewCellStyle2.BackColor = Color.FromArgb(11, 61, 110);
+            dataGridViewCellStyle2.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            dataGridViewCellStyle2.ForeColor = Color.FromArgb(255, 255, 255);
+            dataGridViewCellStyle2.SelectionBackColor = Color.FromArgb(11, 61, 110);
+            dataGridViewCellStyle2.SelectionForeColor = Color.FromArgb(255, 255, 255);
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
             dgvRegistros.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             dgvRegistros.ColumnHeadersHeight = 34;
-            dgvRegistros.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dgvRegistros.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { colCodigo, colNombre, colTipoDeMuestra, colProcedimiento, colTarifaS, colEstado });
-            dgvRegistros.DefaultCellStyle = dataGridViewCellStyle3;
-            dgvRegistros.Dock = System.Windows.Forms.DockStyle.Fill;
+            dgvRegistros.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            dgvRegistros.Columns.AddRange(new DataGridViewColumn[] { colCodigo, colNombre, colTipoDeMuestra, colProcedimiento, colTarifaS, colEstado });
+            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = SystemColors.Window;
+            dataGridViewCellStyle4.Font = new Font("Segoe UI", 10F);
+            dataGridViewCellStyle4.ForeColor = Color.FromArgb(31, 35, 40);
+            dataGridViewCellStyle4.SelectionBackColor = Color.FromArgb(207, 226, 243);
+            dataGridViewCellStyle4.SelectionForeColor = Color.FromArgb(31, 35, 40);
+            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.False;
+            dgvRegistros.DefaultCellStyle = dataGridViewCellStyle4;
+            dgvRegistros.Dock = DockStyle.Fill;
             dgvRegistros.EnableHeadersVisualStyles = false;
-            dgvRegistros.GridColor = System.Drawing.Color.FromArgb(208, 215, 222);
-            dgvRegistros.Location = new System.Drawing.Point(10, 31);
+            dgvRegistros.GridColor = Color.FromArgb(208, 215, 222);
+            dgvRegistros.Location = new Point(10, 26);
             dgvRegistros.MultiSelect = false;
             dgvRegistros.Name = "dgvRegistros";
             dgvRegistros.ReadOnly = true;
             dgvRegistros.RowHeadersVisible = false;
             dgvRegistros.RowTemplate.Height = 28;
-            dgvRegistros.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            dgvRegistros.Size = new System.Drawing.Size(940, 197);
+            dgvRegistros.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvRegistros.Size = new Size(940, 202);
             dgvRegistros.TabIndex = 0;
             // 
             // colCodigo
@@ -368,7 +344,8 @@
             // 
             // colTarifaS
             // 
-            colTarifaS.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleRight;
+            colTarifaS.DefaultCellStyle = dataGridViewCellStyle3;
             colTarifaS.HeaderText = "Tarifa (S/)";
             colTarifaS.Name = "colTarifaS";
             colTarifaS.ReadOnly = true;
@@ -381,7 +358,7 @@
             // 
             // grpDatos
             // 
-            grpDatos.BackColor = System.Drawing.Color.FromArgb(255, 255, 255);
+            grpDatos.BackColor = Color.FromArgb(255, 255, 255);
             grpDatos.Controls.Add(lblCodigoExamen);
             grpDatos.Controls.Add(txtCodigo);
             grpDatos.Controls.Add(lblNombre);
@@ -392,11 +369,11 @@
             grpDatos.Controls.Add(cboProcedimiento);
             grpDatos.Controls.Add(lblTarifa);
             grpDatos.Controls.Add(nudTarifa);
-            grpDatos.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
-            grpDatos.ForeColor = System.Drawing.Color.FromArgb(11, 61, 110);
-            grpDatos.Location = new System.Drawing.Point(20, 406);
+            grpDatos.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            grpDatos.ForeColor = Color.FromArgb(11, 61, 110);
+            grpDatos.Location = new Point(20, 406);
             grpDatos.Name = "grpDatos";
-            grpDatos.Size = new System.Drawing.Size(960, 154);
+            grpDatos.Size = new Size(960, 154);
             grpDatos.TabIndex = 3;
             grpDatos.TabStop = false;
             grpDatos.Text = "Datos";
@@ -404,145 +381,145 @@
             // lblCodigoExamen
             // 
             lblCodigoExamen.AutoSize = true;
-            lblCodigoExamen.BackColor = System.Drawing.Color.Transparent;
-            lblCodigoExamen.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular);
-            lblCodigoExamen.ForeColor = System.Drawing.Color.FromArgb(31, 35, 40);
-            lblCodigoExamen.Location = new System.Drawing.Point(15, 35);
+            lblCodigoExamen.BackColor = Color.Transparent;
+            lblCodigoExamen.Font = new Font("Segoe UI", 10F);
+            lblCodigoExamen.ForeColor = Color.FromArgb(31, 35, 40);
+            lblCodigoExamen.Location = new Point(15, 35);
             lblCodigoExamen.Name = "lblCodigoExamen";
-            lblCodigoExamen.Size = new System.Drawing.Size(64, 19);
+            lblCodigoExamen.Size = new Size(63, 19);
             lblCodigoExamen.TabIndex = 0;
             lblCodigoExamen.Text = "Código *";
             // 
             // txtCodigo
             // 
-            txtCodigo.BackColor = System.Drawing.Color.FromArgb(255, 255, 255);
-            txtCodigo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            txtCodigo.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular);
-            txtCodigo.ForeColor = System.Drawing.Color.FromArgb(31, 35, 40);
-            txtCodigo.Location = new System.Drawing.Point(166, 32);
+            txtCodigo.BackColor = Color.FromArgb(255, 255, 255);
+            txtCodigo.BorderStyle = BorderStyle.FixedSingle;
+            txtCodigo.Font = new Font("Segoe UI", 10F);
+            txtCodigo.ForeColor = Color.FromArgb(31, 35, 40);
+            txtCodigo.Location = new Point(166, 32);
             txtCodigo.Name = "txtCodigo";
-            txtCodigo.Size = new System.Drawing.Size(100, 25);
+            txtCodigo.Size = new Size(100, 25);
             txtCodigo.TabIndex = 1;
             // 
             // lblNombre
             // 
             lblNombre.AutoSize = true;
-            lblNombre.BackColor = System.Drawing.Color.Transparent;
-            lblNombre.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular);
-            lblNombre.ForeColor = System.Drawing.Color.FromArgb(31, 35, 40);
-            lblNombre.Location = new System.Drawing.Point(15, 73);
+            lblNombre.BackColor = Color.Transparent;
+            lblNombre.Font = new Font("Segoe UI", 10F);
+            lblNombre.ForeColor = Color.FromArgb(31, 35, 40);
+            lblNombre.Location = new Point(15, 73);
             lblNombre.Name = "lblNombre";
-            lblNombre.Size = new System.Drawing.Size(66, 19);
+            lblNombre.Size = new Size(69, 19);
             lblNombre.TabIndex = 2;
             lblNombre.Text = "Nombre *";
             // 
             // txtNombre
             // 
-            txtNombre.BackColor = System.Drawing.Color.FromArgb(255, 255, 255);
-            txtNombre.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            txtNombre.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular);
-            txtNombre.ForeColor = System.Drawing.Color.FromArgb(31, 35, 40);
-            txtNombre.Location = new System.Drawing.Point(166, 70);
+            txtNombre.BackColor = Color.FromArgb(255, 255, 255);
+            txtNombre.BorderStyle = BorderStyle.FixedSingle;
+            txtNombre.Font = new Font("Segoe UI", 10F);
+            txtNombre.ForeColor = Color.FromArgb(31, 35, 40);
+            txtNombre.Location = new Point(166, 70);
             txtNombre.Name = "txtNombre";
-            txtNombre.Size = new System.Drawing.Size(280, 25);
+            txtNombre.Size = new Size(280, 25);
             txtNombre.TabIndex = 3;
             // 
             // lblTipoMuestra
             // 
             lblTipoMuestra.AutoSize = true;
-            lblTipoMuestra.BackColor = System.Drawing.Color.Transparent;
-            lblTipoMuestra.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular);
-            lblTipoMuestra.ForeColor = System.Drawing.Color.FromArgb(31, 35, 40);
-            lblTipoMuestra.Location = new System.Drawing.Point(15, 111);
+            lblTipoMuestra.BackColor = Color.Transparent;
+            lblTipoMuestra.Font = new Font("Segoe UI", 10F);
+            lblTipoMuestra.ForeColor = Color.FromArgb(31, 35, 40);
+            lblTipoMuestra.Location = new Point(15, 111);
             lblTipoMuestra.Name = "lblTipoMuestra";
-            lblTipoMuestra.Size = new System.Drawing.Size(117, 19);
+            lblTipoMuestra.Size = new Size(118, 19);
             lblTipoMuestra.TabIndex = 4;
             lblTipoMuestra.Text = "Tipo de muestra *";
             // 
             // cboTipoMuestra
             // 
-            cboTipoMuestra.BackColor = System.Drawing.Color.FromArgb(255, 255, 255);
-            cboTipoMuestra.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            cboTipoMuestra.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            cboTipoMuestra.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular);
-            cboTipoMuestra.ForeColor = System.Drawing.Color.FromArgb(31, 35, 40);
+            cboTipoMuestra.BackColor = Color.FromArgb(255, 255, 255);
+            cboTipoMuestra.DropDownStyle = ComboBoxStyle.DropDownList;
+            cboTipoMuestra.FlatStyle = FlatStyle.Flat;
+            cboTipoMuestra.Font = new Font("Segoe UI", 10F);
+            cboTipoMuestra.ForeColor = Color.FromArgb(31, 35, 40);
             cboTipoMuestra.FormattingEnabled = true;
             cboTipoMuestra.Items.AddRange(new object[] { "Sangre", "Orina", "Heces" });
-            cboTipoMuestra.Location = new System.Drawing.Point(166, 108);
+            cboTipoMuestra.Location = new Point(166, 108);
             cboTipoMuestra.Name = "cboTipoMuestra";
-            cboTipoMuestra.Size = new System.Drawing.Size(180, 25);
+            cboTipoMuestra.Size = new Size(180, 25);
             cboTipoMuestra.TabIndex = 5;
             // 
             // lblProcedimiento
             // 
             lblProcedimiento.AutoSize = true;
-            lblProcedimiento.BackColor = System.Drawing.Color.Transparent;
-            lblProcedimiento.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular);
-            lblProcedimiento.ForeColor = System.Drawing.Color.FromArgb(31, 35, 40);
-            lblProcedimiento.Location = new System.Drawing.Point(495, 35);
+            lblProcedimiento.BackColor = Color.Transparent;
+            lblProcedimiento.Font = new Font("Segoe UI", 10F);
+            lblProcedimiento.ForeColor = Color.FromArgb(31, 35, 40);
+            lblProcedimiento.Location = new Point(495, 35);
             lblProcedimiento.Name = "lblProcedimiento";
-            lblProcedimiento.Size = new System.Drawing.Size(102, 19);
+            lblProcedimiento.Size = new Size(107, 19);
             lblProcedimiento.TabIndex = 6;
             lblProcedimiento.Text = "Procedimiento *";
             // 
             // cboProcedimiento
             // 
-            cboProcedimiento.BackColor = System.Drawing.Color.FromArgb(255, 255, 255);
-            cboProcedimiento.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            cboProcedimiento.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            cboProcedimiento.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular);
-            cboProcedimiento.ForeColor = System.Drawing.Color.FromArgb(31, 35, 40);
+            cboProcedimiento.BackColor = Color.FromArgb(255, 255, 255);
+            cboProcedimiento.DropDownStyle = ComboBoxStyle.DropDownList;
+            cboProcedimiento.FlatStyle = FlatStyle.Flat;
+            cboProcedimiento.Font = new Font("Segoe UI", 10F);
+            cboProcedimiento.ForeColor = Color.FromArgb(31, 35, 40);
             cboProcedimiento.FormattingEnabled = true;
             cboProcedimiento.Items.AddRange(new object[] { "Automatizado", "Microscópico" });
-            cboProcedimiento.Location = new System.Drawing.Point(629, 32);
+            cboProcedimiento.Location = new Point(629, 32);
             cboProcedimiento.Name = "cboProcedimiento";
-            cboProcedimiento.Size = new System.Drawing.Size(180, 25);
+            cboProcedimiento.Size = new Size(180, 25);
             cboProcedimiento.TabIndex = 7;
             // 
             // lblTarifa
             // 
             lblTarifa.AutoSize = true;
-            lblTarifa.BackColor = System.Drawing.Color.Transparent;
-            lblTarifa.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular);
-            lblTarifa.ForeColor = System.Drawing.Color.FromArgb(31, 35, 40);
-            lblTarifa.Location = new System.Drawing.Point(495, 73);
+            lblTarifa.BackColor = Color.Transparent;
+            lblTarifa.Font = new Font("Segoe UI", 10F);
+            lblTarifa.ForeColor = Color.FromArgb(31, 35, 40);
+            lblTarifa.Location = new Point(495, 73);
             lblTarifa.Name = "lblTarifa";
-            lblTarifa.Size = new System.Drawing.Size(81, 19);
+            lblTarifa.Size = new Size(74, 19);
             lblTarifa.TabIndex = 8;
             lblTarifa.Text = "Tarifa (S/) *";
             // 
             // nudTarifa
             // 
-            nudTarifa.BackColor = System.Drawing.Color.FromArgb(255, 255, 255);
-            nudTarifa.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            nudTarifa.BackColor = Color.FromArgb(255, 255, 255);
+            nudTarifa.BorderStyle = BorderStyle.FixedSingle;
             nudTarifa.DecimalPlaces = 2;
-            nudTarifa.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular);
-            nudTarifa.ForeColor = System.Drawing.Color.FromArgb(31, 35, 40);
-            nudTarifa.Location = new System.Drawing.Point(629, 70);
+            nudTarifa.Font = new Font("Segoe UI", 10F);
+            nudTarifa.ForeColor = Color.FromArgb(31, 35, 40);
+            nudTarifa.Location = new Point(629, 70);
             nudTarifa.Maximum = new decimal(new int[] { 99999, 0, 0, 0 });
             nudTarifa.Name = "nudTarifa";
-            nudTarifa.Size = new System.Drawing.Size(120, 25);
+            nudTarifa.Size = new Size(120, 25);
             nudTarifa.TabIndex = 9;
-            nudTarifa.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            nudTarifa.TextAlign = HorizontalAlignment.Right;
             // 
             // FrmMantExamenes
             // 
             AcceptButton = btnGuardar;
-            AutoScaleDimensions = new System.Drawing.SizeF(9F, 23F);
-            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            BackColor = System.Drawing.Color.FromArgb(244, 246, 249);
+            AutoScaleDimensions = new SizeF(7F, 17F);
+            AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.FromArgb(244, 246, 249);
             CancelButton = btnCancelar;
-            ClientSize = new System.Drawing.Size(1000, 630);
+            ClientSize = new Size(1000, 630);
             Controls.Add(grpDatos);
             Controls.Add(grpRegistros);
             Controls.Add(grpBusqueda);
             Controls.Add(flpBotones);
             Controls.Add(pnlEncabezado);
-            Font = new System.Drawing.Font("Segoe UI", 10F);
-            FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            Font = new Font("Segoe UI", 10F);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             MaximizeBox = false;
             Name = "FrmMantExamenes";
-            StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Mantenedor de exámenes";
             pnlEncabezado.ResumeLayout(false);
             pnlEncabezado.PerformLayout();
@@ -561,7 +538,6 @@
 
         private System.Windows.Forms.Panel pnlEncabezado;
         private System.Windows.Forms.Label lblTitulo;
-        private System.Windows.Forms.Label lblCodigo;
         private System.Windows.Forms.FlowLayoutPanel flpBotones;
         private System.Windows.Forms.Button btnCerrar;
         private System.Windows.Forms.Button btnCancelar;
