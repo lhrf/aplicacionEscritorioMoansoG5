@@ -6,16 +6,4 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Folder Include="Admision\" />
-    <Folder Include="Catalogos\" />
-    <Folder Include="Evaluacion\" />
-    <Folder Include="Caja\" />
-    <Folder Include="Muestras\" />
-    <Folder Include="Analisis\" />
-    <Folder Include="Enums\" />
-    <Folder Include="Reportes\" />
-    <Folder Include="Seguridad\" />
-  </ItemGroup>
-
 </Project>
