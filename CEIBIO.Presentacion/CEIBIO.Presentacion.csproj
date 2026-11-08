@@ -127,7 +127,9 @@
     <Compile Update="Formalizacion\FrmRevisarReporte.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Formalizacion\FrmValidarResultados.cs" />
+    <Compile Update="Formalizacion\FrmValidarResultados.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Mantenedores\FrmMantBoxes.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -214,4 +216,40 @@
     </EmbeddedResource>
   </ItemGroup>
 
+  <ItemGroup>
+    <!-- Ramos WinForms -->
+    <Compile Update="Formalizacion\FrmValidarResultados.cs"><SubType>Form</SubType></Compile>
+    <Compile Update="Formalizacion\FrmValidarResultados.Designer.cs"><DependentUpon>FrmValidarResultados.cs</DependentUpon></Compile>
+    <EmbeddedResource Update="Formalizacion\FrmValidarResultados.resx"><DependentUpon>FrmValidarResultados.cs</DependentUpon></EmbeddedResource>
+    <Compile Update="Formalizacion\FrmRetenerResultado.cs"><SubType>Form</SubType></Compile>
+    <Compile Update="Formalizacion\FrmRetenerResultado.Designer.cs"><DependentUpon>FrmRetenerResultado.cs</DependentUpon></Compile>
+    <EmbeddedResource Update="Formalizacion\FrmRetenerResultado.resx"><DependentUpon>FrmRetenerResultado.cs</DependentUpon></EmbeddedResource>
+    <Compile Update="Formalizacion\FrmRepetirAnalisis.cs"><SubType>Form</SubType></Compile>
+    <Compile Update="Formalizacion\FrmRepetirAnalisis.Designer.cs"><DependentUpon>FrmRepetirAnalisis.cs</DependentUpon></Compile>
+    <EmbeddedResource Update="Formalizacion\FrmRepetirAnalisis.resx"><DependentUpon>FrmRepetirAnalisis.cs</DependentUpon></EmbeddedResource>
+    <Compile Update="Formalizacion\FrmElaborarReporte.cs"><SubType>Form</SubType></Compile>
+    <Compile Update="Formalizacion\FrmElaborarReporte.Designer.cs"><DependentUpon>FrmElaborarReporte.cs</DependentUpon></Compile>
+    <EmbeddedResource Update="Formalizacion\FrmElaborarReporte.resx"><DependentUpon>FrmElaborarReporte.cs</DependentUpon></EmbeddedResource>
+    <Compile Update="Formalizacion\FrmRevisarReporte.cs"><SubType>Form</SubType></Compile>
+    <Compile Update="Formalizacion\FrmRevisarReporte.Designer.cs"><DependentUpon>FrmRevisarReporte.cs</DependentUpon></Compile>
+    <EmbeddedResource Update="Formalizacion\FrmRevisarReporte.resx"><DependentUpon>FrmRevisarReporte.cs</DependentUpon></EmbeddedResource>
+    <Compile Update="Formalizacion\FrmAutorizarReporte.cs"><SubType>Form</SubType></Compile>
+    <Compile Update="Formalizacion\FrmAutorizarReporte.Designer.cs"><DependentUpon>FrmAutorizarReporte.cs</DependentUpon></Compile>
+    <EmbeddedResource Update="Formalizacion\FrmAutorizarReporte.resx"><DependentUpon>FrmAutorizarReporte.cs</DependentUpon></EmbeddedResource>
+    <Compile Update="Formalizacion\FrmDevolverReporte.cs"><SubType>Form</SubType></Compile>
+    <Compile Update="Formalizacion\FrmDevolverReporte.Designer.cs"><DependentUpon>FrmDevolverReporte.cs</DependentUpon></Compile>
+    <EmbeddedResource Update="Formalizacion\FrmDevolverReporte.resx"><DependentUpon>FrmDevolverReporte.cs</DependentUpon></EmbeddedResource>
+    <Compile Update="Formalizacion\FrmConsultarReportes.cs"><SubType>Form</SubType></Compile>
+    <Compile Update="Formalizacion\FrmConsultarReportes.Designer.cs"><DependentUpon>FrmConsultarReportes.cs</DependentUpon></Compile>
+    <EmbeddedResource Update="Formalizacion\FrmConsultarReportes.resx"><DependentUpon>FrmConsultarReportes.cs</DependentUpon></EmbeddedResource>
+    <Compile Update="Formalizacion\FrmHistorialRevisiones.cs"><SubType>Form</SubType></Compile>
+    <Compile Update="Formalizacion\FrmHistorialRevisiones.Designer.cs"><DependentUpon>FrmHistorialRevisiones.cs</DependentUpon></Compile>
+    <EmbeddedResource Update="Formalizacion\FrmHistorialRevisiones.resx"><DependentUpon>FrmHistorialRevisiones.cs</DependentUpon></EmbeddedResource>
+    <Compile Update="Mantenedores\FrmMantPlantillas.cs"><SubType>Form</SubType></Compile>
+    <Compile Update="Mantenedores\FrmMantPlantillas.Designer.cs"><DependentUpon>FrmMantPlantillas.cs</DependentUpon></Compile>
+    <EmbeddedResource Update="Mantenedores\FrmMantPlantillas.resx"><DependentUpon>FrmMantPlantillas.cs</DependentUpon></EmbeddedResource>
+    <Compile Update="Mantenedores\FrmMantIntervalos.cs"><SubType>Form</SubType></Compile>
+    <Compile Update="Mantenedores\FrmMantIntervalos.Designer.cs"><DependentUpon>FrmMantIntervalos.cs</DependentUpon></Compile>
+    <EmbeddedResource Update="Mantenedores\FrmMantIntervalos.resx"><DependentUpon>FrmMantIntervalos.cs</DependentUpon></EmbeddedResource>
+  </ItemGroup>
 </Project>
