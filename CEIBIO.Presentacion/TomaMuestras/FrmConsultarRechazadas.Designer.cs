@@ -33,15 +33,14 @@
             DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             panel1 = new Panel();
             label1 = new Label();
-            label2 = new Label();
             flowLayoutPanel1 = new FlowLayoutPanel();
             button1 = new Button();
             groupBox1 = new GroupBox();
-            label3 = new Label();
+            button2 = new Button();
+            dateTimePicker2 = new DateTimePicker();
             dateTimePicker1 = new DateTimePicker();
             label4 = new Label();
-            dateTimePicker2 = new DateTimePicker();
-            button2 = new Button();
+            label3 = new Label();
             groupBox2 = new GroupBox();
             dataGridView1 = new DataGridView();
             colFecha = new DataGridViewTextBoxColumn();
@@ -78,19 +77,6 @@
             label1.TabIndex = 1;
             label1.Text = "Consultar muestras rechazadas";
             label1.Click += label1_Click;
-            // 
-            // label2
-            // 
-            label2.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            label2.AutoSize = true;
-            label2.BackColor = Color.Transparent;
-            label2.Font = new Font("Segoe UI", 9F);
-            label2.ForeColor = Color.FromArgb(191, 215, 238);
-            label2.Location = new Point(939, 20);
-            label2.Name = "label2";
-            label2.Size = new Size(40, 15);
-            label2.TabIndex = 1;
-            label2.Text = "CU-33";
             // 
             // flowLayoutPanel1
             // 
@@ -137,16 +123,28 @@
             groupBox1.TabStop = false;
             groupBox1.Text = "Filtros";
             // 
-            // label3
+            // button2
             // 
-            label3.AutoSize = true;
-            label3.BackColor = Color.Transparent;
-            label3.ForeColor = Color.FromArgb(31, 35, 40);
-            label3.Location = new Point(45, 33);
-            label3.Name = "label3";
-            label3.Size = new Size(90, 19);
-            label3.TabIndex = 5;
-            label3.Text = "Fecha inicial";
+            button2.Cursor = Cursors.Hand;
+            button2.FlatAppearance.BorderColor = Color.FromArgb(11, 61, 110);
+            button2.FlatAppearance.MouseOverBackColor = Color.FromArgb(238, 244, 251);
+            button2.FlatStyle = FlatStyle.Flat;
+            button2.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            button2.Location = new Point(844, 30);
+            button2.Name = "button2";
+            button2.Size = new Size(110, 34);
+            button2.TabIndex = 5;
+            button2.Text = "Buscar";
+            button2.UseVisualStyleBackColor = false;
+            // 
+            // dateTimePicker2
+            // 
+            dateTimePicker2.CalendarForeColor = Color.FromArgb(31, 35, 40);
+            dateTimePicker2.Format = DateTimePickerFormat.Short;
+            dateTimePicker2.Location = new Point(632, 33);
+            dateTimePicker2.Name = "dateTimePicker2";
+            dateTimePicker2.Size = new Size(200, 25);
+            dateTimePicker2.TabIndex = 5;
             // 
             // dateTimePicker1
             // 
@@ -168,28 +166,16 @@
             label4.TabIndex = 7;
             label4.Text = "Fecha final";
             // 
-            // dateTimePicker2
+            // label3
             // 
-            dateTimePicker2.CalendarForeColor = Color.FromArgb(31, 35, 40);
-            dateTimePicker2.Format = DateTimePickerFormat.Short;
-            dateTimePicker2.Location = new Point(632, 33);
-            dateTimePicker2.Name = "dateTimePicker2";
-            dateTimePicker2.Size = new Size(200, 25);
-            dateTimePicker2.TabIndex = 5;
-            // 
-            // button2
-            // 
-            button2.Cursor = Cursors.Hand;
-            button2.FlatAppearance.BorderColor = Color.FromArgb(11, 61, 110);
-            button2.FlatAppearance.MouseOverBackColor = Color.FromArgb(238, 244, 251);
-            button2.FlatStyle = FlatStyle.Flat;
-            button2.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            button2.Location = new Point(844, 30);
-            button2.Name = "button2";
-            button2.Size = new Size(110, 34);
-            button2.TabIndex = 5;
-            button2.Text = "Buscar";
-            button2.UseVisualStyleBackColor = false;
+            label3.AutoSize = true;
+            label3.BackColor = Color.Transparent;
+            label3.ForeColor = Color.FromArgb(31, 35, 40);
+            label3.Location = new Point(45, 33);
+            label3.Name = "label3";
+            label3.Size = new Size(90, 19);
+            label3.TabIndex = 5;
+            label3.Text = "Fecha inicial";
             // 
             // groupBox2
             // 
@@ -229,7 +215,7 @@
             dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = SystemColors.Window;
             dataGridViewCellStyle3.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            dataGridViewCellStyle3.ForeColor = Color.FromArgb(31, 35, 40);
+            dataGridViewCellStyle3.ForeColor = Color.FromArgb(11, 61, 110);
             dataGridViewCellStyle3.SelectionBackColor = Color.FromArgb(207, 226, 243);
             dataGridViewCellStyle3.SelectionForeColor = Color.FromArgb(31, 35, 40);
             dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
@@ -286,7 +272,6 @@
             Controls.Add(groupBox2);
             Controls.Add(groupBox1);
             Controls.Add(flowLayoutPanel1);
-            Controls.Add(label2);
             Controls.Add(panel1);
             Font = new Font("Segoe UI", 10F);
             FormBorderStyle = FormBorderStyle.FixedSingle;
@@ -304,14 +289,12 @@
             groupBox2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
 
         private Panel panel1;
         private Label label1;
-        private Label label2;
         private FlowLayoutPanel flowLayoutPanel1;
         private Button button1;
         private GroupBox groupBox1;

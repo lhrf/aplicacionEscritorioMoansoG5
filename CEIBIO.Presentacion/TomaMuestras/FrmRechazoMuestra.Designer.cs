@@ -30,19 +30,18 @@
         {
             panel1 = new Panel();
             label1 = new Label();
-            label2 = new Label();
             flowLayoutPanel1 = new FlowLayoutPanel();
             button1 = new Button();
             button2 = new Button();
             groupBox1 = new GroupBox();
-            label3 = new Label();
-            textBox1 = new TextBox();
-            label4 = new Label();
-            textBox2 = new TextBox();
-            label5 = new Label();
-            comboBox1 = new ComboBox();
-            label6 = new Label();
             textBox3 = new TextBox();
+            label6 = new Label();
+            comboBox1 = new ComboBox();
+            label5 = new Label();
+            textBox2 = new TextBox();
+            label4 = new Label();
+            textBox1 = new TextBox();
+            label3 = new Label();
             panel1.SuspendLayout();
             flowLayoutPanel1.SuspendLayout();
             groupBox1.SuspendLayout();
@@ -69,19 +68,6 @@
             label1.Size = new Size(231, 21);
             label1.TabIndex = 1;
             label1.Text = "Registrar rechazo de muestra";
-            // 
-            // label2
-            // 
-            label2.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            label2.AutoSize = true;
-            label2.BackColor = Color.Transparent;
-            label2.Font = new Font("Segoe UI", 9F);
-            label2.ForeColor = Color.FromArgb(191, 215, 238);
-            label2.Location = new Point(459, 15);
-            label2.Name = "label2";
-            label2.Size = new Size(40, 15);
-            label2.TabIndex = 1;
-            label2.Text = "CU-29";
             // 
             // flowLayoutPanel1
             // 
@@ -149,56 +135,26 @@
             groupBox1.TabStop = false;
             groupBox1.Text = "Rechazo de muestra";
             // 
-            // label3
+            // textBox3
             // 
-            label3.AutoSize = true;
-            label3.Location = new Point(15, 35);
-            label3.Name = "label3";
-            label3.Size = new Size(56, 19);
-            label3.TabIndex = 0;
-            label3.Text = "Examen";
+            textBox3.BackColor = Color.White;
+            textBox3.BorderStyle = BorderStyle.FixedSingle;
+            textBox3.ForeColor = Color.FromArgb(31, 35, 40);
+            textBox3.Location = new Point(166, 146);
+            textBox3.Multiline = true;
+            textBox3.Name = "textBox3";
+            textBox3.ScrollBars = ScrollBars.Vertical;
+            textBox3.Size = new Size(260, 60);
+            textBox3.TabIndex = 7;
             // 
-            // textBox1
+            // label6
             // 
-            textBox1.BackColor = Color.FromArgb(233, 238, 243);
-            textBox1.BorderStyle = BorderStyle.FixedSingle;
-            textBox1.ForeColor = Color.FromArgb(31, 35, 40);
-            textBox1.Location = new Point(166, 32);
-            textBox1.Name = "textBox1";
-            textBox1.ReadOnly = true;
-            textBox1.Size = new Size(260, 25);
-            textBox1.TabIndex = 1;
-            textBox1.TabStop = false;
-            // 
-            // label4
-            // 
-            label4.AutoSize = true;
-            label4.Location = new Point(15, 73);
-            label4.Name = "label4";
-            label4.Size = new Size(112, 19);
-            label4.TabIndex = 2;
-            label4.Text = "Tubo / recipiente";
-            // 
-            // textBox2
-            // 
-            textBox2.BackColor = Color.FromArgb(233, 238, 243);
-            textBox2.BorderStyle = BorderStyle.FixedSingle;
-            textBox2.ForeColor = Color.FromArgb(31, 35, 40);
-            textBox2.Location = new Point(166, 70);
-            textBox2.Name = "textBox2";
-            textBox2.ReadOnly = true;
-            textBox2.Size = new Size(260, 25);
-            textBox2.TabIndex = 3;
-            textBox2.TabStop = false;
-            // 
-            // label5
-            // 
-            label5.AutoSize = true;
-            label5.Location = new Point(15, 111);
-            label5.Name = "label5";
-            label5.Size = new Size(63, 19);
-            label5.TabIndex = 4;
-            label5.Text = "Motivo *";
+            label6.AutoSize = true;
+            label6.Location = new Point(15, 149);
+            label6.Name = "label6";
+            label6.Size = new Size(89, 19);
+            label6.TabIndex = 6;
+            label6.Text = " Observación";
             // 
             // comboBox1
             // 
@@ -214,26 +170,56 @@
             comboBox1.TabIndex = 5;
             comboBox1.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
             // 
-            // label6
+            // label5
             // 
-            label6.AutoSize = true;
-            label6.Location = new Point(15, 149);
-            label6.Name = "label6";
-            label6.Size = new Size(89, 19);
-            label6.TabIndex = 6;
-            label6.Text = " Observación";
+            label5.AutoSize = true;
+            label5.Location = new Point(15, 111);
+            label5.Name = "label5";
+            label5.Size = new Size(63, 19);
+            label5.TabIndex = 4;
+            label5.Text = "Motivo *";
             // 
-            // textBox3
+            // textBox2
             // 
-            textBox3.BackColor = Color.White;
-            textBox3.BorderStyle = BorderStyle.FixedSingle;
-            textBox3.ForeColor = Color.FromArgb(31, 35, 40);
-            textBox3.Location = new Point(166, 146);
-            textBox3.Multiline = true;
-            textBox3.Name = "textBox3";
-            textBox3.ScrollBars = ScrollBars.Vertical;
-            textBox3.Size = new Size(260, 60);
-            textBox3.TabIndex = 7;
+            textBox2.BackColor = Color.FromArgb(233, 238, 243);
+            textBox2.BorderStyle = BorderStyle.FixedSingle;
+            textBox2.ForeColor = Color.FromArgb(31, 35, 40);
+            textBox2.Location = new Point(166, 70);
+            textBox2.Name = "textBox2";
+            textBox2.ReadOnly = true;
+            textBox2.Size = new Size(260, 25);
+            textBox2.TabIndex = 3;
+            textBox2.TabStop = false;
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Location = new Point(15, 73);
+            label4.Name = "label4";
+            label4.Size = new Size(112, 19);
+            label4.TabIndex = 2;
+            label4.Text = "Tubo / recipiente";
+            // 
+            // textBox1
+            // 
+            textBox1.BackColor = Color.FromArgb(233, 238, 243);
+            textBox1.BorderStyle = BorderStyle.FixedSingle;
+            textBox1.ForeColor = Color.FromArgb(31, 35, 40);
+            textBox1.Location = new Point(166, 32);
+            textBox1.Name = "textBox1";
+            textBox1.ReadOnly = true;
+            textBox1.Size = new Size(260, 25);
+            textBox1.TabIndex = 1;
+            textBox1.TabStop = false;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new Point(15, 35);
+            label3.Name = "label3";
+            label3.Size = new Size(56, 19);
+            label3.TabIndex = 0;
+            label3.Text = "Examen";
             // 
             // FrmRechazoMuestra
             // 
@@ -243,7 +229,6 @@
             ClientSize = new Size(504, 343);
             Controls.Add(groupBox1);
             Controls.Add(flowLayoutPanel1);
-            Controls.Add(label2);
             Controls.Add(panel1);
             Font = new Font("Segoe UI", 10F);
             FormBorderStyle = FormBorderStyle.FixedDialog;
@@ -266,7 +251,6 @@
 
         private Panel panel1;
         private Label label1;
-        private Label label2;
         private FlowLayoutPanel flowLayoutPanel1;
         private Button button1;
         private Button button2;

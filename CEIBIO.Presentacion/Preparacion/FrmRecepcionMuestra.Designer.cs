@@ -32,25 +32,24 @@
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             pnlEncabezado = new Panel();
             lblTitulo = new Label();
-            lblCodigo = new Label();
             flpBotones = new FlowLayoutPanel();
             btnCerrar = new Button();
             btnConfirmar = new Button();
             btnDevolver = new Button();
             grpAcondicionadas = new GroupBox();
+            grpCotejo = new GroupBox();
+            txtCodigox = new TextBox();
+            lblCodigox = new Label();
             dgvAcondicionadas = new DataGridView();
             colCodigo = new DataGridViewTextBoxColumn();
             colPaciente = new DataGridViewTextBoxColumn();
             colExamenes = new DataGridViewTextBoxColumn();
             colAcondicionadaPor = new DataGridViewTextBoxColumn();
             colHora = new DataGridViewTextBoxColumn();
-            grpCotejo = new GroupBox();
-            lblCodigox = new Label();
-            txtCodigox = new TextBox();
             flpBotones.SuspendLayout();
             grpAcondicionadas.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dgvAcondicionadas).BeginInit();
             grpCotejo.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dgvAcondicionadas).BeginInit();
             SuspendLayout();
             // 
             // pnlEncabezado
@@ -73,19 +72,6 @@
             lblTitulo.Size = new Size(284, 19);
             lblTitulo.TabIndex = 1;
             lblTitulo.Text = "Registrar recepción formal de la muestra";
-            // 
-            // lblCodigo
-            // 
-            lblCodigo.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            lblCodigo.AutoSize = true;
-            lblCodigo.BackColor = Color.Transparent;
-            lblCodigo.Font = new Font("Segoe UI", 9F);
-            lblCodigo.ForeColor = Color.FromArgb(191, 215, 238);
-            lblCodigo.Location = new Point(939, 20);
-            lblCodigo.Name = "lblCodigo";
-            lblCodigo.Size = new Size(40, 15);
-            lblCodigo.TabIndex = 2;
-            lblCodigo.Text = "CU-35";
             // 
             // flpBotones
             // 
@@ -165,6 +151,41 @@
             grpAcondicionadas.TabStop = false;
             grpAcondicionadas.Text = "Muestras acondicionadas";
             // 
+            // grpCotejo
+            // 
+            grpCotejo.BackColor = Color.White;
+            grpCotejo.Controls.Add(txtCodigox);
+            grpCotejo.Controls.Add(lblCodigox);
+            grpCotejo.Location = new Point(4, 331);
+            grpCotejo.Name = "grpCotejo";
+            grpCotejo.Size = new Size(960, 78);
+            grpCotejo.TabIndex = 1;
+            grpCotejo.TabStop = false;
+            grpCotejo.Text = "Cotejo";
+            // 
+            // txtCodigox
+            // 
+            txtCodigox.BackColor = Color.White;
+            txtCodigox.BorderStyle = BorderStyle.FixedSingle;
+            txtCodigox.Font = new Font("Segoe UI", 10F);
+            txtCodigox.ForeColor = Color.FromArgb(31, 35, 40);
+            txtCodigox.Location = new Point(174, 32);
+            txtCodigox.Name = "txtCodigox";
+            txtCodigox.Size = new Size(150, 25);
+            txtCodigox.TabIndex = 3;
+            // 
+            // lblCodigox
+            // 
+            lblCodigox.AutoSize = true;
+            lblCodigox.BackColor = Color.Transparent;
+            lblCodigox.Font = new Font("Segoe UI", 10F);
+            lblCodigox.ForeColor = Color.FromArgb(31, 35, 40);
+            lblCodigox.Location = new Point(9, 35);
+            lblCodigox.Name = "lblCodigox";
+            lblCodigox.Size = new Size(119, 19);
+            lblCodigox.TabIndex = 2;
+            lblCodigox.Text = "Código a cotejar *";
+            // 
             // dgvAcondicionadas
             // 
             dgvAcondicionadas.AllowUserToAddRows = false;
@@ -234,41 +255,6 @@
             colHora.Name = "colHora";
             colHora.ReadOnly = true;
             // 
-            // grpCotejo
-            // 
-            grpCotejo.BackColor = Color.White;
-            grpCotejo.Controls.Add(txtCodigox);
-            grpCotejo.Controls.Add(lblCodigox);
-            grpCotejo.Location = new Point(4, 331);
-            grpCotejo.Name = "grpCotejo";
-            grpCotejo.Size = new Size(960, 78);
-            grpCotejo.TabIndex = 1;
-            grpCotejo.TabStop = false;
-            grpCotejo.Text = "Cotejo";
-            // 
-            // lblCodigox
-            // 
-            lblCodigox.AutoSize = true;
-            lblCodigox.BackColor = Color.Transparent;
-            lblCodigox.Font = new Font("Segoe UI", 10F);
-            lblCodigox.ForeColor = Color.FromArgb(31, 35, 40);
-            lblCodigox.Location = new Point(9, 35);
-            lblCodigox.Name = "lblCodigox";
-            lblCodigox.Size = new Size(119, 19);
-            lblCodigox.TabIndex = 2;
-            lblCodigox.Text = "Código a cotejar *";
-            // 
-            // txtCodigox
-            // 
-            txtCodigox.BackColor = Color.White;
-            txtCodigox.BorderStyle = BorderStyle.FixedSingle;
-            txtCodigox.Font = new Font("Segoe UI", 10F);
-            txtCodigox.ForeColor = Color.FromArgb(31, 35, 40);
-            txtCodigox.Location = new Point(174, 32);
-            txtCodigox.Name = "txtCodigox";
-            txtCodigox.Size = new Size(150, 25);
-            txtCodigox.TabIndex = 3;
-            // 
             // FrmRecepcionMuestra
             // 
             AutoScaleDimensions = new SizeF(7F, 17F);
@@ -277,7 +263,6 @@
             ClientSize = new Size(984, 611);
             Controls.Add(grpAcondicionadas);
             Controls.Add(flpBotones);
-            Controls.Add(lblCodigo);
             Controls.Add(lblTitulo);
             Controls.Add(pnlEncabezado);
             Font = new Font("Segoe UI", 10F);
@@ -288,9 +273,9 @@
             Text = "Registrar recepción formal de la muestra";
             flpBotones.ResumeLayout(false);
             grpAcondicionadas.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)dgvAcondicionadas).EndInit();
             grpCotejo.ResumeLayout(false);
             grpCotejo.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dgvAcondicionadas).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -299,7 +284,6 @@
 
         private Panel pnlEncabezado;
         private Label lblTitulo;
-        private Label lblCodigo;
         private FlowLayoutPanel flpBotones;
         private Button btnCerrar;
         private Button btnConfirmar;

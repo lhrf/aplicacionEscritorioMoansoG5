@@ -28,12 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle13 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle14 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle15 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             pnlEncabezado = new Panel();
             lblTitulo = new Label();
-            lblCodigo = new Label();
             flpBotones = new FlowLayoutPanel();
             btnCerrar = new Button();
             btnValidar = new Button();
@@ -41,14 +40,14 @@
             btnImprimirEtiquetas = new Button();
             btnIniciar = new Button();
             grpAtencion = new GroupBox();
+            textBox1 = new TextBox();
+            label1 = new Label();
+            txtBox = new TextBox();
+            lblBox = new Label();
+            txtPaciente = new TextBox();
+            lblPaciente = new Label();
             txtNumeroAtencion = new TextBox();
             lblNumeroAtencion = new Label();
-            lblPaciente = new Label();
-            txtPaciente = new TextBox();
-            lblBox = new Label();
-            txtBox = new TextBox();
-            label1 = new Label();
-            textBox1 = new TextBox();
             groupBox1 = new GroupBox();
             dataGridView1 = new DataGridView();
             colExamen = new DataGridViewTextBoxColumn();
@@ -56,8 +55,8 @@
             colColorDeTapa = new DataGridViewTextBoxColumn();
             colEstado = new DataGridViewTextBoxColumn();
             groupBox2 = new GroupBox();
-            label2 = new Label();
             dateTimePicker1 = new DateTimePicker();
+            label2 = new Label();
             flpBotones.SuspendLayout();
             grpAtencion.SuspendLayout();
             groupBox1.SuspendLayout();
@@ -85,19 +84,6 @@
             lblTitulo.TabIndex = 1;
             lblTitulo.Text = "Registrar toma de muestra en sede";
             lblTitulo.Click += label1_Click;
-            // 
-            // lblCodigo
-            // 
-            lblCodigo.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            lblCodigo.AutoSize = true;
-            lblCodigo.BackColor = Color.Transparent;
-            lblCodigo.Font = new Font("Segoe UI", 9F);
-            lblCodigo.ForeColor = Color.FromArgb(191, 215, 238);
-            lblCodigo.Location = new Point(890, 20);
-            lblCodigo.Name = "lblCodigo";
-            lblCodigo.Size = new Size(79, 15);
-            lblCodigo.TabIndex = 2;
-            lblCodigo.Text = "CU-27, CU-28";
             // 
             // flpBotones
             // 
@@ -215,6 +201,77 @@
             grpAtencion.TabStop = false;
             grpAtencion.Text = "Atención";
             // 
+            // textBox1
+            // 
+            textBox1.BackColor = Color.FromArgb(233, 238, 243);
+            textBox1.BorderStyle = BorderStyle.FixedSingle;
+            textBox1.ForeColor = Color.FromArgb(31, 35, 40);
+            textBox1.Location = new Point(633, 61);
+            textBox1.Name = "textBox1";
+            textBox1.ReadOnly = true;
+            textBox1.Size = new Size(150, 25);
+            textBox1.TabIndex = 10;
+            textBox1.TabStop = false;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.BackColor = Color.Transparent;
+            label1.ForeColor = Color.FromArgb(31, 35, 40);
+            label1.Location = new Point(470, 67);
+            label1.Name = "label1";
+            label1.Size = new Size(136, 19);
+            label1.TabIndex = 10;
+            label1.Text = "Código correlativo";
+            // 
+            // txtBox
+            // 
+            txtBox.BackColor = Color.FromArgb(233, 238, 243);
+            txtBox.BorderStyle = BorderStyle.FixedSingle;
+            txtBox.ForeColor = Color.FromArgb(31, 35, 40);
+            txtBox.Location = new Point(633, 15);
+            txtBox.Name = "txtBox";
+            txtBox.ReadOnly = true;
+            txtBox.Size = new Size(80, 25);
+            txtBox.TabIndex = 10;
+            txtBox.TabStop = false;
+            // 
+            // lblBox
+            // 
+            lblBox.AutoSize = true;
+            lblBox.BackColor = Color.Transparent;
+            lblBox.ForeColor = Color.FromArgb(31, 35, 40);
+            lblBox.Location = new Point(510, 21);
+            lblBox.Name = "lblBox";
+            lblBox.Size = new Size(35, 19);
+            lblBox.TabIndex = 10;
+            lblBox.Text = "Box";
+            lblBox.Click += lblBox_Click;
+            // 
+            // txtPaciente
+            // 
+            txtPaciente.BackColor = Color.FromArgb(233, 238, 243);
+            txtPaciente.BorderStyle = BorderStyle.FixedSingle;
+            txtPaciente.ForeColor = Color.FromArgb(31, 35, 40);
+            txtPaciente.Location = new Point(132, 67);
+            txtPaciente.Name = "txtPaciente";
+            txtPaciente.ReadOnly = true;
+            txtPaciente.Size = new Size(300, 25);
+            txtPaciente.TabIndex = 10;
+            txtPaciente.TabStop = false;
+            // 
+            // lblPaciente
+            // 
+            lblPaciente.AutoSize = true;
+            lblPaciente.BackColor = Color.Transparent;
+            lblPaciente.ForeColor = Color.FromArgb(31, 35, 40);
+            lblPaciente.Location = new Point(20, 67);
+            lblPaciente.Name = "lblPaciente";
+            lblPaciente.Size = new Size(66, 19);
+            lblPaciente.TabIndex = 10;
+            lblPaciente.Text = "Paciente";
+            lblPaciente.Click += lblPaciente_Click;
+            // 
             // txtNumeroAtencion
             // 
             txtNumeroAtencion.BackColor = Color.FromArgb(233, 238, 243);
@@ -238,77 +295,6 @@
             lblNumeroAtencion.TabIndex = 10;
             lblNumeroAtencion.Text = "N.° de atención";
             // 
-            // lblPaciente
-            // 
-            lblPaciente.AutoSize = true;
-            lblPaciente.BackColor = Color.Transparent;
-            lblPaciente.ForeColor = Color.FromArgb(31, 35, 40);
-            lblPaciente.Location = new Point(20, 67);
-            lblPaciente.Name = "lblPaciente";
-            lblPaciente.Size = new Size(66, 19);
-            lblPaciente.TabIndex = 10;
-            lblPaciente.Text = "Paciente";
-            lblPaciente.Click += lblPaciente_Click;
-            // 
-            // txtPaciente
-            // 
-            txtPaciente.BackColor = Color.FromArgb(233, 238, 243);
-            txtPaciente.BorderStyle = BorderStyle.FixedSingle;
-            txtPaciente.ForeColor = Color.FromArgb(31, 35, 40);
-            txtPaciente.Location = new Point(132, 67);
-            txtPaciente.Name = "txtPaciente";
-            txtPaciente.ReadOnly = true;
-            txtPaciente.Size = new Size(300, 25);
-            txtPaciente.TabIndex = 10;
-            txtPaciente.TabStop = false;
-            // 
-            // lblBox
-            // 
-            lblBox.AutoSize = true;
-            lblBox.BackColor = Color.Transparent;
-            lblBox.ForeColor = Color.FromArgb(31, 35, 40);
-            lblBox.Location = new Point(510, 21);
-            lblBox.Name = "lblBox";
-            lblBox.Size = new Size(35, 19);
-            lblBox.TabIndex = 10;
-            lblBox.Text = "Box";
-            lblBox.Click += lblBox_Click;
-            // 
-            // txtBox
-            // 
-            txtBox.BackColor = Color.FromArgb(233, 238, 243);
-            txtBox.BorderStyle = BorderStyle.FixedSingle;
-            txtBox.ForeColor = Color.FromArgb(31, 35, 40);
-            txtBox.Location = new Point(633, 15);
-            txtBox.Name = "txtBox";
-            txtBox.ReadOnly = true;
-            txtBox.Size = new Size(80, 25);
-            txtBox.TabIndex = 10;
-            txtBox.TabStop = false;
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.BackColor = Color.Transparent;
-            label1.ForeColor = Color.FromArgb(31, 35, 40);
-            label1.Location = new Point(470, 67);
-            label1.Name = "label1";
-            label1.Size = new Size(136, 19);
-            label1.TabIndex = 10;
-            label1.Text = "Código correlativo";
-            // 
-            // textBox1
-            // 
-            textBox1.BackColor = Color.FromArgb(233, 238, 243);
-            textBox1.BorderStyle = BorderStyle.FixedSingle;
-            textBox1.ForeColor = Color.FromArgb(31, 35, 40);
-            textBox1.Location = new Point(633, 61);
-            textBox1.Name = "textBox1";
-            textBox1.ReadOnly = true;
-            textBox1.Size = new Size(150, 25);
-            textBox1.TabIndex = 10;
-            textBox1.TabStop = false;
-            // 
             // groupBox1
             // 
             groupBox1.BackColor = Color.White;
@@ -328,30 +314,30 @@
             dataGridView1.AllowUserToAddRows = false;
             dataGridView1.AllowUserToDeleteRows = false;
             dataGridView1.AllowUserToResizeColumns = false;
-            dataGridViewCellStyle13.BackColor = Color.FromArgb(242, 246, 250);
-            dataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle13;
+            dataGridViewCellStyle1.BackColor = Color.FromArgb(242, 246, 250);
+            dataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridView1.BackgroundColor = Color.White;
             dataGridView1.BorderStyle = BorderStyle.None;
-            dataGridViewCellStyle14.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle14.BackColor = Color.FromArgb(11, 61, 110);
-            dataGridViewCellStyle14.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            dataGridViewCellStyle14.ForeColor = Color.White;
-            dataGridViewCellStyle14.SelectionBackColor = Color.FromArgb(11, 61, 110);
-            dataGridViewCellStyle14.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle14.WrapMode = DataGridViewTriState.True;
-            dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle14;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = Color.FromArgb(11, 61, 110);
+            dataGridViewCellStyle2.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            dataGridViewCellStyle2.ForeColor = Color.White;
+            dataGridViewCellStyle2.SelectionBackColor = Color.FromArgb(11, 61, 110);
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
+            dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             dataGridView1.ColumnHeadersHeight = 34;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             dataGridView1.Columns.AddRange(new DataGridViewColumn[] { colExamen, colTuboRecipiente, colColorDeTapa, colEstado });
-            dataGridViewCellStyle15.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle15.BackColor = SystemColors.Window;
-            dataGridViewCellStyle15.Font = new Font("Segoe UI", 10F);
-            dataGridViewCellStyle15.ForeColor = Color.FromArgb(31, 35, 40);
-            dataGridViewCellStyle15.SelectionBackColor = Color.FromArgb(207, 226, 243);
-            dataGridViewCellStyle15.SelectionForeColor = Color.FromArgb(31, 35, 40);
-            dataGridViewCellStyle15.WrapMode = DataGridViewTriState.False;
-            dataGridView1.DefaultCellStyle = dataGridViewCellStyle15;
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = SystemColors.Window;
+            dataGridViewCellStyle3.Font = new Font("Segoe UI", 10F);
+            dataGridViewCellStyle3.ForeColor = Color.FromArgb(11, 61, 110);
+            dataGridViewCellStyle3.SelectionBackColor = Color.FromArgb(207, 226, 243);
+            dataGridViewCellStyle3.SelectionForeColor = Color.FromArgb(31, 35, 40);
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
+            dataGridView1.DefaultCellStyle = dataGridViewCellStyle3;
             dataGridView1.Dock = DockStyle.Fill;
             dataGridView1.EnableHeadersVisualStyles = false;
             dataGridView1.GridColor = Color.FromArgb(208, 215, 222);
@@ -401,6 +387,16 @@
             groupBox2.TabStop = false;
             groupBox2.Text = "Recolección";
             // 
+            // dateTimePicker1
+            // 
+            dateTimePicker1.CalendarForeColor = Color.FromArgb(31, 35, 40);
+            dateTimePicker1.Format = DateTimePickerFormat.Time;
+            dateTimePicker1.Location = new Point(160, 35);
+            dateTimePicker1.Name = "dateTimePicker1";
+            dateTimePicker1.ShowUpDown = true;
+            dateTimePicker1.Size = new Size(200, 25);
+            dateTimePicker1.TabIndex = 1;
+            // 
             // label2
             // 
             label2.AutoSize = true;
@@ -412,16 +408,6 @@
             label2.Size = new Size(133, 19);
             label2.TabIndex = 1;
             label2.Text = "Hora de extracción *";
-            // 
-            // dateTimePicker1
-            // 
-            dateTimePicker1.CalendarForeColor = Color.FromArgb(31, 35, 40);
-            dateTimePicker1.Format = DateTimePickerFormat.Time;
-            dateTimePicker1.Location = new Point(160, 35);
-            dateTimePicker1.Name = "dateTimePicker1";
-            dateTimePicker1.ShowUpDown = true;
-            dateTimePicker1.Size = new Size(200, 25);
-            dateTimePicker1.TabIndex = 1;
             // 
             // FrmTomaMuestraSede
             // 
@@ -435,7 +421,6 @@
             Controls.Add(groupBox1);
             Controls.Add(grpAtencion);
             Controls.Add(flpBotones);
-            Controls.Add(lblCodigo);
             Controls.Add(lblTitulo);
             Controls.Add(pnlEncabezado);
             Font = new Font("Segoe UI", 10F);
@@ -459,7 +444,6 @@
 
         private Panel pnlEncabezado;
         private Label lblTitulo;
-        private Label lblCodigo;
         private FlowLayoutPanel flpBotones;
         private Button btnCerrar;
         private Button btnValidar;

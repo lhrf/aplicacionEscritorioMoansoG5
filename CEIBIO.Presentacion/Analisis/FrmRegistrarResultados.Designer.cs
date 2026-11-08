@@ -34,21 +34,20 @@
             fontDialog1 = new FontDialog();
             pnlEncabezado = new Panel();
             lblTitulo = new Label();
-            lblCodigo = new Label();
             btnCerrar = new Button();
             flpBotones = new FlowLayoutPanel();
             btnEnviar = new Button();
             btnGuardar = new Button();
             grpMuestra = new GroupBox();
-            txtCodigo = new TextBox();
-            btnBuscar = new Button();
-            lblPaciente = new Label();
-            txtPaciente = new TextBox();
-            lblExamen = new Label();
-            cboExamen = new ComboBox();
-            lblProcedimiento = new Label();
-            contextMenuStrip1 = new ContextMenuStrip(components);
             txtProcedimiento = new TextBox();
+            lblProcedimiento = new Label();
+            cboExamen = new ComboBox();
+            lblExamen = new Label();
+            txtPaciente = new TextBox();
+            lblPaciente = new Label();
+            btnBuscar = new Button();
+            txtCodigo = new TextBox();
+            contextMenuStrip1 = new ContextMenuStrip(components);
             backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             grpParametros = new GroupBox();
             dgvParametros = new DataGridView();
@@ -57,8 +56,8 @@
             colUnidad = new DataGridViewTextBoxColumn();
             backgroundWorker2 = new System.ComponentModel.BackgroundWorker();
             grpObservacionesMicroscopicas = new GroupBox();
-            lblObservaciones = new Label();
             txtObservaciones = new TextBox();
+            lblObservaciones = new Label();
             flpBotones.SuspendLayout();
             grpMuestra.SuspendLayout();
             grpParametros.SuspendLayout();
@@ -86,19 +85,6 @@
             lblTitulo.Size = new Size(277, 25);
             lblTitulo.TabIndex = 3;
             lblTitulo.Text = "Registrar resultados analíticos";
-            // 
-            // lblCodigo
-            // 
-            lblCodigo.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            lblCodigo.AutoSize = true;
-            lblCodigo.BackColor = Color.Transparent;
-            lblCodigo.Font = new Font("Segoe UI", 9F);
-            lblCodigo.ForeColor = Color.FromArgb(191, 215, 238);
-            lblCodigo.Location = new Point(939, 20);
-            lblCodigo.Name = "lblCodigo";
-            lblCodigo.Size = new Size(40, 15);
-            lblCodigo.TabIndex = 4;
-            lblCodigo.Text = "CU-39";
             // 
             // btnCerrar
             // 
@@ -182,15 +168,72 @@
             grpMuestra.TabStop = false;
             grpMuestra.Text = "Muestra";
             // 
-            // txtCodigo
+            // txtProcedimiento
             // 
-            txtCodigo.BackColor = Color.White;
-            txtCodigo.BorderStyle = BorderStyle.FixedSingle;
-            txtCodigo.ForeColor = Color.FromArgb(31, 35, 40);
-            txtCodigo.Location = new Point(164, 24);
-            txtCodigo.Name = "txtCodigo";
-            txtCodigo.Size = new Size(150, 25);
-            txtCodigo.TabIndex = 8;
+            txtProcedimiento.BackColor = Color.FromArgb(233, 238, 243);
+            txtProcedimiento.BorderStyle = BorderStyle.FixedSingle;
+            txtProcedimiento.ForeColor = Color.FromArgb(31, 35, 40);
+            txtProcedimiento.Location = new Point(620, 75);
+            txtProcedimiento.Name = "txtProcedimiento";
+            txtProcedimiento.ReadOnly = true;
+            txtProcedimiento.Size = new Size(180, 25);
+            txtProcedimiento.TabIndex = 9;
+            txtProcedimiento.TabStop = false;
+            // 
+            // lblProcedimiento
+            // 
+            lblProcedimiento.AutoSize = true;
+            lblProcedimiento.BackColor = Color.Transparent;
+            lblProcedimiento.ForeColor = Color.FromArgb(31, 35, 40);
+            lblProcedimiento.Location = new Point(497, 78);
+            lblProcedimiento.Name = "lblProcedimiento";
+            lblProcedimiento.Size = new Size(108, 19);
+            lblProcedimiento.TabIndex = 8;
+            lblProcedimiento.Text = "Procedimiento";
+            // 
+            // cboExamen
+            // 
+            cboExamen.BackColor = Color.White;
+            cboExamen.FlatStyle = FlatStyle.Flat;
+            cboExamen.ForeColor = Color.FromArgb(31, 35, 40);
+            cboExamen.FormattingEnabled = true;
+            cboExamen.IntegralHeight = false;
+            cboExamen.Location = new Point(620, 34);
+            cboExamen.Name = "cboExamen";
+            cboExamen.Size = new Size(260, 25);
+            cboExamen.TabIndex = 8;
+            // 
+            // lblExamen
+            // 
+            lblExamen.AutoSize = true;
+            lblExamen.BackColor = Color.Transparent;
+            lblExamen.ForeColor = Color.FromArgb(31, 35, 40);
+            lblExamen.Location = new Point(544, 37);
+            lblExamen.Name = "lblExamen";
+            lblExamen.Size = new Size(61, 19);
+            lblExamen.TabIndex = 9;
+            lblExamen.Text = "Examen";
+            // 
+            // txtPaciente
+            // 
+            txtPaciente.BackColor = Color.FromArgb(233, 238, 243);
+            txtPaciente.BorderStyle = BorderStyle.FixedSingle;
+            txtPaciente.Location = new Point(164, 72);
+            txtPaciente.Name = "txtPaciente";
+            txtPaciente.Size = new Size(283, 25);
+            txtPaciente.TabIndex = 8;
+            txtPaciente.TabStop = false;
+            // 
+            // lblPaciente
+            // 
+            lblPaciente.AutoSize = true;
+            lblPaciente.BackColor = Color.Transparent;
+            lblPaciente.ForeColor = Color.FromArgb(31, 35, 40);
+            lblPaciente.Location = new Point(30, 78);
+            lblPaciente.Name = "lblPaciente";
+            lblPaciente.Size = new Size(66, 19);
+            lblPaciente.TabIndex = 8;
+            lblPaciente.Text = "Paciente";
             // 
             // btnBuscar
             // 
@@ -206,77 +249,20 @@
             btnBuscar.Text = "Buscar";
             btnBuscar.UseVisualStyleBackColor = true;
             // 
-            // lblPaciente
+            // txtCodigo
             // 
-            lblPaciente.AutoSize = true;
-            lblPaciente.BackColor = Color.Transparent;
-            lblPaciente.ForeColor = Color.FromArgb(31, 35, 40);
-            lblPaciente.Location = new Point(30, 78);
-            lblPaciente.Name = "lblPaciente";
-            lblPaciente.Size = new Size(66, 19);
-            lblPaciente.TabIndex = 8;
-            lblPaciente.Text = "Paciente";
-            // 
-            // txtPaciente
-            // 
-            txtPaciente.BackColor = Color.FromArgb(233, 238, 243);
-            txtPaciente.BorderStyle = BorderStyle.FixedSingle;
-            txtPaciente.Location = new Point(164, 72);
-            txtPaciente.Name = "txtPaciente";
-            txtPaciente.Size = new Size(283, 25);
-            txtPaciente.TabIndex = 8;
-            txtPaciente.TabStop = false;
-            // 
-            // lblExamen
-            // 
-            lblExamen.AutoSize = true;
-            lblExamen.BackColor = Color.Transparent;
-            lblExamen.ForeColor = Color.FromArgb(31, 35, 40);
-            lblExamen.Location = new Point(544, 37);
-            lblExamen.Name = "lblExamen";
-            lblExamen.Size = new Size(61, 19);
-            lblExamen.TabIndex = 9;
-            lblExamen.Text = "Examen";
-            // 
-            // cboExamen
-            // 
-            cboExamen.BackColor = Color.White;
-            cboExamen.FlatStyle = FlatStyle.Flat;
-            cboExamen.ForeColor = Color.FromArgb(31, 35, 40);
-            cboExamen.FormattingEnabled = true;
-            cboExamen.IntegralHeight = false;
-            cboExamen.Location = new Point(620, 34);
-            cboExamen.Name = "cboExamen";
-            cboExamen.Size = new Size(260, 25);
-            cboExamen.TabIndex = 8;
-            // 
-            // lblProcedimiento
-            // 
-            lblProcedimiento.AutoSize = true;
-            lblProcedimiento.BackColor = Color.Transparent;
-            lblProcedimiento.ForeColor = Color.FromArgb(31, 35, 40);
-            lblProcedimiento.Location = new Point(497, 78);
-            lblProcedimiento.Name = "lblProcedimiento";
-            lblProcedimiento.Size = new Size(108, 19);
-            lblProcedimiento.TabIndex = 8;
-            lblProcedimiento.Text = "Procedimiento";
+            txtCodigo.BackColor = Color.White;
+            txtCodigo.BorderStyle = BorderStyle.FixedSingle;
+            txtCodigo.ForeColor = Color.FromArgb(31, 35, 40);
+            txtCodigo.Location = new Point(164, 24);
+            txtCodigo.Name = "txtCodigo";
+            txtCodigo.Size = new Size(150, 25);
+            txtCodigo.TabIndex = 8;
             // 
             // contextMenuStrip1
             // 
             contextMenuStrip1.Name = "contextMenuStrip1";
             contextMenuStrip1.Size = new Size(61, 4);
-            // 
-            // txtProcedimiento
-            // 
-            txtProcedimiento.BackColor = Color.FromArgb(233, 238, 243);
-            txtProcedimiento.BorderStyle = BorderStyle.FixedSingle;
-            txtProcedimiento.ForeColor = Color.FromArgb(31, 35, 40);
-            txtProcedimiento.Location = new Point(620, 75);
-            txtProcedimiento.Name = "txtProcedimiento";
-            txtProcedimiento.ReadOnly = true;
-            txtProcedimiento.Size = new Size(180, 25);
-            txtProcedimiento.TabIndex = 9;
-            txtProcedimiento.TabStop = false;
             // 
             // grpParametros
             // 
@@ -314,7 +300,7 @@
             dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = Color.FromArgb(242, 246, 250);
             dataGridViewCellStyle2.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            dataGridViewCellStyle2.ForeColor = Color.FromArgb(31, 35, 40);
+            dataGridViewCellStyle2.ForeColor = Color.FromArgb(11, 61, 110);
             dataGridViewCellStyle2.SelectionBackColor = Color.FromArgb(207, 226, 243);
             dataGridViewCellStyle2.SelectionForeColor = Color.FromArgb(31, 35, 40);
             dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
@@ -361,17 +347,6 @@
             grpObservacionesMicroscopicas.TabStop = false;
             grpObservacionesMicroscopicas.Text = "Observaciones microscópicas";
             // 
-            // lblObservaciones
-            // 
-            lblObservaciones.AutoSize = true;
-            lblObservaciones.BackColor = Color.Transparent;
-            lblObservaciones.ForeColor = Color.FromArgb(31, 35, 40);
-            lblObservaciones.Location = new Point(6, 32);
-            lblObservaciones.Name = "lblObservaciones";
-            lblObservaciones.Size = new Size(108, 19);
-            lblObservaciones.TabIndex = 1;
-            lblObservaciones.Text = "Observaciones";
-            // 
             // txtObservaciones
             // 
             txtObservaciones.BackColor = Color.White;
@@ -384,6 +359,17 @@
             txtObservaciones.Size = new Size(600, 51);
             txtObservaciones.TabIndex = 2;
             // 
+            // lblObservaciones
+            // 
+            lblObservaciones.AutoSize = true;
+            lblObservaciones.BackColor = Color.Transparent;
+            lblObservaciones.ForeColor = Color.FromArgb(31, 35, 40);
+            lblObservaciones.Location = new Point(6, 32);
+            lblObservaciones.Name = "lblObservaciones";
+            lblObservaciones.Size = new Size(108, 19);
+            lblObservaciones.TabIndex = 1;
+            lblObservaciones.Text = "Observaciones";
+            // 
             // FrmRegistrarResultados
             // 
             AutoScaleDimensions = new SizeF(7F, 17F);
@@ -393,7 +379,6 @@
             Controls.Add(grpObservacionesMicroscopicas);
             Controls.Add(grpParametros);
             Controls.Add(grpMuestra);
-            Controls.Add(lblCodigo);
             Controls.Add(lblTitulo);
             Controls.Add(pnlEncabezado);
             Controls.Add(flpBotones);
@@ -418,7 +403,6 @@
         private FontDialog fontDialog1;
         private Panel pnlEncabezado;
         private Label lblTitulo;
-        private Label lblCodigo;
         private Button btnCerrar;
         private FlowLayoutPanel flpBotones;
         private Button btnEnviar;
