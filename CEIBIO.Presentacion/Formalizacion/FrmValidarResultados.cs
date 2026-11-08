@@ -8,17 +8,6 @@ namespace CEIBIO.Presentacion.Formalizacion
     // CU-46: Validar resultados clínicos
     public partial class FrmValidarResultados : Form
     {
-        private TextBox txtPaciente;
-        private TextBox txtSexo;
-        private TextBox txtEdad;
-        private TextBox txtNumeroAtencion;
-
-        private DataGridView dgvResultados;
-        private DataGridView dgvAnteriores;
-
-        private Button btnValidar;
-        private Button btnRetener;
-        private Button btnCerrar;
 
         private readonly Color azul = Color.FromArgb(11, 61, 110);
         private readonly Color fondo = Color.FromArgb(244, 246, 249);
@@ -27,165 +16,13 @@ namespace CEIBIO.Presentacion.Formalizacion
         public FrmValidarResultados()
         {
             InitializeComponent();
-            CrearInterfaz();
+            this.btnCerrar.Click += this.BtnCerrar_Click;
+            this.btnRetener.Click += this.BtnRetener_Click;
+            this.btnValidar.Click += this.BtnValidar_Click;
+
         }
 
-        private void CrearInterfaz()
-        {
-            SuspendLayout();
-            Controls.Clear();
 
-            Text = "Validar resultados clínicos";
-            ClientSize = new Size(1000, 700);
-            StartPosition = FormStartPosition.CenterScreen;
-            BackColor = fondo;
-            Font = new Font("Segoe UI", 10);
-            AutoScroll = true;
-
-            // CABECERA
-            Panel cabecera = new Panel
-            {
-                Name = "pnlCabecera",
-                Location = new Point(0, 0),
-                Size = new Size(1000, 56),
-                BackColor = azul
-            };
-
-            Label titulo = new Label
-            {
-                Name = "lblTitulo",
-                Text = "Validar resultados clínicos",
-                ForeColor = Color.White,
-                Font = new Font("Segoe UI", 17, FontStyle.Bold),
-                Location = new Point(20, 12),
-                AutoSize = true
-            };
-
-            Label codigo = new Label
-            {
-                Name = "lblCodigoCU",
-                Text = "",
-                ForeColor = Color.LightBlue,
-                Location = new Point(900, 20),
-                AutoSize = true
-            };
-
-            cabecera.Controls.Add(titulo);
-            cabecera.Controls.Add(codigo);
-            Controls.Add(cabecera);
-
-            // DATOS DEL PACIENTE
-            GroupBox grpPaciente = CrearGrupo(
-                "grpPaciente", "Paciente",
-                20, 70, 960, 116);
-
-            CrearEtiqueta(grpPaciente, "lblPaciente",
-                "Paciente", 15, 35);
-
-            txtPaciente = CrearTexto(
-                grpPaciente, "txtPaciente",
-                125, 32, 300, true);
-
-            CrearEtiqueta(grpPaciente, "lblSexo",
-                "Sexo", 15, 73);
-
-            txtSexo = CrearTexto(
-                grpPaciente, "txtSexo",
-                125, 70, 100, true);
-
-            CrearEtiqueta(grpPaciente, "lblEdad",
-                "Edad", 495, 35);
-
-            txtEdad = CrearTexto(
-                grpPaciente, "txtEdad",
-                629, 32, 80, true);
-
-            CrearEtiqueta(grpPaciente, "lblNumeroAtencion",
-                "N.° de atención", 495, 73);
-
-            txtNumeroAtencion = CrearTexto(
-                grpPaciente, "txtNumeroAtencion",
-                629, 70, 120, true);
-
-            // RESULTADOS A VALIDAR
-            GroupBox grpResultados = CrearGrupo(
-                "grpResultados", "Resultados a validar",
-                20, 196, 960, 268);
-
-            dgvResultados = CrearTabla(
-                grpResultados, "dgvResultados",
-                new string[]
-                {
-                    "Examen",
-                    "Parámetro",
-                    "Valor",
-                    "Unidad",
-                    "Intervalo de referencia",
-                    "Fuera de rango",
-                    "Estado"
-                });
-
-            // ANCHOS PARA LOS ENCABEZADOS LARGOS
-            dgvResultados.Columns[0].FillWeight = 90;
-            dgvResultados.Columns[1].FillWeight = 110;
-            dgvResultados.Columns[2].FillWeight = 75;
-            dgvResultados.Columns[3].FillWeight = 85;
-            dgvResultados.Columns[4].FillWeight = 150;
-            dgvResultados.Columns[5].FillWeight = 115;
-            dgvResultados.Columns[6].FillWeight = 85;
-
-            // RESULTADOS ANTERIORES
-            GroupBox grpAnteriores = CrearGrupo(
-                "grpAnteriores",
-                "Resultados anteriores del paciente",
-                20, 474, 960, 148);
-
-            dgvAnteriores = CrearTabla(
-                grpAnteriores, "dgvAnteriores",
-                new string[]
-                {
-                    "Fecha",
-                    "Parámetro",
-                    "Valor"
-                });
-
-            // BARRA INFERIOR
-            Panel barra = new Panel
-            {
-                Name = "pnlAcciones",
-                Location = new Point(0, 640),
-                Size = new Size(1000, 60),
-                BackColor = Color.White
-            };
-
-            btnCerrar = CrearBoton(
-                "btnCerrar", "Cerrar",
-                850, 12, 130,
-                Color.FromArgb(229, 231, 235),
-                Color.Black);
-
-            btnValidar = CrearBoton(
-                "btnValidar", "Validar",
-                710, 12, 130,
-                azul, Color.White);
-
-            btnRetener = CrearBoton(
-                "btnRetener", "Retener y repetir",
-                531, 12, 169,
-                rojo, Color.White);
-
-            btnCerrar.Click += BtnCerrar_Click;
-            btnValidar.Click += BtnValidar_Click;
-            btnRetener.Click += BtnRetener_Click;
-
-            barra.Controls.Add(btnCerrar);
-            barra.Controls.Add(btnValidar);
-            barra.Controls.Add(btnRetener);
-
-            Controls.Add(barra);
-
-            ResumeLayout(false);
-        }
 
         // CREAR GRUPOS
         private GroupBox CrearGrupo(
