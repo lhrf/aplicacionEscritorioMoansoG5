@@ -1,10 +1,9 @@
 ﻿namespace CEIBIO.Entidades
 {
-    /// <summary>Hoja de Ruta de Atención.</summary>
     public class Atencion
     {
         public int IdAtencion { get; set; }
-        public string NumeroAtencion { get; set; } = string.Empty;   // AT-000001 (lo genera la base de datos)
+        public string NumeroAtencion { get; set; } = string.Empty;
         public int IdPaciente { get; set; }
         public DateTime FechaRegistro { get; set; }
         public string Modalidad { get; set; } = "En sede";
@@ -19,7 +18,6 @@
         public int? IdBox { get; set; }
         public int IdUsuarioRegistro { get; set; }
 
-        // Datos para mostrar (se llenan con JOIN)
         public string Dni { get; set; } = string.Empty;
         public string NombrePaciente { get; set; } = string.Empty;
         public string Examenes { get; set; } = string.Empty;
@@ -30,7 +28,6 @@
         public string MedioPago { get; set; } = string.Empty;
         public string EstadoReporte { get; set; } = string.Empty;
 
-        /// <summary>Exámenes de la atención (al registrarla).</summary>
         public List<AtencionExamen> Detalle { get; set; } = new();
     }
 }

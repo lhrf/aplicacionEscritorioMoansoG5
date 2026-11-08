@@ -324,7 +324,6 @@
             Name = "FrmAutorizarTransferencia";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Autorizar pago por transferencia";
-            Load += FrmAutorizarTransferencia_Load;
             pnlEncabezado.ResumeLayout(false);
             pnlEncabezado.PerformLayout();
             flpBotones.ResumeLayout(false);

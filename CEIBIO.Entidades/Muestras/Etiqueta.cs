@@ -1,6 +1,5 @@
 ﻿namespace CEIBIO.Entidades
 {
-    /// <summary>Etiqueta adhesiva de la muestra (CU-28).</summary>
     public class Etiqueta
     {
         public string NombrePaciente { get; set; } = string.Empty;

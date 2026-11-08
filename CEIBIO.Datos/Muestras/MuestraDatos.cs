@@ -40,32 +40,26 @@ namespace CEIBIO.Datos
 
         public List<Muestra> ListarPorEstado(string estado) => Db.Listar("usp_Muestra_ListarPorEstado", Mapear, P("@Estado", estado));
 
-        /// <summary>CU-37: estado vacío o null = todos.</summary>
         public List<Muestra> ConsultarTransito(DateTime desde, DateTime hasta, string? estado) =>
             Db.Listar("usp_Muestra_ConsultarTransito", Mapear,
                 P("@Desde", desde.Date), P("@Hasta", hasta.Date), P("@Estado", string.IsNullOrWhiteSpace(estado) ? null : estado));
 
-        /// <summary>CU-28: genera el código correlativo de la muestra (si ya existe, devuelve la misma). Devuelve el Id.</summary>
         public int Generar(int idAtencion, int idUsuario) =>
             Db.Entero("usp_Muestra_Generar", P("@IdAtencion", idAtencion), P("@IdUsuario", idUsuario));
 
-        /// <summary>CU-27.</summary>
         public void RegistrarRecoleccion(int idMuestra, DateTime horaExtraccion, int idUsuario) =>
             Db.Ejecutar("usp_Muestra_RegistrarRecoleccion", P("@IdMuestra", idMuestra), P("@HoraExtraccion", horaExtraccion), P("@IdUsuario", idUsuario));
 
-        /// <summary>CU-30.</summary>
         public void RegistrarRetorno(int idMuestra, DateTime horaExtraccion, string? condiciones, string? rechazos, int idUsuario) =>
             Db.Ejecutar("usp_Muestra_RegistrarRetorno",
                 P("@IdMuestra", idMuestra), P("@HoraExtraccion", horaExtraccion), P("@CondicionesDeclaradas", condiciones),
                 P("@RechazosOcurridos", rechazos), P("@IdUsuario", idUsuario));
 
-        /// <summary>CU-29.</summary>
         public void RegistrarRechazo(RechazoMuestra r, int idUsuario) =>
             Db.Ejecutar("usp_Muestra_RegistrarRechazo",
                 P("@IdMuestra", r.IdMuestra), P("@IdExamen", r.IdExamen), P("@IdTubo", r.IdTubo), P("@Motivo", r.Motivo),
                 P("@Observacion", r.Observacion), P("@IdUsuario", idUsuario));
 
-        /// <summary>CU-33.</summary>
         public List<RechazoMuestra> ConsultarRechazadas(DateTime desde, DateTime hasta) =>
             Db.Listar("usp_Muestra_ConsultarRechazadas",
                 r => new RechazoMuestra
@@ -83,30 +77,24 @@ namespace CEIBIO.Datos
                     NombreTecnico = Leer.Texto(r, "NombreTecnico")
                 }, P("@Desde", desde.Date), P("@Hasta", hasta.Date));
 
-        /// <summary>CU-34 pasos 2-3.</summary>
         public void RegistrarIngreso(int idMuestra, int idUsuario) =>
             Db.Ejecutar("usp_Muestra_RegistrarIngreso", P("@IdMuestra", idMuestra), P("@IdUsuario", idUsuario));
 
-        /// <summary>CU-34 pasos 4-7.</summary>
         public void RegistrarAcondicionamiento(int idMuestra, string estadoConservacion, int? minutos, int idUsuario) =>
             Db.Ejecutar("usp_Muestra_RegistrarAcondicionamiento",
                 P("@IdMuestra", idMuestra), P("@EstadoConservacion", estadoConservacion), P("@MinutosCentrifugacion", minutos), P("@IdUsuario", idUsuario));
 
-        /// <summary>CU-34 A3.</summary>
         public void Corregir(int idMuestra, string estadoConservacion, int? minutos, string datoAnterior, string motivo, int idUsuario) =>
             Db.Ejecutar("usp_Muestra_Corregir",
                 P("@IdMuestra", idMuestra), P("@EstadoConservacion", estadoConservacion), P("@MinutosCentrifugacion", minutos),
                 P("@DatoAnterior", datoAnterior), P("@Motivo", motivo), P("@IdUsuario", idUsuario));
 
-        /// <summary>CU-35.</summary>
         public void RegistrarRecepcion(int idMuestra, int idUsuario) =>
             Db.Ejecutar("usp_Muestra_RegistrarRecepcion", P("@IdMuestra", idMuestra), P("@IdUsuario", idUsuario));
 
-        /// <summary>Libro de Tránsito: movimientos de una muestra en orden cronológico.</summary>
         public List<MovimientoMuestra> ListarMovimientos(int idMuestra) =>
             Db.Listar("usp_MovimientoMuestra_Listar", MapearMovimiento, P("@IdMuestra", idMuestra));
 
-        /// <summary>CU-37: movimientos entre dos fechas; tipo vacío o null = todos.</summary>
         public List<MovimientoMuestra> ConsultarMovimientos(DateTime desde, DateTime hasta, string? tipoMovimiento) =>
             Db.Listar("usp_MovimientoMuestra_Consultar", MapearMovimiento,
                 P("@Desde", desde.Date), P("@Hasta", hasta.Date), P("@TipoMovimiento", string.IsNullOrWhiteSpace(tipoMovimiento) ? null : tipoMovimiento));
@@ -125,7 +113,6 @@ namespace CEIBIO.Datos
             NombreUsuario = Leer.Texto(r, "NombreUsuario")
         };
 
-        /// <summary>CU-36.</summary>
         public void Devolver(int idMuestra, string diferencia, int idUsuario) =>
             Db.Ejecutar("usp_Muestra_Devolver", P("@IdMuestra", idMuestra), P("@Diferencia", diferencia), P("@IdUsuario", idUsuario));
     }

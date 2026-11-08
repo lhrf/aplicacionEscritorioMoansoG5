@@ -3,14 +3,12 @@ using CEIBIO.Entidades;
 
 namespace CEIBIO.Negocio
 {
-    /// <summary>CU-07 Mantenedor de convenios.</summary>
     public class ConvenioNegocio
     {
         private readonly ConvenioDatos datos = new();
 
         public List<Convenio> Listar(string filtro = "") => datos.Listar((filtro ?? "").Trim());
 
-        /// <summary>Convenios habilitados y vigentes hoy (combo de CU-01).</summary>
         public List<Convenio> ListarVigentes() => datos.ListarVigentes();
 
         public Convenio? ObtenerPorId(int id) => datos.ObtenerPorId(id);

@@ -1,203 +1,88 @@
-﻿
-using System;
-using System.Drawing;
-using System.Windows.Forms;
+using CEIBIO.Entidades;
+using CEIBIO.Negocio;
 
 namespace CEIBIO.Presentacion.Mantenedores
 {
     public partial class FrmMantPlantillas : Form
     {
-        private readonly Color AZUL = Color.FromArgb(11, 61, 110);
-        private readonly Color BLANCO = Color.White;
-        private readonly Color TEXTO = Color.FromArgb(31, 35, 40);
-        private readonly Color FONDO = Color.FromArgb(244, 246, 249);
-        private readonly Color PELIGRO = Color.FromArgb(180, 35, 24);
+        private readonly PlantillaNegocio negocio = new();
+        private readonly Mantenedor m;
 
         public FrmMantPlantillas()
         {
             InitializeComponent();
-            this.btnCerrar.Click += (sender, args) => this.Close();
-
+            clbExamenes.CheckOnClick = true;
+            m = new Mantenedor(grpDatos, btnNuevo, btnEditar, btnGuardar, btnCancelar, btnInhabilitar);
+            btnBuscar.Click += (s, e) => Buscar();
+            btnNuevo.Click += (s, e) => { m.Nuevo(); txtNombre.Focus(); };
+            btnEditar.Click += BtnEditar_Click;
+            btnGuardar.Click += BtnGuardar_Click;
+            btnCancelar.Click += (s, e) => m.Cancelar();
+            btnInhabilitar.Click += BtnInhabilitar_Click;
+            btnExaminar.Click += BtnExaminar_Click;
+            btnCerrar.Click += (s, e) => Close();
+            Load += (s, e) => Ui.Intentar(() =>
+            {
+                clbExamenes.Items.Clear();
+                foreach (var ex in new ExamenNegocio().ListarHabilitados()) clbExamenes.Items.Add(ex);
+                Buscar();
+            });
         }
 
-
-
-        // CREAR GROUPBOX
-        private GroupBox CrearGrupo(
-            string nombre,
-            string titulo,
-            int x, int y,
-            int ancho, int alto)
+        private void Buscar()
         {
-            return new GroupBox
+            Ui.Intentar(() => Ui.Llenar(dgvRegistros, negocio.Listar(txtBuscar.Text), x => new object?[]
             {
-                Name = nombre,
-                Text = titulo,
-                Location = new Point(x, y),
-                Size = new Size(ancho, alto),
-                BackColor = BLANCO,
-                ForeColor = AZUL,
-                Font = new Font(
-                    "Segoe UI", 10, FontStyle.Bold)
-            };
+                x.Nombre, x.Formato, x.Examenes, x.EstadoTexto
+            }));
         }
 
-        // CREAR ETIQUETAS
-        private Label CrearEtiqueta(
-            string nombre,
-            string texto,
-            int x, int y)
+        private void BtnExaminar_Click(object? sender, EventArgs e)
         {
-            return new Label
+            using var dlg = new OpenFileDialog
             {
-                Name = nombre,
-                Text = texto,
-                Location = new Point(x, y),
-                AutoSize = true,
-                Font = new Font("Segoe UI", 10),
-                ForeColor = TEXTO,
-                BackColor = Color.Transparent
+                Title = "Seleccionar formato de plantilla",
+                Filter = "Documentos (*.docx;*.doc;*.pdf;*.rtf;*.txt)|*.docx;*.doc;*.pdf;*.rtf;*.txt|Todos los archivos (*.*)|*.*"
             };
+            if (dlg.ShowDialog(this) == DialogResult.OK) txtFormato.Text = Path.GetFileName(dlg.FileName);
         }
 
-        // CREAR TEXTBOX
-        private TextBox CrearTexto(
-            string nombre,
-            int x, int y,
-            int ancho, int alto)
+        private void BtnEditar_Click(object? sender, EventArgs e)
         {
-            return new TextBox
+            var sel = Ui.Seleccionado<Plantilla>(dgvRegistros);
+            if (sel == null) { Ui.Aviso("Seleccione un registro."); return; }
+            Ui.Intentar(() =>
             {
-                Name = nombre,
-                Location = new Point(x, y),
-                Size = new Size(ancho, alto),
-                Font = new Font("Segoe UI", 10),
-                ForeColor = TEXTO,
-                BackColor = BLANCO,
-                BorderStyle = BorderStyle.FixedSingle
-            };
+                var x = negocio.ObtenerPorId(sel.IdPlantilla);
+                if (x == null) return;
+                m.Editar(x.IdPlantilla);
+                txtNombre.Text = x.Nombre;
+                txtFormato.Text = x.Formato;
+                for (int i = 0; i < clbExamenes.Items.Count; i++)
+                    clbExamenes.SetItemChecked(i, clbExamenes.Items[i] is Examen ex && x.IdExamenes.Contains(ex.IdExamen));
+            });
         }
 
-        // CREAR DATAGRIDVIEW
-        private DataGridView CrearGrilla(string nombre)
+        private void BtnGuardar_Click(object? sender, EventArgs e)
         {
-            DataGridView dgv = new DataGridView
+            var x = new Plantilla
             {
-                Name = nombre,
-                Dock = DockStyle.Fill,
-                BackgroundColor = BLANCO,
-                BorderStyle = BorderStyle.None,
-                GridColor = Color.FromArgb(208, 215, 222),
-                EnableHeadersVisualStyles = false,
-
-                ColumnHeadersHeightSizeMode =
-                    DataGridViewColumnHeadersHeightSizeMode.DisableResizing,
-
-                ColumnHeadersHeight = 45,
-                RowHeadersVisible = false,
-                ReadOnly = true,
-
-                SelectionMode =
-                    DataGridViewSelectionMode.FullRowSelect,
-
-                MultiSelect = false,
-                AllowUserToAddRows = false,
-                AllowUserToDeleteRows = false,
-                AllowUserToResizeRows = false,
-
-                AutoSizeColumnsMode =
-                    DataGridViewAutoSizeColumnsMode.Fill
+                IdPlantilla = m.Id,
+                Nombre = txtNombre.Text,
+                Formato = txtFormato.Text,
+                IdExamenes = clbExamenes.CheckedItems.OfType<Examen>().Select(ex => ex.IdExamen).ToList()
             };
-
-            dgv.RowTemplate.Height = 28;
-
-            dgv.ColumnHeadersDefaultCellStyle.BackColor = AZUL;
-            dgv.ColumnHeadersDefaultCellStyle.ForeColor = BLANCO;
-            dgv.ColumnHeadersDefaultCellStyle.SelectionBackColor = AZUL;
-            dgv.ColumnHeadersDefaultCellStyle.Font =
-                new Font("Segoe UI", 10, FontStyle.Bold);
-
-            dgv.ColumnHeadersDefaultCellStyle.WrapMode =
-                DataGridViewTriState.True;
-
-            dgv.ColumnHeadersDefaultCellStyle.Alignment =
-                DataGridViewContentAlignment.MiddleLeft;
-
-            dgv.DefaultCellStyle.Font =
-                new Font("Segoe UI", 10);
-
-            dgv.DefaultCellStyle.ForeColor = TEXTO;
-
-            dgv.DefaultCellStyle.SelectionBackColor =
-                Color.FromArgb(207, 226, 243);
-
-            dgv.DefaultCellStyle.SelectionForeColor = TEXTO;
-
-            dgv.AlternatingRowsDefaultCellStyle.BackColor =
-                Color.FromArgb(242, 246, 250);
-
-            return dgv;
+            if (!Ui.Mostrar(negocio.Guardar(x))) return;
+            m.Cancelar();
+            Buscar();
         }
 
-        // CREAR BOTONES
-        private Button CrearBoton(
-            string nombre,
-            string texto,
-            int ancho,
-            string estilo)
+        private void BtnInhabilitar_Click(object? sender, EventArgs e)
         {
-            Button boton = new Button
-            {
-                Name = nombre,
-                Text = texto,
-                Size = new Size(ancho, 36),
-                AutoSize = false,
-                AutoEllipsis = false,
-                TextAlign = ContentAlignment.MiddleCenter,
-                Font = new Font(
-                    "Segoe UI", 10, FontStyle.Bold),
-                FlatStyle = FlatStyle.Flat,
-                Cursor = Cursors.Hand,
-                UseVisualStyleBackColor = false,
-                TabStop = true
-            };
-
-            if (estilo == "pri")
-            {
-                boton.BackColor = AZUL;
-                boton.ForeColor = BLANCO;
-                boton.FlatAppearance.BorderSize = 0;
-                boton.FlatAppearance.MouseOverBackColor =
-                    Color.FromArgb(20, 90, 158);
-            }
-            else if (estilo == "dan")
-            {
-                boton.BackColor = PELIGRO;
-                boton.ForeColor = BLANCO;
-                boton.FlatAppearance.BorderSize = 0;
-                boton.FlatAppearance.MouseOverBackColor =
-                    Color.FromArgb(143, 28, 19);
-            }
-            else if (estilo == "sec")
-            {
-                boton.BackColor = BLANCO;
-                boton.ForeColor = AZUL;
-                boton.FlatAppearance.BorderSize = 1;
-                boton.FlatAppearance.BorderColor = AZUL;
-                boton.FlatAppearance.MouseOverBackColor =
-                    Color.FromArgb(238, 244, 251);
-            }
-            else
-            {
-                boton.BackColor =
-                    Color.FromArgb(229, 231, 235);
-                boton.ForeColor = TEXTO;
-                boton.FlatAppearance.BorderSize = 0;
-                boton.FlatAppearance.MouseOverBackColor =
-                    Color.FromArgb(209, 213, 219);
-            }
-
-            return boton;
+            var x = Ui.Seleccionado<Plantilla>(dgvRegistros);
+            if (x == null) { Ui.Aviso("Seleccione un registro."); return; }
+            if (!Ui.Confirmar("¿Desea inhabilitar la plantilla " + x.Nombre + "?")) return;
+            if (Ui.Mostrar(negocio.Inhabilitar(x.IdPlantilla))) Buscar();
         }
     }
 }

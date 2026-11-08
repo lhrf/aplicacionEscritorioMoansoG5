@@ -1,232 +1,56 @@
-﻿
-using System;
-using System.Drawing;
-using System.Windows.Forms;
+using CEIBIO.Entidades;
+using CEIBIO.Negocio;
 
 namespace CEIBIO.Presentacion.Formalizacion
 {
     public partial class FrmRevisarReporte : Form
     {
-        private readonly Color AZUL =
-            Color.FromArgb(11, 61, 110);
-
-        private readonly Color BLANCO = Color.White;
-
-        private readonly Color TEXTO =
-            Color.FromArgb(31, 35, 40);
-
-        private readonly Color FONDO =
-            Color.FromArgb(244, 246, 249);
-
-        private readonly Color PELIGRO =
-            Color.FromArgb(180, 35, 24);
+        private readonly ReporteNegocio negocio = new();
 
         public FrmRevisarReporte()
         {
             InitializeComponent();
-            this.btnCerrar.Click += (sender, args) => this.Close();
-
+            rtbReporte.ReadOnly = true;
+            rtbReporte.Font = new Font("Consolas", 10F);
+            dgvReportes.SelectionChanged += (s, e) => Ui.Intentar(MostrarSeleccion);
+            btnConformidad.Click += BtnConformidad_Click;
+            btnObservar.Click += BtnObservar_Click;
+            btnCerrar.Click += (s, e) => Close();
+            Load += (s, e) => Ui.Intentar(Cargar);
         }
 
-
-
-        // =========================================
-        // MÉTODO PARA CREAR GROUPBOX
-        // =========================================
-
-        private GroupBox CrearGrupo(
-            string nombre,
-            string titulo,
-            int x,
-            int y,
-            int ancho,
-            int alto,
-            bool contieneGrilla)
+        private void Cargar()
         {
-            return new GroupBox
+            Ui.Llenar(dgvReportes, negocio.ListarEnRevision(), r => new object?[]
             {
-                Name = nombre,
-                Text = titulo,
-                Location = new Point(x, y),
-                Size = new Size(ancho, alto),
-                BackColor = BLANCO,
-                ForeColor = AZUL,
-                Font = new Font(
-                    "Segoe UI", 10, FontStyle.Bold),
-
-                Padding = contieneGrilla
-                    ? new Padding(10, 8, 10, 10)
-                    : new Padding(3)
-            };
+                r.NumeroAtencion, r.NombrePaciente, r.Version, r.NombreDigitador
+            });
+            MostrarSeleccion();
         }
 
-        // =========================================
-        // MÉTODO PARA CREAR LABEL
-        // =========================================
-
-        private Label CrearEtiqueta(
-            string nombre,
-            string texto,
-            int x,
-            int y)
+        private void MostrarSeleccion()
         {
-            return new Label
-            {
-                Name = nombre,
-                Text = texto,
-                Location = new Point(x, y),
-                AutoSize = true,
-                Font = new Font("Segoe UI", 10),
-                ForeColor = TEXTO,
-                BackColor = Color.Transparent
-            };
+            var r = Ui.Seleccionado<ReporteClinico>(dgvReportes);
+            rtbReporte.Text = r?.Contenido ?? "";
+            var validados = r == null ? new List<ResultadoAnalitico>() : negocio.ListarResultadosValidados(r.IdAtencion);
+            Ui.Llenar(dgvValidados, validados, x => new object?[] { x.NombreParametro, x.Valor, x.Unidad });
+            txtObservaciones.Clear();
+            btnConformidad.Enabled = r != null;
+            btnObservar.Enabled = r != null;
         }
 
-        // =========================================
-        // MÉTODO PARA CREAR DATAGRIDVIEW
-        // =========================================
-
-        private DataGridView CrearGrilla(string nombre)
+        private void BtnConformidad_Click(object? sender, EventArgs e)
         {
-            DataGridView dgv = new DataGridView
-            {
-                Name = nombre,
-                Dock = DockStyle.Fill,
-                BackgroundColor = BLANCO,
-                BorderStyle = BorderStyle.None,
-
-                GridColor =
-                    Color.FromArgb(208, 215, 222),
-
-                EnableHeadersVisualStyles = false,
-
-                ColumnHeadersHeightSizeMode =
-                    DataGridViewColumnHeadersHeightSizeMode
-                    .DisableResizing,
-
-                ColumnHeadersHeight = 34,
-
-                RowHeadersVisible = false,
-
-                ReadOnly = true,
-
-                SelectionMode =
-                    DataGridViewSelectionMode.FullRowSelect,
-
-                MultiSelect = false,
-
-                AllowUserToAddRows = false,
-                AllowUserToDeleteRows = false,
-                AllowUserToResizeRows = false,
-
-                AutoSizeColumnsMode =
-                    DataGridViewAutoSizeColumnsMode.Fill
-            };
-
-            dgv.RowTemplate.Height = 28;
-
-            dgv.ColumnHeadersDefaultCellStyle.BackColor =
-                AZUL;
-
-            dgv.ColumnHeadersDefaultCellStyle.ForeColor =
-                BLANCO;
-
-            dgv.ColumnHeadersDefaultCellStyle
-                .SelectionBackColor = AZUL;
-
-            dgv.ColumnHeadersDefaultCellStyle.Font =
-                new Font(
-                    "Segoe UI", 10, FontStyle.Bold);
-
-            dgv.DefaultCellStyle.Font =
-                new Font("Segoe UI", 10);
-
-            dgv.DefaultCellStyle.ForeColor =
-                TEXTO;
-
-            dgv.DefaultCellStyle.SelectionBackColor =
-                Color.FromArgb(207, 226, 243);
-
-            dgv.DefaultCellStyle.SelectionForeColor =
-                TEXTO;
-
-            dgv.AlternatingRowsDefaultCellStyle.BackColor =
-                Color.FromArgb(242, 246, 250);
-
-            return dgv;
+            var r = Ui.Seleccionado<ReporteClinico>(dgvReportes);
+            if (r == null) return;
+            if (Ui.Mostrar(negocio.DarConformidad(r.IdReporte))) Ui.Intentar(Cargar);
         }
 
-        // =========================================
-        // MÉTODO PARA CREAR BOTONES
-        // =========================================
-
-        private Button CrearBoton(
-            string nombre,
-            string texto,
-            int ancho,
-            string estilo)
+        private void BtnObservar_Click(object? sender, EventArgs e)
         {
-            Button boton = new Button
-            {
-                Name = nombre,
-                Text = texto,
-
-                Size = new Size(ancho, 36),
-
-                AutoSize = false,
-                AutoEllipsis = false,
-
-                TextAlign =
-                    ContentAlignment.MiddleCenter,
-
-                Font = new Font(
-                    "Segoe UI", 10, FontStyle.Bold),
-
-                FlatStyle = FlatStyle.Flat,
-
-                Cursor = Cursors.Hand,
-
-                UseVisualStyleBackColor = false,
-
-                TabStop = true,
-
-                Margin = new Padding(0)
-            };
-
-            if (estilo == "pri")
-            {
-                boton.BackColor = AZUL;
-                boton.ForeColor = BLANCO;
-
-                boton.FlatAppearance.BorderSize = 0;
-
-                boton.FlatAppearance.MouseOverBackColor =
-                    Color.FromArgb(20, 90, 158);
-            }
-            else if (estilo == "dan")
-            {
-                boton.BackColor = PELIGRO;
-                boton.ForeColor = BLANCO;
-
-                boton.FlatAppearance.BorderSize = 0;
-
-                boton.FlatAppearance.MouseOverBackColor =
-                    Color.FromArgb(143, 28, 19);
-            }
-            else
-            {
-                boton.BackColor =
-                    Color.FromArgb(229, 231, 235);
-
-                boton.ForeColor = TEXTO;
-
-                boton.FlatAppearance.BorderSize = 0;
-
-                boton.FlatAppearance.MouseOverBackColor =
-                    Color.FromArgb(209, 213, 219);
-            }
-
-            return boton;
+            var r = Ui.Seleccionado<ReporteClinico>(dgvReportes);
+            if (r == null) return;
+            if (Ui.Mostrar(negocio.Observar(r.IdReporte, txtObservaciones.Text))) Ui.Intentar(Cargar);
         }
     }
 }

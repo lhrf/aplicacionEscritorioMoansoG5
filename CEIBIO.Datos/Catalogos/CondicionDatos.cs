@@ -19,7 +19,6 @@ namespace CEIBIO.Datos
 
         public List<CondicionPreanalitica> Listar(string filtro) => Db.Listar("usp_Condicion_Listar", Mapear, P("@Filtro", filtro));
 
-        /// <summary>Condiciones habilitadas de los exámenes de una atención (CU-10).</summary>
         public List<CondicionPreanalitica> ListarPorAtencion(int idAtencion) =>
             Db.Listar("usp_Condicion_ListarPorAtencion", Mapear, P("@IdAtencion", idAtencion));
 

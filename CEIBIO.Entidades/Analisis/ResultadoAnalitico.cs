@@ -1,6 +1,5 @@
 ﻿namespace CEIBIO.Entidades
 {
-    /// <summary>Resultado de un parámetro de un examen de la atención.</summary>
     public class ResultadoAnalitico
     {
         public int IdResultado { get; set; }
@@ -13,7 +12,6 @@
         public string? ObservacionMedico { get; set; }
         public DateTime? FechaValidacion { get; set; }
 
-        // Datos para mostrar
         public string NumeroAtencion { get; set; } = string.Empty;
         public string NombrePaciente { get; set; } = string.Empty;
         public int IdExamen { get; set; }
@@ -24,7 +22,6 @@
         public string NombreMedico { get; set; } = string.Empty;
         public string? ValorAnterior { get; set; }
 
-        // Se calculan en la capa de negocio al validar (CU-46)
         public string IntervaloReferencia { get; set; } = string.Empty;
         public bool FueraDeRango { get; set; }
 

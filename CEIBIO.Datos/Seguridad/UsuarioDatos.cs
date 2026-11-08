@@ -43,7 +43,6 @@ namespace CEIBIO.Datos
                 P("@NombreCompleto", u.NombreCompleto), P("@Dni", u.Dni), P("@NombreUsuario", u.NombreUsuario),
                 P("@ClaveHash", u.ClaveHash), P("@IdRol", u.IdRol), P("@IdUsuarioRegistro", idUsuarioRegistro), P("@Sal", u.Sal));
 
-        /// <summary>idUsuarioAccion: usuario en sesión que hace el cambio (RNF-20).</summary>
         public void Actualizar(Usuario u, int idUsuarioAccion) =>
             Db.Ejecutar("usp_Usuario_Actualizar",
                 P("@IdUsuario", u.IdUsuario), P("@NombreCompleto", u.NombreCompleto), P("@Dni", u.Dni),
@@ -58,7 +57,6 @@ namespace CEIBIO.Datos
         public void RegistrarInicioSesion(int idUsuario) =>
             Db.Ejecutar("usp_Sesion_Registrar", P("@IdUsuario", idUsuario));
 
-        /// <summary>RNF-20: historial de cambios; tabla e idRegistro null = todos.</summary>
         public List<Auditoria> ConsultarAuditoria(string? tabla, int? idRegistro, DateTime desde, DateTime hasta) =>
             Db.Listar("usp_Auditoria_Consultar",
                 r => new Auditoria

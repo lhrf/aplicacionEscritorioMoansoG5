@@ -3,17 +3,14 @@ using CEIBIO.Entidades;
 
 namespace CEIBIO.Negocio
 {
-    /// <summary>CU-41 Registrar uso del equipo, CU-42 Registrar falla analítica y CU-45 Consultar bitácora de uso del equipo.</summary>
     public class UsoEquipoNegocio
     {
         private readonly UsoEquipoDatos datos = new();
         private readonly EquipoDatos equipoDatos = new();
         private readonly MuestraDatos muestraDatos = new();
 
-        /// <summary>CU-41 paso 2: equipos habilitados.</summary>
         public List<Equipo> ListarEquipos() => equipoDatos.Listar("", true);
 
-        /// <summary>CU-41: registra la hora de inicio, el equipo y la muestra. Respuesta.Id = IdUso, Respuesta.Dato = hora.</summary>
         public Respuesta RegistrarUso(int idEquipo, string codigoMuestra) => Respuesta.Intentar(() =>
         {
             var equipo = equipoDatos.ObtenerPorId(idEquipo);
@@ -31,7 +28,6 @@ namespace CEIBIO.Negocio
 
         public UsoEquipo? ObtenerUso(int idUso) => datos.ObtenerPorId(idUso);
 
-        /// <summary>CU-42: registra la falla de calibración y marca la muestra para una nueva corrida.</summary>
         public Respuesta RegistrarFalla(int idUso, string descripcion) => Respuesta.Intentar(() =>
         {
             if (datos.ObtenerPorId(idUso) == null) return Respuesta.Error("Seleccione el uso del equipo en el que ocurrió la falla.");
@@ -40,7 +36,6 @@ namespace CEIBIO.Negocio
             return Respuesta.Ok("Falla registrada. La muestra quedó marcada para una nueva corrida.", idUso);
         });
 
-        /// <summary>CU-45: idEquipo = 0 para todos los equipos.</summary>
         public List<UsoEquipo> ConsultarBitacora(int idEquipo, DateTime desde, DateTime hasta) => datos.ConsultarBitacora(idEquipo, desde, hasta);
     }
 }

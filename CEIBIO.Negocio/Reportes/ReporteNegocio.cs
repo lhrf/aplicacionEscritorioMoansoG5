@@ -4,10 +4,6 @@ using CEIBIO.Entidades;
 
 namespace CEIBIO.Negocio
 {
-    /// <summary>
-    /// CU-49 Elaborar Reporte clínico, CU-50 Revisar, CU-51 Autorizar, CU-52 Devolver para completar validaciones,
-    /// CU-55 Consultar Reportes clínicos y CU-56 Consultar historial de revisiones.
-    /// </summary>
     public class ReporteNegocio
     {
         private readonly ReporteDatos datos = new();
@@ -17,11 +13,6 @@ namespace CEIBIO.Negocio
         private readonly PlantillaDatos plantillaDatos = new();
         private readonly IntervaloDatos intervaloDatos = new();
 
-        // ---------------- CU-49 ----------------
-        /// <summary>
-        /// CU-49 paso 2: atenciones "Lista para reporte" que el Digitador debe trabajar
-        /// (sin reporte, en borrador, observado, devuelto, revisado o autorizado). Atencion.EstadoReporte trae el estado del reporte.
-        /// </summary>
         public List<Atencion> ListarParaElaborar()
         {
             var lista = atencionDatos.ListarPorEstadoReporte(EstadoAtencion.ListaReporte, new[]
@@ -37,13 +28,8 @@ namespace CEIBIO.Negocio
 
         public ReporteClinico? ObtenerPorId(int idReporte) => datos.ObtenerPorId(idReporte);
 
-        /// <summary>CU-49: una sección por examen con la plantilla usada; version null = versión vigente.</summary>
         public List<ReporteSeccion> ListarSecciones(int idReporte, int? version = null) => datos.ListarSecciones(idReporte, version);
 
-        /// <summary>
-        /// CU-49 paso 4: genera el reporte con una sección por examen según su plantilla (A4: si un examen no tiene plantilla,
-        /// no se genera). Si el reporte estaba observado o devuelto, se crea una nueva versión (A1). Respuesta.Id = IdReporte.
-        /// </summary>
         public Respuesta Generar(int idAtencion) => Respuesta.Intentar(() =>
         {
             var atencion = atencionDatos.ObtenerPorId(idAtencion);
@@ -76,7 +62,6 @@ namespace CEIBIO.Negocio
             return Respuesta.Ok(nuevaVersion ? "Se generó la versión " + (actual.Version + 1) + " del reporte." : "Reporte regenerado.", actual.IdReporte);
         });
 
-        /// <summary>Texto para imprimir. Si es borrador, se marca como «BORRADOR» (CU-49 paso 5).</summary>
         public static string TextoImpresion(ReporteClinico r)
         {
             bool final = r.Definitivo && (r.Estado == EstadoReporte.Revisado || r.Estado == EstadoReporte.PendienteAutorizacion ||
@@ -87,12 +72,10 @@ namespace CEIBIO.Negocio
                    Environment.NewLine + "******************** BORRADOR ********************";
         }
 
-        /// <summary>CU-49 pasos 6-7.</summary>
         public Respuesta EnviarARevision(int idReporte) =>
             CambiarEstado(idReporte, new[] { EstadoReporte.Borrador }, EstadoReporte.EnRevision, "Enviado a revisión", null,
                 "Reporte enviado a revisión de calidad.");
 
-        /// <summary>CU-49 A2: guarda el reporte definitivo (después de la conformidad del Supervisor de Calidad).</summary>
         public Respuesta GuardarDefinitivo(int idReporte) => Respuesta.Intentar(() =>
         {
             var r = datos.ObtenerPorId(idReporte);
@@ -103,7 +86,6 @@ namespace CEIBIO.Negocio
             return Respuesta.Ok("Reporte definitivo guardado. Imprímalo en papel membretado y envíelo a autorización.", idReporte);
         });
 
-        /// <summary>CU-49 A2.</summary>
         public Respuesta EnviarAAutorizacion(int idReporte) => Respuesta.Intentar(() =>
         {
             var r = datos.ObtenerPorId(idReporte);
@@ -113,15 +95,12 @@ namespace CEIBIO.Negocio
             return Respuesta.Ok("Reporte enviado a autorización del Director Médico.", idReporte);
         });
 
-        /// <summary>CU-49 A3.</summary>
         public Respuesta EnviarAEntrega(int idReporte) =>
             CambiarEstado(idReporte, new[] { EstadoReporte.Autorizado }, EstadoReporte.DisponibleEntrega, "Enviado a entrega", null,
                 "Reporte disponible para entrega.");
 
-        // ---------------- CU-50 ----------------
         public List<ReporteClinico> ListarEnRevision() => datos.ListarPorEstado(EstadoReporte.EnRevision);
 
-        /// <summary>Resultados validados de la atención para comparar con el reporte.</summary>
         public List<ResultadoAnalitico> ListarResultadosValidados(int idAtencion) =>
             resultadoDatos.ListarPorAtencion(idAtencion).Where(r => r.Estado == EstadoResultado.Validado).ToList();
 
@@ -129,7 +108,6 @@ namespace CEIBIO.Negocio
             CambiarEstado(idReporte, new[] { EstadoReporte.EnRevision }, EstadoReporte.Revisado, "Conformidad de calidad", null,
                 "Conformidad registrada. El reporte está revisado.");
 
-        /// <summary>CU-50 A1: registra las observaciones y devuelve el reporte al Digitador.</summary>
         public Respuesta Observar(int idReporte, string observaciones)
         {
             if (Validacion.Vacio(observaciones)) return Respuesta.Error("Ingrese las observaciones.");
@@ -137,13 +115,10 @@ namespace CEIBIO.Negocio
                 "Reporte observado y devuelto al Digitador Clínico.");
         }
 
-        // ---------------- CU-51 / CU-52 ----------------
         public List<ReporteClinico> ListarPendientesAutorizacion() => datos.ListarPorEstado(EstadoReporte.PendienteAutorizacion);
 
-        /// <summary>CU-51 paso 4: estado de validación de cada resultado (ValidadoTexto, NombreMedico, FechaValidacion).</summary>
         public List<ResultadoAnalitico> ListarValidaciones(int idAtencion) => resultadoDatos.ListarPorAtencion(idAtencion);
 
-        /// <summary>CU-51: autoriza el reporte; después ya no se puede modificar. Si falta validar algo, usar DevolverAlMedico (CU-52).</summary>
         public Respuesta Autorizar(int idReporte) => Respuesta.Intentar(() =>
         {
             var r = datos.ObtenerPorId(idReporte);
@@ -155,7 +130,6 @@ namespace CEIBIO.Negocio
             return Respuesta.Ok("Reporte autorizado. Ya no se puede modificar.", idReporte);
         });
 
-        /// <summary>CU-52: devuelve el reporte al Médico Patólogo; los resultados vuelven a "Pendiente de validación".</summary>
         public Respuesta DevolverAlMedico(int idReporte, string observacion) => Respuesta.Intentar(() =>
         {
             var r = datos.ObtenerPorId(idReporte);
@@ -165,7 +139,6 @@ namespace CEIBIO.Negocio
             return Respuesta.Ok("Reporte devuelto al Médico Patólogo para completar las validaciones.", idReporte);
         });
 
-        /// <summary>CU-51 A2: anula la autorización (antes de la entrega); se generará una nueva versión.</summary>
         public Respuesta AnularAutorizacion(int idReporte, string motivo) => Respuesta.Intentar(() =>
         {
             var r = datos.ObtenerPorId(idReporte);
@@ -176,19 +149,15 @@ namespace CEIBIO.Negocio
             return Respuesta.Ok("Autorización anulada. El Digitador Clínico deberá generar una nueva versión.", idReporte);
         });
 
-        /// <summary>Reportes autorizados (para la anulación en CU-51 A2).</summary>
         public List<ReporteClinico> ListarAutorizados() =>
             datos.ListarPorEstado(EstadoReporte.Autorizado).Concat(datos.ListarPorEstado(EstadoReporte.DisponibleEntrega)).ToList();
 
-        // ---------------- CU-55 / CU-56 ----------------
-        /// <summary>CU-55: si se indica DNI se busca por DNI; si no, por rango de fechas. Estado "(Todos)" o vacío = todos.</summary>
         public List<ReporteClinico> Consultar(string? dni, DateTime desde, DateTime hasta, string? estado)
         {
             if (estado == "(Todos)") estado = null;
             return datos.Consultar(dni, desde, hasta, estado);
         }
 
-        /// <summary>CU-56: historial del reporte de una atención (acepta "AT-000012" o "12").</summary>
         public List<ReporteHistorial> ListarHistorial(string numeroAtencion)
         {
             var atencion = atencionDatos.ObtenerPorNumero(Validacion.NumeroAtencion(numeroAtencion));
@@ -197,7 +166,6 @@ namespace CEIBIO.Negocio
             return reporte == null ? new List<ReporteHistorial>() : datos.ListarHistorial(reporte.IdReporte);
         }
 
-        // ---------------- auxiliares ----------------
         private Respuesta CambiarEstado(int idReporte, string[] estadosPermitidos, string nuevoEstado, string accion, string? observacion, string mensaje) =>
             Respuesta.Intentar(() =>
             {
@@ -209,10 +177,6 @@ namespace CEIBIO.Negocio
                 return Respuesta.Ok(mensaje, idReporte);
             });
 
-        /// <summary>
-        /// Arma el contenido completo del reporte y, por separado, una sección por examen con su plantilla (ReporteSeccion).
-        /// El contenido completo es la cabecera más las secciones agrupadas por plantilla.
-        /// </summary>
         private string ConstruirContenido(Atencion atencion, List<AtencionExamen> examenes, Dictionary<int, Plantilla> plantillas, int version,
                                           out List<ReporteSeccion> secciones)
         {
@@ -222,7 +186,6 @@ namespace CEIBIO.Negocio
             string sexo = paciente?.Sexo ?? "";
             int edad = paciente?.Edad ?? 0;
 
-            // Una sección por examen
             secciones = new List<ReporteSeccion>();
             foreach (var ex in examenes)
             {
@@ -251,7 +214,6 @@ namespace CEIBIO.Negocio
                 });
             }
 
-            // Contenido completo: cabecera + secciones agrupadas por plantilla
             var sb = new StringBuilder();
             sb.AppendLine("LABORATORIO CLÍNICO CEIBIO S.A.C.");
             sb.AppendLine("REPORTE CLÍNICO - Atención " + atencion.NumeroAtencion + " - Versión " + version);

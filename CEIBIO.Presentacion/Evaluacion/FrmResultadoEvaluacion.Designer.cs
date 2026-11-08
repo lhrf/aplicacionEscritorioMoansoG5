@@ -152,7 +152,7 @@
             btnApto.Name = "btnApto";
             btnApto.Size = new Size(284, 36);
             btnApto.TabIndex = 1;
-            btnApto.Text = "Registrar apto y derivar a Cajaç";
+            btnApto.Text = "Registrar apto y derivar a Caja";
             btnApto.UseVisualStyleBackColor = false;
             // 
             // btnSuspender

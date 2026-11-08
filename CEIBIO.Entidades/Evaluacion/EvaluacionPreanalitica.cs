@@ -7,7 +7,6 @@
         public int HorasAyuno { get; set; }
         public string? Medicamentos { get; set; }
 
-        // Estado de la muestra entregada (null cuando los exámenes no piden muestra de orina o heces)
         public bool? RotuladoCorrecto { get; set; }
         public bool? RecipienteHermetico { get; set; }
         public bool? VolumenSuficiente { get; set; }
@@ -15,10 +14,9 @@
 
         public string? Observaciones { get; set; }
         public DateTime FechaObservacion { get; set; }
-        public string? Resultado { get; set; }   // Apto, No apto
+        public string? Resultado { get; set; }
         public DateTime? FechaResultado { get; set; }
 
-        // Datos para mostrar
         public string NumeroAtencion { get; set; } = string.Empty;
         public string NombrePaciente { get; set; } = string.Empty;
         public string NombreEnfermera { get; set; } = string.Empty;

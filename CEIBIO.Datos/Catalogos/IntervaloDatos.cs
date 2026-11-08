@@ -24,13 +24,11 @@ namespace CEIBIO.Datos
 
         public List<IntervaloReferencia> Listar(string filtro) => Db.Listar("usp_Intervalo_Listar", Mapear, P("@Filtro", filtro));
 
-        /// <summary>Intervalos habilitados de los parámetros con resultados en una atención (CU-46).</summary>
         public List<IntervaloReferencia> ListarPorAtencion(int idAtencion) =>
             Db.Listar("usp_Intervalo_ListarPorAtencion", Mapear, P("@IdAtencion", idAtencion));
 
         public IntervaloReferencia? ObtenerPorId(int id) => Db.Obtener("usp_Intervalo_ObtenerPorId", Mapear, P("@IdIntervalo", id));
 
-        /// <summary>CU-54: hay otro intervalo habilitado del mismo parámetro y sexo (o "Ambos") cuyo rango de edad se cruza.</summary>
         public bool ExisteSuperposicion(IntervaloReferencia i) =>
             Db.Entero("usp_Intervalo_ExisteSuperposicion", P("@IdParametro", i.IdParametro), P("@Sexo", i.Sexo),
                 P("@EdadMinima", i.EdadMinima), P("@EdadMaxima", i.EdadMaxima), P("@IdExcluir", i.IdIntervalo)) > 0;

@@ -1,6 +1,6 @@
 ﻿namespace CEIBIO.Presentacion.TomaMuestras
 {
-    partial class kodi
+    partial class FrmAsignarBox
     {
         /// <summary>
         /// Required designer variable.
@@ -28,10 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle8 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle7 = new DataGridViewCellStyle();
             pnlEncabezado = new Panel();
             lblTitulo = new Label();
             flpBotones = new FlowLayoutPanel();
@@ -146,7 +146,6 @@
             grpAsignacion.TabIndex = 1;
             grpAsignacion.TabStop = false;
             grpAsignacion.Text = "Asignación";
-            grpAsignacion.Enter += grpAsignacion_Enter;
             // 
             // cboBox
             // 
@@ -158,7 +157,6 @@
             cboBox.Name = "cboBox";
             cboBox.Size = new Size(200, 25);
             cboBox.TabIndex = 2;
-            cboBox.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
             // 
             // lblBox
             // 
@@ -171,37 +169,36 @@
             lblBox.Size = new Size(125, 19);
             lblBox.TabIndex = 2;
             lblBox.Text = "Box de extracción *";
-            lblBox.Click += lblBox_Click;
             // 
             // dgvEspera
             // 
             dgvEspera.AllowUserToAddRows = false;
             dgvEspera.AllowUserToDeleteRows = false;
             dgvEspera.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.BackColor = Color.FromArgb(242, 246, 250);
-            dgvEspera.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle5.BackColor = Color.FromArgb(242, 246, 250);
+            dgvEspera.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
             dgvEspera.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvEspera.BackgroundColor = Color.White;
             dgvEspera.BorderStyle = BorderStyle.None;
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = Color.FromArgb(11, 61, 110);
-            dataGridViewCellStyle2.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            dataGridViewCellStyle2.ForeColor = Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = Color.FromArgb(11, 61, 110);
-            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
-            dgvEspera.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = Color.FromArgb(11, 61, 110);
+            dataGridViewCellStyle6.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            dataGridViewCellStyle6.ForeColor = Color.White;
+            dataGridViewCellStyle6.SelectionBackColor = Color.FromArgb(11, 61, 110);
+            dataGridViewCellStyle6.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = DataGridViewTriState.True;
+            dgvEspera.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle6;
             dgvEspera.ColumnHeadersHeight = 34;
             dgvEspera.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             dgvEspera.Columns.AddRange(new DataGridViewColumn[] { colTurno, colNAtencion, colPaciente, colExamenes });
-            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = SystemColors.Window;
-            dataGridViewCellStyle4.Font = new Font("Segoe UI", 10F);
-            dataGridViewCellStyle4.ForeColor = Color.FromArgb(11, 61, 110);
-            dataGridViewCellStyle4.SelectionBackColor = Color.FromArgb(207, 226, 243);
-            dataGridViewCellStyle4.SelectionForeColor = Color.FromArgb(31, 35, 40);
-            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.False;
-            dgvEspera.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle8.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = SystemColors.Window;
+            dataGridViewCellStyle8.Font = new Font("Segoe UI", 10F);
+            dataGridViewCellStyle8.ForeColor = Color.FromArgb(11, 61, 110);
+            dataGridViewCellStyle8.SelectionBackColor = Color.FromArgb(207, 226, 243);
+            dataGridViewCellStyle8.SelectionForeColor = Color.FromArgb(31, 35, 40);
+            dataGridViewCellStyle8.WrapMode = DataGridViewTriState.False;
+            dgvEspera.DefaultCellStyle = dataGridViewCellStyle8;
             dgvEspera.Dock = DockStyle.Fill;
             dgvEspera.EnableHeadersVisualStyles = false;
             dgvEspera.GridColor = Color.FromArgb(208, 215, 222);
@@ -217,8 +214,8 @@
             // 
             // colTurno
             // 
-            dataGridViewCellStyle3.BackColor = Color.Black;
-            colTurno.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle7.BackColor = Color.Black;
+            colTurno.DefaultCellStyle = dataGridViewCellStyle7;
             colTurno.HeaderText = "Turno";
             colTurno.Name = "colTurno";
             colTurno.ReadOnly = true;
@@ -241,7 +238,7 @@
             colExamenes.Name = "colExamenes";
             colExamenes.ReadOnly = true;
             // 
-            // kodi
+            // FrmAsignarBox
             // 
             AcceptButton = btnAsignar;
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -257,7 +254,7 @@
             ForeColor = Color.FromArgb(191, 215, 238);
             FormBorderStyle = FormBorderStyle.FixedSingle;
             MaximizeBox = false;
-            Name = "kodi";
+            Name = "FrmAsignarBox";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Asignar box de extracción";
             pnlEncabezado.ResumeLayout(false);

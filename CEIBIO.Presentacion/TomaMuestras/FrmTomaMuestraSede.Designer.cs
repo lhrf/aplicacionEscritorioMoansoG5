@@ -83,7 +83,6 @@
             lblTitulo.Size = new Size(319, 25);
             lblTitulo.TabIndex = 1;
             lblTitulo.Text = "Registrar toma de muestra en sede";
-            lblTitulo.Click += label1_Click;
             // 
             // flpBotones
             // 
@@ -246,7 +245,6 @@
             lblBox.Size = new Size(35, 19);
             lblBox.TabIndex = 10;
             lblBox.Text = "Box";
-            lblBox.Click += lblBox_Click;
             // 
             // txtPaciente
             // 
@@ -270,7 +268,6 @@
             lblPaciente.Size = new Size(66, 19);
             lblPaciente.TabIndex = 10;
             lblPaciente.Text = "Paciente";
-            lblPaciente.Click += lblPaciente_Click;
             // 
             // txtNumeroAtencion
             // 

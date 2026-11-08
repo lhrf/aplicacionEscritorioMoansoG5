@@ -3,29 +3,21 @@ using CEIBIO.Entidades;
 
 namespace CEIBIO.Negocio
 {
-    /// <summary>
-    /// CU-10 Registrar observaciones preanalíticas, CU-11 Registrar resultado de la evaluación pre-analítica,
-    /// CU-12 Suspender atención y CU-14 Consultar atenciones suspendidas.
-    /// </summary>
     public class EvaluacionNegocio
     {
         private readonly EvaluacionDatos datos = new();
         private readonly AtencionDatos atencionDatos = new();
         private readonly CondicionDatos condicionDatos = new();
 
-        /// <summary>CU-10 paso 2.</summary>
         public List<Atencion> ListarPendientes() => atencionDatos.ListarPorEstado(EstadoAtencion.PendienteEvaluacion);
 
-        /// <summary>CU-10 paso 4: condiciones que exige cada examen de la atención.</summary>
         public List<CondicionPreanalitica> ListarCondiciones(int idAtencion) => condicionDatos.ListarPorAtencion(idAtencion);
 
-        /// <summary>CU-10 A2: true si algún examen es de orina o heces (se pide el estado de la muestra entregada).</summary>
         public bool RequiereMuestraEntregada(int idAtencion) =>
             atencionDatos.ListarDetalle(idAtencion).Any(d => d.TipoMuestra == "Orina" || d.TipoMuestra == "Heces");
 
         public EvaluacionPreanalitica? ObtenerPorAtencion(int idAtencion) => datos.ObtenerPorAtencion(idAtencion);
 
-        /// <summary>CU-10 paso 6. Si los exámenes no requieren muestra entregada, se ignoran los datos de la muestra.</summary>
         public Respuesta GuardarObservaciones(EvaluacionPreanalitica e) => Respuesta.Intentar(() =>
         {
             var atencion = atencionDatos.ObtenerPorId(e.IdAtencion);
@@ -55,7 +47,6 @@ namespace CEIBIO.Negocio
             return Respuesta.Ok("Observaciones preanalíticas registradas para la atención " + atencion.NumeroAtencion + ".", e.IdAtencion);
         });
 
-        /// <summary>CU-11: registra al paciente como apto y deriva la atención a Caja.</summary>
         public Respuesta RegistrarApto(int idAtencion) => Respuesta.Intentar(() =>
         {
             var error = ValidarEvaluable(idAtencion);
@@ -64,7 +55,6 @@ namespace CEIBIO.Negocio
             return Respuesta.Ok("Paciente apto. La atención pasó a Caja (pendiente de pago).", idAtencion);
         });
 
-        /// <summary>CU-12: paciente no apto. Registra el motivo y la nueva fecha, y suspende la atención.</summary>
         public Respuesta Suspender(Suspension s) => Respuesta.Intentar(() =>
         {
             var error = ValidarEvaluable(s.IdAtencion);
@@ -77,10 +67,8 @@ namespace CEIBIO.Negocio
             return Respuesta.Ok("Atención suspendida hasta el " + s.NuevaFecha.ToString("dd/MM/yyyy") + ".", s.IdAtencion);
         });
 
-        /// <summary>CU-14.</summary>
         public List<Suspension> ConsultarSuspendidas(DateTime desde, DateTime hasta) => datos.ConsultarSuspendidas(desde, hasta);
 
-        /// <summary>CU-12: reactiva la atención en la nueva fecha (o después); vuelve a "Pendiente de evaluación".</summary>
         public Respuesta Reactivar(int idSuspension) => Respuesta.Intentar(() =>
         {
             var s = datos.ObtenerSuspension(idSuspension);

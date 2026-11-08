@@ -233,7 +233,6 @@
             label3.Size = new Size(59, 19);
             label3.TabIndex = 1;
             label3.Text = "Número";
-            label3.Click += label3_Click;
             // 
             // textBox2
             // 

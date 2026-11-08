@@ -1,14 +1,30 @@
-﻿using System;
-using System.Windows.Forms;
+using CEIBIO.Negocio;
 
 namespace CEIBIO.Presentacion.Admision
 {
-    // Consultar visitas domiciliarias (CU-09)
     public partial class FrmConsultarVisitas : Form
     {
+        private readonly VisitaNegocio negocio = new();
+
         public FrmConsultarVisitas()
         {
             InitializeComponent();
+            dtpFecha.Value = DateTime.Today;
+            btnBuscar.Click += (s, e) => Buscar();
+            btnCerrar.Click += (s, e) => Close();
+            Load += (s, e) => Buscar();
+        }
+
+        private void Buscar()
+        {
+            Ui.Intentar(() =>
+            {
+                var lista = negocio.ConsultarPorFecha(dtpFecha.Value);
+                Ui.Llenar(dgvVisitas, lista, v => new object?[]
+                {
+                    v.NombrePaciente, v.Direccion, v.Telefono, v.Examenes, v.NombreTecnico, v.Estado
+                });
+            });
         }
     }
 }

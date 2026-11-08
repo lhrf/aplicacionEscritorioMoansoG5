@@ -16,7 +16,6 @@ namespace CEIBIO.Datos
 
         public List<Box> Listar(string filtro) => Db.Listar("usp_Box_Listar", Mapear, P("@Filtro", filtro));
 
-        /// <summary>Boxes habilitados que no tienen un paciente en toma de muestra (CU-26).</summary>
         public List<Box> ListarLibres() => Db.Listar("usp_Box_ListarLibres", Mapear);
 
         public Box? ObtenerPorId(int id) => Db.Obtener("usp_Box_ObtenerPorId", Mapear, P("@IdBox", id));
@@ -24,7 +23,6 @@ namespace CEIBIO.Datos
         public bool ExisteNumero(string numero, int idExcluir) =>
             Db.Entero("usp_Box_ExisteNumero", P("@Numero", numero), P("@IdExcluir", idExcluir)) > 0;
 
-        /// <summary>CU-32 A3: el box tiene una atención en toma de muestra.</summary>
         public bool EstaEnUso(int idBox) => Db.Entero("usp_Box_EstaEnUso", P("@IdBox", idBox)) > 0;
 
         public int Insertar(Box b, int idUsuario) =>

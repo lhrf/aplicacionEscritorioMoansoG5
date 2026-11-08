@@ -3,7 +3,6 @@ using CEIBIO.Entidades;
 
 namespace CEIBIO.Negocio
 {
-    /// <summary>CU-05 Programar visita domiciliaria, CU-09 Consultar visitas domiciliarias y CU-23 Recibir visitas asignadas.</summary>
     public class VisitaNegocio
     {
         private readonly VisitaDatos datos = new();
@@ -11,7 +10,6 @@ namespace CEIBIO.Negocio
 
         public VisitaDomiciliaria? ObtenerPorAtencion(int idAtencion) => datos.ObtenerPorAtencion(idAtencion);
 
-        /// <summary>CU-05: programa la visita de una atención a domicilio.</summary>
         public Respuesta Programar(VisitaDomiciliaria v) => Respuesta.Intentar(() =>
         {
             var atencion = atencionDatos.ObtenerPorId(v.IdAtencion);
@@ -28,7 +26,6 @@ namespace CEIBIO.Negocio
             return Respuesta.Ok("Visita programada para el " + v.FechaProgramada.ToString("dd/MM/yyyy") + ".", id);
         });
 
-        /// <summary>CU-05: reprograma la visita (también la que no se realizó, CU-30 A1).</summary>
         public Respuesta Reprogramar(VisitaDomiciliaria v) => Respuesta.Intentar(() =>
         {
             var actual = datos.ObtenerPorAtencion(v.IdAtencion);
@@ -46,7 +43,6 @@ namespace CEIBIO.Negocio
             return Respuesta.Ok("Visita reprogramada para el " + v.FechaProgramada.ToString("dd/MM/yyyy") + ".", actual.IdVisita);
         });
 
-        /// <summary>CU-05: cancela la visita.</summary>
         public Respuesta Cancelar(int idAtencion, string motivo) => Respuesta.Intentar(() =>
         {
             var actual = datos.ObtenerPorAtencion(idAtencion);
@@ -57,10 +53,8 @@ namespace CEIBIO.Negocio
             return Respuesta.Ok("Visita cancelada.", actual.IdVisita);
         });
 
-        /// <summary>CU-09.</summary>
         public List<VisitaDomiciliaria> ConsultarPorFecha(DateTime fecha) => datos.ListarPorFecha(fecha);
 
-        /// <summary>CU-23: visitas asignadas al técnico en sesión.</summary>
         public List<VisitaDomiciliaria> ListarMisVisitas() => datos.ListarAsignadas(Sesion.IdUsuario);
 
         private static string? Validar(VisitaDomiciliaria v)

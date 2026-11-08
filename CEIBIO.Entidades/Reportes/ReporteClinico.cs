@@ -11,7 +11,6 @@
         public DateTime FechaGeneracion { get; set; }
         public DateTime? FechaAutorizacion { get; set; }
 
-        // Datos para mostrar
         public string NumeroAtencion { get; set; } = string.Empty;
         public string Dni { get; set; } = string.Empty;
         public string NombrePaciente { get; set; } = string.Empty;

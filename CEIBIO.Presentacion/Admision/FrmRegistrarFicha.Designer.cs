@@ -62,7 +62,6 @@
             pnlEncabezado.Name = "pnlEncabezado";
             pnlEncabezado.Size = new Size(520, 46);
             pnlEncabezado.TabIndex = 0;
-            pnlEncabezado.Paint += panel1_Paint;
             // 
             // lblTitulo
             // 

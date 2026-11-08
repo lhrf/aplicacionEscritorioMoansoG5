@@ -76,7 +76,6 @@
             label1.Size = new Size(285, 25);
             label1.TabIndex = 1;
             label1.Text = "Consultar muestras rechazadas";
-            label1.Click += label1_Click;
             // 
             // flowLayoutPanel1
             // 
@@ -280,7 +279,6 @@
             Name = "FrmConsultarRechazadas";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Consultar muestras rechazadas";
-            Load += FrmConsultarRechazadas_Load;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             flowLayoutPanel1.ResumeLayout(false);

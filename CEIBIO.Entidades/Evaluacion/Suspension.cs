@@ -10,7 +10,6 @@
         public bool Reactivada { get; set; }
         public DateTime? FechaReactivacion { get; set; }
 
-        // Datos para mostrar
         public string NumeroAtencion { get; set; } = string.Empty;
         public string NombrePaciente { get; set; } = string.Empty;
         public string NombreEnfermera { get; set; } = string.Empty;

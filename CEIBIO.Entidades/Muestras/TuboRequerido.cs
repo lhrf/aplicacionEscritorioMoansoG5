@@ -1,6 +1,5 @@
 ﻿namespace CEIBIO.Entidades
 {
-    /// <summary>Tubo o recipiente que requiere un examen de la atención.</summary>
     public class TuboRequerido
     {
         public int IdExamen { get; set; }

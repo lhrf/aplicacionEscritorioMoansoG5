@@ -2,11 +2,6 @@
 
 namespace CEIBIO.Negocio
 {
-    /// <summary>
-    /// Formularios que puede abrir cada rol (CU-63: el menú muestra solo las opciones del rol).
-    /// En FrmMenuPrincipal: opcion.Visible = Permisos.PuedeAbrir("FrmRegistrarAtencion");
-    /// El Administrador del Sistema puede abrir todos.
-    /// </summary>
     public static class Permisos
     {
         private static readonly string[] Todos = { "FrmMenuPrincipal", "FrmCambiarClave" };
@@ -34,7 +29,6 @@ namespace CEIBIO.Negocio
                                             "FrmMantEquipos", "FrmMantUsuarios" },
         };
 
-        /// <summary>True si el usuario en sesión puede abrir el formulario.</summary>
         public static bool PuedeAbrir(string nombreFormulario)
         {
             if (!Sesion.Activa) return false;
@@ -43,7 +37,6 @@ namespace CEIBIO.Negocio
             return PorRol.TryGetValue(Sesion.Rol, out var formularios) && formularios.Contains(nombreFormulario);
         }
 
-        /// <summary>Formularios propios de un rol (sin contar los comunes a todos).</summary>
         public static string[] FormulariosDelRol(string rol) =>
             PorRol.TryGetValue(rol, out var formularios) ? formularios : Array.Empty<string>();
     }

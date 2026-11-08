@@ -3,7 +3,6 @@ using CEIBIO.Entidades;
 
 namespace CEIBIO.Negocio
 {
-    /// <summary>CU-01 Registrar atención del paciente, CU-02 Calcular costo de la atención y CU-08 Consultar atenciones.</summary>
     public class AtencionNegocio
     {
         private readonly AtencionDatos datos = new();
@@ -12,10 +11,6 @@ namespace CEIBIO.Negocio
         private readonly ExamenDatos examenDatos = new();
         private readonly PagoDatos pagoDatos = new();
 
-        /// <summary>
-        /// CU-02: suma las tarifas de los exámenes y aplica el descuento del convenio (null = sin convenio).
-        /// Se puede llamar cada vez que se agrega o quita un examen para refrescar las etiquetas.
-        /// </summary>
         public CostoAtencion CalcularCosto(IEnumerable<Examen> examenes, Convenio? convenio)
         {
             decimal subtotal = examenes.Sum(e => e.Tarifa);
@@ -30,10 +25,6 @@ namespace CEIBIO.Negocio
             };
         }
 
-        /// <summary>
-        /// CU-01: registra la atención. En sede queda "Pendiente de evaluación"; a domicilio queda "Pendiente de pago"
-        /// y luego se debe programar la visita (CU-05). Respuesta.Dato = número de atención.
-        /// </summary>
         public Respuesta Registrar(int idPaciente, string modalidad, List<int> idExamenes, int? idConvenio) => Respuesta.Intentar(() =>
         {
             var paciente = pacienteDatos.ObtenerPorId(idPaciente);
@@ -41,7 +32,6 @@ namespace CEIBIO.Negocio
             if (modalidad != Modalidad.EnSede && modalidad != Modalidad.ADomicilio) return Respuesta.Error("Seleccione la modalidad de atención.");
             if (idExamenes == null || idExamenes.Count == 0) return Respuesta.Error("Seleccione al menos un examen.");
 
-            // Se vuelven a leer las tarifas y el convenio desde la base de datos (no se confía en los valores del formulario).
             var examenes = new List<Examen>();
             foreach (int idExamen in idExamenes.Distinct())
             {
@@ -79,7 +69,6 @@ namespace CEIBIO.Negocio
             return Respuesta.Ok(mensaje, id, numero);
         });
 
-        /// <summary>CU-01 A4: anula una atención que aún no fue pagada.</summary>
         public Respuesta Anular(int idAtencion, string motivo) => Respuesta.Intentar(() =>
         {
             var atencion = datos.ObtenerPorId(idAtencion);
@@ -98,15 +87,12 @@ namespace CEIBIO.Negocio
 
         public Atencion? ObtenerPorId(int idAtencion) => datos.ObtenerPorId(idAtencion);
 
-        /// <summary>Busca por número: acepta "AT-000012" o "12".</summary>
         public Atencion? ObtenerPorNumero(string numeroAtencion) => datos.ObtenerPorNumero(Validacion.NumeroAtencion(numeroAtencion));
 
-        /// <summary>Exámenes de la atención con su tarifa.</summary>
         public List<AtencionExamen> ListarDetalle(int idAtencion) => datos.ListarDetalle(idAtencion);
 
         public List<Atencion> ListarPorEstado(string estado) => datos.ListarPorEstado(estado);
 
-        /// <summary>CU-08: estado null, vacío o "(Todos)" = todos los estados.</summary>
         public List<Atencion> Consultar(DateTime desde, DateTime hasta, string? estado)
         {
             if (estado == "(Todos)") estado = null;

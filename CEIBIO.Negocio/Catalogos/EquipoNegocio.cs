@@ -3,7 +3,6 @@ using CEIBIO.Entidades;
 
 namespace CEIBIO.Negocio
 {
-    /// <summary>CU-43 Mantenedor de equipos analizadores.</summary>
     public class EquipoNegocio
     {
         private readonly EquipoDatos datos = new();
@@ -12,7 +11,6 @@ namespace CEIBIO.Negocio
 
         public List<Equipo> Listar(string filtro = "") => datos.Listar((filtro ?? "").Trim(), false);
 
-        /// <summary>Equipos habilitados (CU-41 y CU-45).</summary>
         public List<Equipo> ListarHabilitados() => datos.Listar("", true);
 
         public Equipo? ObtenerPorId(int id) => datos.ObtenerPorId(id);

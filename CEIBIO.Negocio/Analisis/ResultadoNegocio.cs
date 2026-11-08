@@ -3,10 +3,6 @@ using CEIBIO.Entidades;
 
 namespace CEIBIO.Negocio
 {
-    /// <summary>
-    /// CU-39 Registrar resultados analíticos, CU-40 Recibir resultados para validación, CU-46 Validar resultados clínicos,
-    /// CU-47 Retener y repetir resultado y CU-48 Registrar repetición del análisis.
-    /// </summary>
     public class ResultadoNegocio
     {
         private readonly ResultadoDatos datos = new();
@@ -15,8 +11,6 @@ namespace CEIBIO.Negocio
         private readonly PacienteDatos pacienteDatos = new();
         private readonly IntervaloDatos intervaloDatos = new();
 
-        // ---------------- CU-39 ----------------
-        /// <summary>CU-39 paso 2: busca la muestra; solo se aceptan muestras "Recibida para análisis".</summary>
         public Muestra? BuscarMuestra(string codigo, out string mensaje)
         {
             mensaje = string.Empty;
@@ -31,16 +25,10 @@ namespace CEIBIO.Negocio
             return muestra;
         }
 
-        /// <summary>CU-39 paso 3: exámenes de la atención con su procedimiento (Automatizado o Microscópico).</summary>
         public List<AtencionExamen> ListarExamenes(int idAtencion) => atencionDatos.ListarDetalle(idAtencion);
 
-        /// <summary>CU-39 pasos 4-5: parámetros del examen con su unidad y el valor ya registrado (si existe).</summary>
         public List<ResultadoAnalitico> ListarParametros(int idAtencion, int idExamen) => datos.ListarParametrosConValor(idAtencion, idExamen);
 
-        /// <summary>
-        /// CU-39: guarda los valores (solo los que tienen valor). Los parámetros con unidad deben ser numéricos (A2).
-        /// Se pueden corregir mientras no se envíen a validación (A3).
-        /// </summary>
         public Respuesta GuardarResultados(int idAtencion, int idExamen, List<ResultadoAnalitico> valores, string? observacionesMicroscopicas) => Respuesta.Intentar(() =>
         {
             var atencion = atencionDatos.ObtenerPorId(idAtencion);
@@ -78,7 +66,6 @@ namespace CEIBIO.Negocio
             return Respuesta.Ok("Resultados guardados (" + aGuardar.Count + " parámetro(s)).", idAtencion);
         });
 
-        /// <summary>CU-39 pasos 6-7: envía a validación los resultados del examen. Todos los parámetros deben tener valor.</summary>
         public Respuesta EnviarAValidacion(int idAtencion, int idExamen) => Respuesta.Intentar(() =>
         {
             var parametros = datos.ListarParametrosConValor(idAtencion, idExamen);
@@ -90,21 +77,14 @@ namespace CEIBIO.Negocio
             return Respuesta.Ok(enviados + " resultado(s) enviados a validación del Médico Patólogo.", idAtencion);
         });
 
-        // ---------------- CU-40 ----------------
-        /// <summary>Un registro por atención: NumeroAtencion, NombrePaciente, NombreExamen (exámenes), NombreTecnico y FechaEnvio.</summary>
         public List<ResultadoAnalitico> ListarPendientesValidacion() => datos.ListarAtencionesPendientes();
 
-        // ---------------- CU-46 ----------------
         public Paciente? ObtenerPaciente(int idAtencion)
         {
             var atencion = atencionDatos.ObtenerPorId(idAtencion);
             return atencion == null ? null : pacienteDatos.ObtenerPorId(atencion.IdPaciente);
         }
 
-        /// <summary>
-        /// CU-46 paso 2: resultados de la atención con el intervalo de referencia según el sexo y la edad del paciente
-        /// y la marca FueraDeRango.
-        /// </summary>
         public List<ResultadoAnalitico> ListarParaValidar(int idAtencion)
         {
             var resultados = datos.ListarPorAtencion(idAtencion);
@@ -121,14 +101,12 @@ namespace CEIBIO.Negocio
             return resultados;
         }
 
-        /// <summary>CU-46 paso 2: resultados validados de atenciones anteriores del paciente.</summary>
         public List<ResultadoAnalitico> ListarAnteriores(int idAtencion)
         {
             var atencion = atencionDatos.ObtenerPorId(idAtencion);
             return atencion == null ? new List<ResultadoAnalitico>() : datos.ListarAnterioresDelPaciente(atencion.IdPaciente, idAtencion);
         }
 
-        /// <summary>CU-46 pasos 4-6: valida un resultado. Al validar el último, la atención queda "Lista para reporte".</summary>
         public Respuesta Validar(int idResultado) => Respuesta.Intentar(() =>
         {
             var r = datos.ObtenerPorId(idResultado);
@@ -141,7 +119,6 @@ namespace CEIBIO.Negocio
                 : Respuesta.Ok("Resultado validado.", idResultado);
         });
 
-        /// <summary>CU-47: retiene el resultado con una observación y lo devuelve al Técnico Analista.</summary>
         public Respuesta Retener(int idResultado, string observacion) => Respuesta.Intentar(() =>
         {
             var r = datos.ObtenerPorId(idResultado);
@@ -152,10 +129,8 @@ namespace CEIBIO.Negocio
             return Respuesta.Ok("Resultado retenido: «Retener y Repetir». Se devolvió al Técnico Analista.", idResultado);
         });
 
-        // ---------------- CU-48 ----------------
         public List<ResultadoAnalitico> ListarEnRepeticion() => datos.ListarEnRepeticion();
 
-        /// <summary>CU-48: guarda el nuevo resultado, conserva el anterior y lo reenvía a validación.</summary>
         public Respuesta RegistrarRepeticion(int idResultado, string nuevoValor) => Respuesta.Intentar(() =>
         {
             var r = datos.ObtenerPorId(idResultado);
@@ -171,7 +146,6 @@ namespace CEIBIO.Negocio
             return Respuesta.Ok("Nuevo resultado guardado y reenviado a validación. Se conservó el resultado anterior.", idResultado);
         });
 
-        // ---------------- auxiliares ----------------
         public static bool EstaFueraDeRango(string? valor, IntervaloReferencia? intervalo)
         {
             if (intervalo == null || !Validacion.EsNumero(valor, out decimal numero)) return false;

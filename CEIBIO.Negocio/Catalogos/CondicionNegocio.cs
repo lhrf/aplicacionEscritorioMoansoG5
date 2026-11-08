@@ -3,7 +3,6 @@ using CEIBIO.Entidades;
 
 namespace CEIBIO.Negocio
 {
-    /// <summary>CU-13 Mantenedor de condiciones preanalíticas.</summary>
     public class CondicionNegocio
     {
         private readonly CondicionDatos datos = new();

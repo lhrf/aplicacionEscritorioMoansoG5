@@ -2,7 +2,6 @@
 
 namespace CEIBIO.Negocio
 {
-    /// <summary>Usuario que inició sesión. Lo llena UsuarioNegocio.IniciarSesion.</summary>
     public static class Sesion
     {
         public static Usuario? Usuario { get; private set; }

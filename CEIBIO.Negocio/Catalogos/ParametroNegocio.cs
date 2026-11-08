@@ -3,14 +3,12 @@ using CEIBIO.Entidades;
 
 namespace CEIBIO.Negocio
 {
-    /// <summary>CU-44 Mantenedor de parámetros de examen.</summary>
     public class ParametroNegocio
     {
         private readonly ParametroDatos datos = new();
 
         public List<Parametro> Listar(string filtro = "") => datos.Listar((filtro ?? "").Trim());
 
-        /// <summary>Parámetros habilitados de un examen (combo de CU-54).</summary>
         public List<Parametro> ListarPorExamen(int idExamen) => datos.ListarPorExamen(idExamen, true);
 
         public Parametro? ObtenerPorId(int id) => datos.ObtenerPorId(id);

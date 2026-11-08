@@ -1,6 +1,5 @@
 ﻿namespace CEIBIO.Entidades
 {
-    /// <summary>Resultado de CU-02 Calcular costo de la atención.</summary>
     public class CostoAtencion
     {
         public decimal Subtotal { get; set; }

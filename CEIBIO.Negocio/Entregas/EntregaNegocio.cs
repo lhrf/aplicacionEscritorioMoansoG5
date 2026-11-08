@@ -3,10 +3,6 @@ using CEIBIO.Entidades;
 
 namespace CEIBIO.Negocio
 {
-    /// <summary>
-    /// CU-57 Registrar entrega de resultados, CU-58 Verificar comprobante de pago, CU-59 Retener entrega,
-    /// CU-60 Cerrar atención, CU-61 Consultar pendientes de entrega y CU-62 Consultar entregas realizadas.
-    /// </summary>
     public class EntregaNegocio
     {
         private readonly EntregaDatos datos = new();
@@ -16,17 +12,11 @@ namespace CEIBIO.Negocio
 
         public static readonly string[] Relaciones = { "Paciente", "Representante", "Familiar" };
 
-        /// <summary>CU-61 / CU-57 paso 2: reportes disponibles para entrega (ver ReporteClinico.DiasSinRecoger).</summary>
         public List<ReporteClinico> ListarPendientesEntrega() => reporteDatos.ListarPorEstado(EstadoReporte.DisponibleEntrega);
 
-        /// <summary>
-        /// CU-58: busca por número de comprobante o por DNI y devuelve los datos del comprobante y del reporte
-        /// para verificar su correspondencia (DatosEntrega.Coinciden). Null si no hay reporte para entregar.
-        /// </summary>
         public DatosEntrega? VerificarComprobante(string numeroComprobanteODni) =>
             Validacion.Vacio(numeroComprobanteODni) ? null : datos.BuscarParaEntrega(numeroComprobanteODni);
 
-        /// <summary>CU-57 pasos 4-5.</summary>
         public Respuesta RegistrarEntrega(Entrega e) => Respuesta.Intentar(() =>
         {
             var reporte = reporteDatos.ObtenerPorId(e.IdReporte);
@@ -34,7 +24,6 @@ namespace CEIBIO.Negocio
             if (reporte.Estado == EstadoReporte.EntregaRetenida) return Respuesta.Error("La entrega está retenida. Levante la retención antes de entregar.");
             if (reporte.Estado != EstadoReporte.DisponibleEntrega) return Respuesta.Error("El reporte no está disponible para entrega.");
 
-            // CU-58: la atención del reporte debe tener su Comprobante de pago emitido (no anulado)
             if (comprobanteDatos.ObtenerEmitidoPorAtencion(reporte.IdAtencion) == null)
                 return Respuesta.Error("La atención no tiene un Comprobante de pago vigente. Retenga la entrega.");
 
@@ -50,7 +39,6 @@ namespace CEIBIO.Negocio
             return Respuesta.Ok("Entrega registrada. Ya puede cerrar la atención " + reporte.NumeroAtencion + ".", id);
         });
 
-        /// <summary>CU-59: retiene la entrega con su motivo.</summary>
         public Respuesta Retener(int idReporte, string motivo) => Respuesta.Intentar(() =>
         {
             var reporte = reporteDatos.ObtenerPorId(idReporte);
@@ -60,7 +48,6 @@ namespace CEIBIO.Negocio
             return Respuesta.Ok("Entrega retenida.", idReporte);
         });
 
-        /// <summary>CU-59: levanta la retención una vez aclarada la observación.</summary>
         public Respuesta LevantarRetencion(int idReporte) => Respuesta.Intentar(() =>
         {
             var reporte = reporteDatos.ObtenerPorId(idReporte);
@@ -69,10 +56,8 @@ namespace CEIBIO.Negocio
             return Respuesta.Ok("Retención levantada. El reporte está disponible para entrega.", idReporte);
         });
 
-        /// <summary>CU-60 paso 1: atenciones entregadas que falta cerrar.</summary>
         public List<Entrega> ListarEntregadas() => datos.ListarEntregadasSinCerrar();
 
-        /// <summary>CU-60: la atención pasa a "Culminada" (historial del paciente).</summary>
         public Respuesta CerrarAtencion(int idAtencion) => Respuesta.Intentar(() =>
         {
             var reporte = reporteDatos.ObtenerPorAtencion(idAtencion);
@@ -87,7 +72,6 @@ namespace CEIBIO.Negocio
             return Respuesta.Ok("Atención " + atencion.NumeroAtencion + " culminada.", idAtencion);
         });
 
-        /// <summary>CU-62.</summary>
         public List<Entrega> ConsultarEntregas(DateTime desde, DateTime hasta) => datos.Consultar(desde, hasta);
     }
 }
