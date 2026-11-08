@@ -7,19 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CEIBIO.Entidades\CEIBIO.Entidades.csproj" />
+    <PackageReference Include="Microsoft.Data.SqlClient" Version="6.1.1" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Admision\" />
-    <Folder Include="Catalogos\" />
-    <Folder Include="Evaluacion\" />
-    <Folder Include="Caja\" />
-    <Folder Include="Muestras\" />
-    <Folder Include="Analisis\" />
-    <Folder Include="Entregas\" />
-    <Folder Include="Reportes\" />
-    <Folder Include="Seguridad\" />
+    <ProjectReference Include="..\CEIBIO.Entidades\CEIBIO.Entidades.csproj" />
   </ItemGroup>
 
 </Project>
