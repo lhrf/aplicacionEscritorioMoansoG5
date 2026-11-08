@@ -10,5 +10,10 @@ namespace CEIBIO.Presentacion.Preparacion
         {
             InitializeComponent();
         }
+
+        private void FrmAcondicionarMuestra_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

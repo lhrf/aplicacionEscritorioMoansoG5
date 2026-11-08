@@ -10,5 +10,25 @@ namespace CEIBIO.Presentacion.TomaMuestras
         {
             InitializeComponent();
         }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblPaciente_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblBox_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnRechazo_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
