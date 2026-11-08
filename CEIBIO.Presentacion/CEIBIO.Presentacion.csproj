@@ -127,9 +127,7 @@
     <Compile Update="Formalizacion\FrmRevisarReporte.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Formalizacion\FrmValidarResultados.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Update="Formalizacion\FrmValidarResultados.cs" />
     <Compile Update="Mantenedores\FrmMantBoxes.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -178,6 +176,11 @@
     <Compile Update="Preparacion\FrmRecepcionMuestra.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Update="Seguridad\FrmCambiarClave.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -202,6 +205,13 @@
     <Compile Update="TomaMuestras\FrmTomaMuestraSede.cs">
       <SubType>Form</SubType>
     </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
 
 </Project>

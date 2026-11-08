@@ -10,5 +10,10 @@ namespace CEIBIO.Presentacion.Caja
         {
             InitializeComponent();
         }
+
+        private void FrmAutorizarTransferencia_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

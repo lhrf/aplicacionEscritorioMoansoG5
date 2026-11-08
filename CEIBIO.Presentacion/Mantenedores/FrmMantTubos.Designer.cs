@@ -34,7 +34,7 @@
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(9F, 23F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(1000, 620);
+            ClientSize = new System.Drawing.Size(1000, 660);
             Font = new System.Drawing.Font("Segoe UI", 10F);
             FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             MaximizeBox = false;
