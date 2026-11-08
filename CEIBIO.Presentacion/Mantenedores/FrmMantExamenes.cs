@@ -1,4 +1,4 @@
-using CEIBIO.Entidades;
+﻿using CEIBIO.Entidades;
 using CEIBIO.Negocio;
 
 namespace CEIBIO.Presentacion.Mantenedores
@@ -11,6 +11,10 @@ namespace CEIBIO.Presentacion.Mantenedores
         public FrmMantExamenes()
         {
             InitializeComponent();
+            cboTipoMuestra.Items.Clear();
+            cboTipoMuestra.Items.AddRange(ExamenNegocio.TiposMuestra);
+            cboProcedimiento.Items.Clear();
+            cboProcedimiento.Items.AddRange(ExamenNegocio.Procedimientos);
             nudTarifa.DecimalPlaces = 2;
             nudTarifa.Minimum = 0;
             nudTarifa.Maximum = 9999;

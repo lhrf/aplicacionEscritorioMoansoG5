@@ -7,7 +7,7 @@ namespace CEIBIO.Negocio
     {
         private readonly ExamenDatos datos = new();
 
-        public static readonly string[] TiposMuestra = { "Sangre", "Orina", "Heces" };
+        public static readonly string[] TiposMuestra = { "Sangre", "Orina", "Heces", "Secreción", "Semen", "Raspado de piel", "Hisopado perianal" };
         public static readonly string[] Procedimientos = { "Automatizado", "Microscópico" };
 
         public List<Examen> Listar(string filtro = "") => datos.Listar((filtro ?? "").Trim(), false);
