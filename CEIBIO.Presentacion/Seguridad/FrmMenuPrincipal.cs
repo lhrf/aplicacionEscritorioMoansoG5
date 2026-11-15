@@ -13,6 +13,8 @@ namespace CEIBIO.Presentacion.Seguridad
 {
     public partial class FrmMenuPrincipal : Form
     {
+        private readonly System.Windows.Forms.Timer reloj = new();
+
         public bool CerroSesion { get; private set; }
 
         public FrmMenuPrincipal()
@@ -84,6 +86,10 @@ namespace CEIBIO.Presentacion.Seguridad
                 menu.Visible = menu.DropDownItems.OfType<ToolStripItem>().Any(i => i.Available);
 
             Load += (s, e) => MostrarSesion();
+            reloj.Interval = 1000;
+            reloj.Tick += (s, e) => tslFecha.Text = DateTime.Now.ToString("dd/MM/yyyy HH:mm");
+            reloj.Start();
+            FormClosing += FrmMenuPrincipal_FormClosing;
         }
 
         private void Opcion(ToolStripMenuItem item, string formulario, Func<Form> crear)
@@ -102,7 +108,19 @@ namespace CEIBIO.Presentacion.Seguridad
             lblRol.Text = "Rol: " + Sesion.Rol;
             tslUsuario.Text = "Usuario: " + Sesion.NombreUsuario;
             tslRol.Text = "Rol: " + Sesion.Rol;
-            tslFecha.Text = DateTime.Now.ToString("dd/MM/yyyy");
+            tslFecha.Text = DateTime.Now.ToString("dd/MM/yyyy HH:mm");
+        }
+
+        private void FrmMenuPrincipal_FormClosing(object? sender, FormClosingEventArgs e)
+        {
+            if (CerroSesion || e.CloseReason != CloseReason.UserClosing) { reloj.Stop(); return; }
+            if (!Ui.Confirmar("¿Desea salir del sistema?"))
+            {
+                e.Cancel = true;
+                return;
+            }
+            reloj.Stop();
+            Ui.Intentar(() => new UsuarioNegocio().CerrarSesion());
         }
 
         private void MnuItemCerrarSesion_Click(object? sender, EventArgs e)

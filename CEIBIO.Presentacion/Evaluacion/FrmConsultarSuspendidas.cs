@@ -15,11 +15,14 @@ namespace CEIBIO.Presentacion.Evaluacion
             btnBuscar.Click += (s, e) => Buscar();
             btnReactivar.Click += BtnReactivar_Click;
             btnCerrar.Click += (s, e) => Close();
+            Ui.AlSeleccionar(dgvSuspendidas, () => btnReactivar.Enabled = dgvSuspendidas.CurrentRow != null);
+            Ui.AlDobleClic(dgvSuspendidas, () => BtnReactivar_Click(btnReactivar, EventArgs.Empty));
             Load += (s, e) => Buscar();
         }
 
         private void Buscar()
         {
+            if (!Ui.RangoValido(dtpFechaInicio, dtpFechaFin)) return;
             Ui.Intentar(() =>
             {
                 var lista = negocio.ConsultarSuspendidas(dtpFechaInicio.Value, dtpFechaFin.Value);
@@ -27,6 +30,7 @@ namespace CEIBIO.Presentacion.Evaluacion
                 {
                     x.NumeroAtencion, x.NombrePaciente, x.Motivo, Ui.Fecha(x.NuevaFecha), x.NombreEnfermera
                 });
+                btnReactivar.Enabled = dgvSuspendidas.CurrentRow != null;
             });
         }
 
@@ -34,6 +38,7 @@ namespace CEIBIO.Presentacion.Evaluacion
         {
             var s = Ui.Seleccionado<Suspension>(dgvSuspendidas);
             if (s == null) { Ui.Aviso("Seleccione una atención suspendida."); return; }
+            if (!Ui.Confirmar("¿Desea reactivar la atención " + s.NumeroAtencion + " de " + s.NombrePaciente + "?")) return;
             if (Ui.Mostrar(negocio.Reactivar(s.IdSuspension))) Buscar();
         }
     }

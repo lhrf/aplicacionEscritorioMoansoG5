@@ -11,6 +11,7 @@ namespace CEIBIO.Presentacion.Preparacion
         public FrmConsultarTransito()
         {
             InitializeComponent();
+            Ui.Lista(cboEstado);
             cboEstado.Items.Clear();
             cboEstado.Items.Add("(Todos)");
             foreach (var estado in EstadoMuestra.Todos) cboEstado.Items.Add(estado);
@@ -18,13 +19,14 @@ namespace CEIBIO.Presentacion.Preparacion
             dtpFechaInicio.Value = DateTime.Today.AddDays(-7);
             dateTimePicker1.Value = DateTime.Today;
             btnBuscar.Click += (s, e) => Buscar();
-            dgvTransito.CellDoubleClick += (s, e) => MostrarMovimientos();
+            Ui.AlDobleClic(dgvTransito, MostrarMovimientos);
             btnCerrar.Click += (s, e) => Close();
             Load += (s, e) => Buscar();
         }
 
         private void Buscar()
         {
+            if (!Ui.RangoValido(dtpFechaInicio, dateTimePicker1)) return;
             Ui.Intentar(() =>
             {
                 var lista = negocio.ConsultarTransito(dtpFechaInicio.Value, dateTimePicker1.Value, cboEstado.Text);

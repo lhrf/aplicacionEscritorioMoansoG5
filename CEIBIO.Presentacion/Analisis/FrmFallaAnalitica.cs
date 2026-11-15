@@ -11,6 +11,8 @@ namespace CEIBIO.Presentacion.Analisis
         public FrmFallaAnalitica()
         {
             InitializeComponent();
+            Ui.SoloLectura(txtEquipo, txtMuestra);
+            CancelButton = btnCancelar;
             btnRegistrar.Click += BtnRegistrar_Click;
             btnCancelar.Click += (s, e) => { DialogResult = DialogResult.Cancel; Close(); };
         }
@@ -25,6 +27,7 @@ namespace CEIBIO.Presentacion.Analisis
         private void BtnRegistrar_Click(object? sender, EventArgs e)
         {
             if (uso == null) { Ui.Aviso("Abra este formulario desde el registro de uso del equipo."); return; }
+            if (Validacion.Vacio(txtDescripcion.Text)) { Ui.Aviso("Describa la falla analítica."); txtDescripcion.Focus(); return; }
             if (!Ui.Mostrar(negocio.RegistrarFalla(uso.IdUso, txtDescripcion.Text))) return;
             DialogResult = DialogResult.OK;
             Close();

@@ -12,11 +12,14 @@ namespace CEIBIO.Presentacion.TomaMuestras
         public FrmTomaMuestraSede()
         {
             InitializeComponent();
+            Ui.SoloLectura(txtNumeroAtencion, txtPaciente, txtBox, textBox1);
             btnIniciar.Click += BtnIniciar_Click;
             btnImprimirEtiquetas.Click += (s, e) => ImprimirEtiquetas();
             btnRechazo.Click += BtnRechazo_Click;
             btnValidar.Click += BtnValidar_Click;
             btnCerrar.Click += (s, e) => Close();
+            Ui.AlDobleClic(dataGridView1, () => BtnRechazo_Click(btnRechazo, EventArgs.Empty));
+            txtNumeroAtencion.DoubleClick += (s, e) => Ui.Intentar(ElegirAtencion);
             Load += (s, e) => Ui.Intentar(ElegirAtencion);
         }
 
@@ -71,6 +74,7 @@ namespace CEIBIO.Presentacion.TomaMuestras
         {
             if (atencion == null || muestra == null) return;
             var tubo = Ui.Seleccionado<TuboRequerido>(dataGridView1);
+            if (tubo == null) { Ui.Aviso("Seleccione el tubo o recipiente rechazado."); return; }
             using var f = new FrmRechazoMuestra(muestra, tubo);
             if (f.ShowDialog(this) == DialogResult.OK)
             {
@@ -83,6 +87,8 @@ namespace CEIBIO.Presentacion.TomaMuestras
         private void BtnValidar_Click(object? sender, EventArgs e)
         {
             if (atencion == null) return;
+            if (dateTimePicker1.Value > DateTime.Now) { Ui.Aviso("La hora de extracción no puede ser posterior a la hora actual."); return; }
+            if (!Ui.Confirmar("¿Confirma que la recolección de las muestras de " + atencion.NombrePaciente + " está completa?")) return;
             if (Ui.Mostrar(negocio.ValidarRecoleccion(atencion.IdAtencion, dateTimePicker1.Value))) Ui.Intentar(ElegirAtencion);
         }
     }

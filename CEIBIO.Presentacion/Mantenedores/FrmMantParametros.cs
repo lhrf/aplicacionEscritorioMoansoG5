@@ -12,7 +12,7 @@ namespace CEIBIO.Presentacion.Mantenedores
         {
             InitializeComponent();
             cboExamen.DropDownStyle = ComboBoxStyle.DropDownList;
-            m = new Mantenedor(grpDatos, btnNuevo, btnEditar, btnGuardar, btnCancelar, btnInhabilitar);
+            m = new Mantenedor(grpDatos, btnNuevo, btnEditar, btnGuardar, btnCancelar, btnInhabilitar, dgvRegistros);
             btnBuscar.Click += (s, e) => Buscar();
             btnNuevo.Click += (s, e) => m.Nuevo();
             btnEditar.Click += BtnEditar_Click;
@@ -20,6 +20,9 @@ namespace CEIBIO.Presentacion.Mantenedores
             btnCancelar.Click += (s, e) => m.Cancelar();
             btnInhabilitar.Click += BtnInhabilitar_Click;
             btnCerrar.Click += (s, e) => Close();
+            Ui.AlPresionarEnter(txtBuscar, Buscar);
+            Ui.AlDobleClic(dgvRegistros, () => BtnEditar_Click(null, EventArgs.Empty));
+            Ui.AlSeleccionar(dgvRegistros, MostrarEstado);
             Load += (s, e) => Ui.Intentar(() =>
             {
                 Ui.Combo(cboExamen, new ExamenNegocio().ListarHabilitados(), "Nombre", "IdExamen");
@@ -27,12 +30,15 @@ namespace CEIBIO.Presentacion.Mantenedores
             });
         }
 
+        private void MostrarEstado() => m.Estado(Ui.Seleccionado<Parametro>(dgvRegistros)?.Habilitado);
+
         private void Buscar()
         {
             Ui.Intentar(() => Ui.Llenar(dgvRegistros, negocio.Listar(txtBuscar.Text), x => new object?[]
             {
                 x.NombreExamen, x.Nombre, x.Unidad, x.EstadoTexto
             }));
+            MostrarEstado();
         }
 
         private void BtnEditar_Click(object? sender, EventArgs e)
@@ -63,8 +69,16 @@ namespace CEIBIO.Presentacion.Mantenedores
         {
             var x = Ui.Seleccionado<Parametro>(dgvRegistros);
             if (x == null) { Ui.Aviso("Seleccione un registro."); return; }
-            if (!Ui.Confirmar("¿Desea inhabilitar el parámetro " + x.Nombre + "?")) return;
-            if (Ui.Mostrar(negocio.Inhabilitar(x.IdParametro))) Buscar();
+            if (x.Habilitado)
+            {
+                if (!Ui.Confirmar("¿Desea inhabilitar " + "el parámetro " + x.Nombre + "?")) return;
+                if (Ui.Mostrar(negocio.Inhabilitar(x.IdParametro))) Buscar();
+            }
+            else
+            {
+                if (!Ui.Confirmar("¿Desea habilitar nuevamente " + "el parámetro " + x.Nombre + "?")) return;
+                if (Ui.Mostrar(negocio.Habilitar(x.IdParametro))) Buscar();
+            }
         }
     }
 }

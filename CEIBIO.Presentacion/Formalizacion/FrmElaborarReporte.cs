@@ -13,7 +13,8 @@ namespace CEIBIO.Presentacion.Formalizacion
             InitializeComponent();
             rtbVistaPrevia.ReadOnly = true;
             rtbVistaPrevia.Font = new Font("Consolas", 10F);
-            dgvAtenciones.SelectionChanged += (s, e) => Ui.Intentar(MostrarSeleccion);
+            Ui.SoloLectura(txtEstado);
+            Ui.AlSeleccionar(dgvAtenciones, MostrarSeleccion);
             btnGenerar.Click += BtnGenerar_Click;
             btnImprimirBorrador.Click += (s, e) => Imprimir();
             btnEnviarRevision.Click += (s, e) => Ejecutar(id => negocio.EnviarARevision(id));
@@ -30,9 +31,7 @@ namespace CEIBIO.Presentacion.Formalizacion
             int? seleccion = Ui.Seleccionado<Atencion>(dgvAtenciones)?.IdAtencion;
             var lista = negocio.ListarParaElaborar();
             Ui.Llenar(dgvAtenciones, lista, a => new object?[] { a.NumeroAtencion, a.NombrePaciente, a.EstadoReporte });
-            if (seleccion.HasValue)
-                foreach (DataGridViewRow fila in dgvAtenciones.Rows)
-                    if (fila.Tag is Atencion a && a.IdAtencion == seleccion.Value) { fila.Selected = true; dgvAtenciones.CurrentCell = fila.Cells[0]; }
+            if (seleccion.HasValue) Ui.Seleccionar<Atencion>(dgvAtenciones, a => a.IdAtencion == seleccion.Value);
             MostrarSeleccion();
         }
 
@@ -57,6 +56,7 @@ namespace CEIBIO.Presentacion.Formalizacion
         {
             var a = Ui.Seleccionado<Atencion>(dgvAtenciones);
             if (a == null) { Ui.Aviso("Seleccione una atención."); return; }
+            if (reporte != null && !Ui.Confirmar("Se generará una nueva versión del Reporte clínico con los resultados validados. ¿Desea continuar?")) return;
             if (Ui.Mostrar(negocio.Generar(a.IdAtencion))) Ui.Intentar(Cargar);
         }
 

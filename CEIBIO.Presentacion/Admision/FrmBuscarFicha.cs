@@ -11,13 +11,18 @@ namespace CEIBIO.Presentacion.Admision
         public FrmBuscarFicha()
         {
             InitializeComponent();
+            Ui.SoloDigitos(txtDni, 8);
+            Ui.SoloDigitos(txtTelefono, 9);
+            Ui.Lista(cboSexo);
+            dtpFechaNacimiento.MaxDate = DateTime.Today;
+            Ui.AlPresionarEnter(txtDni, () => BtnBuscar_Click(btnBuscar, EventArgs.Empty));
+            txtDni.TextChanged += (s, e) => { if (paciente != null && txtDni.Text.Trim() != paciente.Dni) Mostrar(null); };
             Ui.Columnas(dgvAtenciones, "N.° atención", "Fecha", "Exámenes", "Estado");
-            AcceptButton = btnBuscar;
             btnBuscar.Click += BtnBuscar_Click;
             btnActualizar.Click += BtnActualizar_Click;
             btnRegistrarFicha.Click += BtnRegistrarFicha_Click;
             btnCerrar.Click += (s, e) => Close();
-            Mostrar(null);
+            Ui.Intentar(() => Mostrar(null));
         }
 
         private void BtnBuscar_Click(object? sender, EventArgs e)
@@ -70,7 +75,7 @@ namespace CEIBIO.Presentacion.Admision
                 Telefono = txtTelefono.Text,
                 Direccion = txtDireccion.Text
             };
-            if (Ui.Mostrar(negocio.Actualizar(p))) Mostrar(negocio.ObtenerPorId(p.IdPaciente));
+            if (Ui.Mostrar(negocio.Actualizar(p))) Ui.Intentar(() => Mostrar(negocio.ObtenerPorId(p.IdPaciente)));
         }
 
         private void BtnRegistrarFicha_Click(object? sender, EventArgs e)
@@ -78,8 +83,9 @@ namespace CEIBIO.Presentacion.Admision
             using var f = new FrmRegistrarFicha(txtDni.Text.Trim());
             if (f.ShowDialog(this) == DialogResult.OK && f.Registrado != null)
             {
-                txtDni.Text = f.Registrado.Dni;
-                Mostrar(f.Registrado);
+                var registrado = f.Registrado;
+                txtDni.Text = registrado.Dni;
+                Ui.Intentar(() => Mostrar(registrado));
             }
         }
     }

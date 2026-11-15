@@ -11,6 +11,10 @@ namespace CEIBIO.Presentacion.Analisis
         {
             InitializeComponent();
             cboEquipo.DropDownStyle = ComboBoxStyle.DropDownList;
+            Ui.Mayusculas(txtCodigo);
+            Ui.SoloLectura(txtHoraInicio);
+            Ui.AlPresionarEnter(txtCodigo, () => BtnRegistrar_Click(btnRegistrar, EventArgs.Empty));
+            Ui.AlDobleClic(dgvUsos, () => BtnFalla_Click(btnFalla, EventArgs.Empty));
             btnRegistrar.Click += BtnRegistrar_Click;
             btnFalla.Click += BtnFalla_Click;
             btnCerrar.Click += (s, e) => Close();
@@ -33,6 +37,7 @@ namespace CEIBIO.Presentacion.Analisis
         {
             var equipo = Ui.ItemCombo<Equipo>(cboEquipo);
             if (equipo == null) { Ui.Aviso("Seleccione el equipo."); return; }
+            if (Validacion.Vacio(txtCodigo.Text)) { Ui.Aviso("Ingrese o escanee el código de la muestra."); txtCodigo.Focus(); return; }
             var r = negocio.RegistrarUso(equipo.IdEquipo, txtCodigo.Text);
             if (!Ui.Mostrar(r)) return;
             txtHoraInicio.Text = r.Dato;

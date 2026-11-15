@@ -13,6 +13,7 @@ namespace CEIBIO.Presentacion.Mantenedores
         public FrmMantIntervalos()
         {
             InitializeComponent();
+            Ui.Lista(cboExamen, cboParametro, cboSexo);
             cboExamen.Items.Clear();
             cboParametro.Items.Clear();
             cboSexo.Items.Clear();
@@ -23,7 +24,7 @@ namespace CEIBIO.Presentacion.Mantenedores
             nudEdadMinima.Maximum = 120;
             nudEdadMaxima.Minimum = 0;
             nudEdadMaxima.Maximum = 120;
-            m = new Mantenedor(grpDatos, btnNuevo, btnEditar, btnGuardar, btnCancelar, btnInhabilitar);
+            m = new Mantenedor(grpDatos, btnNuevo, btnEditar, btnGuardar, btnCancelar, btnInhabilitar, dgvRegistros);
             cboExamen.SelectedIndexChanged += (s, e) => CargarParametros();
             btnBuscar.Click += (s, e) => Buscar();
             btnNuevo.Click += (s, e) => Nuevo();
@@ -32,6 +33,9 @@ namespace CEIBIO.Presentacion.Mantenedores
             btnCancelar.Click += (s, e) => m.Cancelar();
             btnInhabilitar.Click += BtnInhabilitar_Click;
             btnCerrar.Click += (s, e) => Close();
+            Ui.AlPresionarEnter(txtBuscar, Buscar);
+            Ui.AlDobleClic(dgvRegistros, () => BtnEditar_Click(null, EventArgs.Empty));
+            Ui.AlSeleccionar(dgvRegistros, MostrarEstado);
             Load += (s, e) => Ui.Intentar(() =>
             {
                 cargando = true;
@@ -49,6 +53,8 @@ namespace CEIBIO.Presentacion.Mantenedores
             Ui.Intentar(() => Ui.Combo(cboParametro, parametros.ListarPorExamen(ex.IdExamen), "Nombre", "IdParametro"));
         }
 
+        private void MostrarEstado() => m.Estado(Ui.Seleccionado<IntervaloReferencia>(dgvRegistros)?.Habilitado);
+
         private void Buscar()
         {
             Ui.Intentar(() => Ui.Llenar(dgvRegistros, negocio.Listar(txtBuscar.Text), x => new object?[]
@@ -56,6 +62,7 @@ namespace CEIBIO.Presentacion.Mantenedores
                 x.NombreParametro, x.ValorMinimo?.ToString("0.##"), x.ValorMaximo?.ToString("0.##"),
                 x.Sexo, x.EdadTexto, x.ReferenciaTexto, x.EstadoTexto
             }));
+            MostrarEstado();
         }
 
         private void Nuevo()
@@ -106,8 +113,16 @@ namespace CEIBIO.Presentacion.Mantenedores
         {
             var x = Ui.Seleccionado<IntervaloReferencia>(dgvRegistros);
             if (x == null) { Ui.Aviso("Seleccione un registro."); return; }
-            if (!Ui.Confirmar("¿Desea inhabilitar el intervalo de " + x.NombreParametro + "?")) return;
-            if (Ui.Mostrar(negocio.Inhabilitar(x.IdIntervalo))) Buscar();
+            if (x.Habilitado)
+            {
+                if (!Ui.Confirmar("¿Desea inhabilitar " + "el intervalo de " + x.NombreParametro + "?")) return;
+                if (Ui.Mostrar(negocio.Inhabilitar(x.IdIntervalo))) Buscar();
+            }
+            else
+            {
+                if (!Ui.Confirmar("¿Desea habilitar nuevamente " + "el intervalo de " + x.NombreParametro + "?")) return;
+                if (Ui.Mostrar(negocio.Habilitar(x.IdIntervalo))) Buscar();
+            }
         }
     }
 }

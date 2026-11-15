@@ -26,7 +26,11 @@ namespace CEIBIO.Presentacion.Admision
 
         private void Configurar()
         {
-            txtTelefono.MaxLength = 9;
+            Ui.SoloDigitos(txtTelefono, 9);
+            Ui.SoloLectura(txtNumeroAtencion, txtPaciente);
+            btnGuardar.Enabled = false;
+            btnReprogramar.Enabled = false;
+            btnCancelarVisita.Enabled = false;
             dtpFechaProgramada.MinDate = DateTime.Today;
             btnGuardar.Click += BtnGuardar_Click;
             btnReprogramar.Click += BtnReprogramar_Click;
@@ -68,9 +72,10 @@ namespace CEIBIO.Presentacion.Admision
                 txtDireccion.Text = paciente?.Direccion ?? "";
                 txtTelefono.Text = paciente?.Telefono ?? "";
             }
+            bool activa = visita != null && visita.Estado != EstadoVisita.Cancelada && visita.Estado != EstadoVisita.Realizada;
             btnGuardar.Enabled = visita == null;
-            btnReprogramar.Enabled = visita != null;
-            btnCancelarVisita.Enabled = visita != null;
+            btnReprogramar.Enabled = activa || visita?.Estado == EstadoVisita.NoRealizada;
+            btnCancelarVisita.Enabled = activa;
         }
 
         private VisitaDomiciliaria Leer() => new VisitaDomiciliaria

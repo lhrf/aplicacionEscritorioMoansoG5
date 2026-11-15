@@ -10,7 +10,10 @@ namespace CEIBIO.Presentacion.Formalizacion
         public FrmConsultarReportes()
         {
             InitializeComponent();
-            txtDni.MaxLength = 8;
+            Ui.SoloDigitos(txtDni, 8);
+            Ui.Lista(cboEstado);
+            Ui.AlPresionarEnter(txtDni, Buscar);
+            Ui.AlDobleClic(dgvReportes, () => BtnReimprimir_Click(btnReimprimir, EventArgs.Empty));
             cboEstado.Items.Clear();
             cboEstado.Items.Add("(Todos)");
             foreach (var estado in EstadoReporte.Todos) cboEstado.Items.Add(estado);
@@ -25,6 +28,7 @@ namespace CEIBIO.Presentacion.Formalizacion
 
         private void Buscar()
         {
+            if (!Ui.RangoValido(dtpFechaInicio, dtpFechaFin)) return;
             if (!Validacion.Vacio(txtDni.Text) && !Validacion.EsDni(txtDni.Text))
             {
                 Ui.Aviso("El DNI debe tener 8 dígitos numéricos.");

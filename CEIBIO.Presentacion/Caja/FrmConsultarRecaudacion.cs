@@ -16,6 +16,7 @@ namespace CEIBIO.Presentacion.Caja
             btnBuscar.Click += (s, e) => Buscar();
             btnImprimir.Click += BtnImprimir_Click;
             btnCerrar.Click += (s, e) => Close();
+            dtpFecha.ValueChanged += (s, e) => Buscar();
             Load += (s, e) => Buscar();
         }
 
@@ -37,12 +38,13 @@ namespace CEIBIO.Presentacion.Caja
 
         private void BtnImprimir_Click(object? sender, EventArgs e)
         {
+            if (movimientos.Count == 0) { Ui.Aviso("No hay movimientos de recaudación para la fecha seleccionada."); return; }
             var sb = new StringBuilder();
             sb.AppendLine("LABORATORIO CLÍNICO CEIBIO S.A.C.");
             sb.AppendLine("RECAUDACIÓN DEL DÍA " + dtpFecha.Value.ToString("dd/MM/yyyy"));
             sb.AppendLine(new string('-', 70));
             foreach (var m in movimientos)
-                sb.AppendLine(m.NumeroComprobante.PadRight(14) + m.NombrePaciente.PadRight(30) + m.MedioPago.PadRight(14) + m.Importe.ToString("0.00").PadLeft(10));
+                sb.AppendLine((m.NumeroComprobante ?? "").PadRight(14) + Recortar(m.NombrePaciente, 29).PadRight(30) + (m.MedioPago ?? "").PadRight(14) + m.Importe.ToString("0.00").PadLeft(10));
             sb.AppendLine(new string('-', 70));
             foreach (var t in ComprobanteNegocio.TotalesPorMedio(movimientos))
                 sb.AppendLine(t.Key.PadRight(58) + t.Value.ToString("0.00").PadLeft(10));
@@ -50,6 +52,12 @@ namespace CEIBIO.Presentacion.Caja
                 sb.AppendLine(("Cajero: " + t.Key).PadRight(58) + t.Value.ToString("0.00").PadLeft(10));
             sb.AppendLine("TOTAL DEL DÍA".PadRight(58) + ComprobanteNegocio.TotalDia(movimientos).ToString("0.00").PadLeft(10));
             Ui.Imprimir("Recaudación del día", sb.ToString());
+        }
+
+        private static string Recortar(string? texto, int largo)
+        {
+            texto ??= "";
+            return texto.Length <= largo ? texto : texto.Substring(0, largo);
         }
     }
 }

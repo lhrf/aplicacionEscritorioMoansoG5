@@ -15,7 +15,8 @@ namespace CEIBIO.Presentacion.Caja
             nudImporte.Maximum = 99999;
             dtpFecha.MaxDate = DateTime.Today;
             dtpFecha.Value = DateTime.Today;
-            dgvTransferencias.SelectionChanged += (s, e) => MostrarSeleccion();
+            Ui.AlSeleccionar(dgvTransferencias, MostrarSeleccion);
+            Ui.AlPresionarEnter(txtNumeroOperacion, () => BtnAutorizar_Click(btnAutorizar, EventArgs.Empty));
             btnAutorizar.Click += BtnAutorizar_Click;
             btnRechazar.Click += BtnRechazar_Click;
             btnCerrar.Click += (s, e) => Close();
@@ -37,12 +38,19 @@ namespace CEIBIO.Presentacion.Caja
             txtNumeroOperacion.Clear();
             nudImporte.Value = p?.Importe ?? 0;
             dtpFecha.Value = DateTime.Today;
+            btnAutorizar.Enabled = p != null;
+            btnRechazar.Enabled = p != null;
+            txtNumeroOperacion.Enabled = p != null;
+            nudImporte.Enabled = p != null;
+            dtpFecha.Enabled = p != null;
         }
 
         private void BtnAutorizar_Click(object? sender, EventArgs e)
         {
             var p = Ui.Seleccionado<Pago>(dgvTransferencias);
             if (p == null) { Ui.Aviso("Seleccione una transferencia pendiente."); return; }
+            if (Validacion.Vacio(txtNumeroOperacion.Text)) { Ui.Aviso("Ingrese el número de operación de la transferencia."); txtNumeroOperacion.Focus(); return; }
+            if (!Ui.Confirmar("¿Autoriza la transferencia de " + Ui.Soles(nudImporte.Value) + " de " + p.NombrePaciente + "?")) return;
             if (Ui.Mostrar(negocio.Autorizar(p.IdPago, txtNumeroOperacion.Text, nudImporte.Value, dtpFecha.Value))) Ui.Intentar(Cargar);
         }
 

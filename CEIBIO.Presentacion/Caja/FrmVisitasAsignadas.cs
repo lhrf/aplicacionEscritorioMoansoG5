@@ -10,7 +10,9 @@ namespace CEIBIO.Presentacion.Caja
         public FrmVisitasAsignadas()
         {
             InitializeComponent();
-            dgvVisitas.SelectionChanged += (s, e) => MostrarSeleccion();
+            Ui.SoloLectura(txtPaciente, txtDireccion, txtReferencia, txtTelefono);
+            Ui.AlSeleccionar(dgvVisitas, MostrarSeleccion);
+            Ui.AlDobleClic(dgvVisitas, AbrirTomaMuestra);
             btnCerrar.Click += (s, e) => Close();
             Load += (s, e) => Ui.Intentar(Cargar);
         }
@@ -33,6 +35,14 @@ namespace CEIBIO.Presentacion.Caja
             txtDireccion.Text = v?.Direccion ?? "";
             txtReferencia.Text = v?.Referencia ?? "";
             txtTelefono.Text = v?.Telefono ?? "";
+        }
+
+        private void AbrirTomaMuestra()
+        {
+            if (!Permisos.PuedeAbrir("FrmTomaMuestraDomicilio")) return;
+            using var f = new TomaMuestras.FrmTomaMuestraDomicilio();
+            f.ShowDialog(this);
+            Cargar();
         }
     }
 }

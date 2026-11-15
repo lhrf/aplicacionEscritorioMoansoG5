@@ -12,7 +12,8 @@ namespace CEIBIO.Presentacion.Mantenedores
         {
             InitializeComponent();
             txtCodigo.MaxLength = 10;
-            m = new Mantenedor(grpDatos, btnNuevo, btnEditar, btnGuardar, btnCancelar, btnInhabilitar);
+            Ui.Mayusculas(txtCodigo);
+            m = new Mantenedor(grpDatos, btnNuevo, btnEditar, btnGuardar, btnCancelar, btnInhabilitar, dgvRegistros);
             btnBuscar.Click += (s, e) => Buscar();
             btnNuevo.Click += (s, e) => { m.Nuevo(); txtCodigo.Focus(); };
             btnEditar.Click += BtnEditar_Click;
@@ -20,8 +21,13 @@ namespace CEIBIO.Presentacion.Mantenedores
             btnCancelar.Click += (s, e) => m.Cancelar();
             btnInhabilitar.Click += BtnInhabilitar_Click;
             btnCerrar.Click += (s, e) => Close();
+            Ui.AlPresionarEnter(txtBuscar, Buscar);
+            Ui.AlDobleClic(dgvRegistros, () => BtnEditar_Click(null, EventArgs.Empty));
+            Ui.AlSeleccionar(dgvRegistros, MostrarEstado);
             Load += (s, e) => Buscar();
         }
+
+        private void MostrarEstado() => m.Estado(Ui.Seleccionado<MedioPago>(dgvRegistros)?.Habilitado);
 
         private void Buscar()
         {
@@ -29,6 +35,7 @@ namespace CEIBIO.Presentacion.Mantenedores
             {
                 x.Codigo, x.Descripcion, x.RequiereAutorizacionTexto, x.EstadoTexto
             }));
+            MostrarEstado();
         }
 
         private void BtnEditar_Click(object? sender, EventArgs e)
@@ -59,8 +66,16 @@ namespace CEIBIO.Presentacion.Mantenedores
         {
             var x = Ui.Seleccionado<MedioPago>(dgvRegistros);
             if (x == null) { Ui.Aviso("Seleccione un registro."); return; }
-            if (!Ui.Confirmar("¿Desea inhabilitar el medio de pago " + x.Descripcion + "?")) return;
-            if (Ui.Mostrar(negocio.Inhabilitar(x.IdMedioPago))) Buscar();
+            if (x.Habilitado)
+            {
+                if (!Ui.Confirmar("¿Desea inhabilitar " + "el medio de pago " + x.Descripcion + "?")) return;
+                if (Ui.Mostrar(negocio.Inhabilitar(x.IdMedioPago))) Buscar();
+            }
+            else
+            {
+                if (!Ui.Confirmar("¿Desea habilitar nuevamente " + "el medio de pago " + x.Descripcion + "?")) return;
+                if (Ui.Mostrar(negocio.Habilitar(x.IdMedioPago))) Buscar();
+            }
         }
     }
 }

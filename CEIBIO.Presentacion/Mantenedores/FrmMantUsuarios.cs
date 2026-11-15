@@ -12,9 +12,9 @@ namespace CEIBIO.Presentacion.Mantenedores
         {
             InitializeComponent();
             txtClave.UseSystemPasswordChar = true;
-            txtDni.MaxLength = 8;
+            Ui.SoloDigitos(txtDni, 8);
             cboRol.DropDownStyle = ComboBoxStyle.DropDownList;
-            m = new Mantenedor(grpDatos, btnNuevo, btnEditar, btnGuardar, btnCancelar, btnInhabilitar);
+            m = new Mantenedor(grpDatos, btnNuevo, btnEditar, btnGuardar, btnCancelar, btnInhabilitar, dgvRegistros);
             btnBuscar.Click += (s, e) => Buscar();
             btnNuevo.Click += (s, e) => { m.Nuevo(); txtClave.Enabled = true; txtNombre.Focus(); };
             btnEditar.Click += BtnEditar_Click;
@@ -22,12 +22,9 @@ namespace CEIBIO.Presentacion.Mantenedores
             btnCancelar.Click += (s, e) => m.Cancelar();
             btnInhabilitar.Click += BtnInhabilitar_Click;
             btnCerrar.Click += (s, e) => Close();
-            dgvRegistros.SelectionChanged += (s, e) =>
-            {
-                var u = Ui.Seleccionado<Usuario>(dgvRegistros);
-                btnInhabilitar.Text = u != null && !u.Habilitado ? "Habilitar" : "Inhabilitar";
-            };
-            txtDni.KeyPress += (s, e) => { if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar)) e.Handled = true; };
+            Ui.AlPresionarEnter(txtBuscar, Buscar);
+            Ui.AlDobleClic(dgvRegistros, () => BtnEditar_Click(null, EventArgs.Empty));
+            Ui.AlSeleccionar(dgvRegistros, MostrarEstado);
             Load += (s, e) => Ui.Intentar(() =>
             {
                 Ui.Combo(cboRol, negocio.ListarRoles(), "Nombre", "IdRol");
@@ -35,12 +32,15 @@ namespace CEIBIO.Presentacion.Mantenedores
             });
         }
 
+        private void MostrarEstado() => m.Estado(Ui.Seleccionado<Usuario>(dgvRegistros)?.Habilitado);
+
         private void Buscar()
         {
             Ui.Intentar(() => Ui.Llenar(dgvRegistros, negocio.Listar(txtBuscar.Text), x => new object?[]
             {
                 x.NombreCompleto, x.Dni, x.NombreUsuario, x.NombreRol, x.EstadoTexto
             }));
+            MostrarEstado();
         }
 
         private void BtnEditar_Click(object? sender, EventArgs e)

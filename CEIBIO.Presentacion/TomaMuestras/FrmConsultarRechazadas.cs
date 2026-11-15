@@ -18,6 +18,7 @@ namespace CEIBIO.Presentacion.TomaMuestras
 
         private void Buscar()
         {
+            if (!Ui.RangoValido(dateTimePicker1, dateTimePicker2)) return;
             Ui.Intentar(() =>
             {
                 var lista = negocio.ConsultarRechazadas(dateTimePicker1.Value, dateTimePicker2.Value);

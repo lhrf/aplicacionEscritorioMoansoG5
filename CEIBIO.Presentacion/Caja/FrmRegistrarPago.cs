@@ -13,7 +13,8 @@ namespace CEIBIO.Presentacion.Caja
             nudMontoRecibido.DecimalPlaces = 2;
             nudMontoRecibido.Minimum = 0;
             nudMontoRecibido.Maximum = 99999;
-            dgvPendientes.SelectionChanged += (s, e) => Ui.Intentar(MostrarSeleccion);
+            Ui.Lista(cboMedioPago);
+            Ui.AlSeleccionar(dgvPendientes, MostrarSeleccion);
             cboMedioPago.SelectedIndexChanged += (s, e) => ActualizarMedio();
             nudMontoRecibido.ValueChanged += (s, e) => CalcularVuelto();
             btnRegistrar.Click += BtnRegistrar_Click;
@@ -45,6 +46,7 @@ namespace CEIBIO.Presentacion.Caja
             lblTotal.Text = "Total a pagar: " + Ui.Soles(a?.CostoTotal ?? 0);
 
             var enCurso = a == null ? null : negocio.ObtenerPagoEnCurso(a.IdAtencion);
+            if (enCurso == null && cboMedioPago.SelectedIndex < 0 && cboMedioPago.Items.Count > 0) cboMedioPago.SelectedIndex = 0;
             if (enCurso != null)
             {
                 cboMedioPago.SelectedValue = enCurso.IdMedioPago;
@@ -54,6 +56,8 @@ namespace CEIBIO.Presentacion.Caja
                     Ui.Info("La transferencia fue autorizada. Pulse «Registrar conformidad» para completar el pago.");
             }
             nudMontoRecibido.Value = 0;
+            btnRegistrar.Enabled = a != null;
+            cboMedioPago.Enabled = a != null && enCurso == null;
             ActualizarMedio();
         }
 
@@ -78,6 +82,12 @@ namespace CEIBIO.Presentacion.Caja
             var medio = Ui.ItemCombo<MedioPago>(cboMedioPago);
             if (a == null) { Ui.Aviso("Seleccione una atención pendiente de pago."); return; }
             if (medio == null) { Ui.Aviso("Seleccione el medio de pago."); return; }
+            if (!medio.RequiereAutorizacion && nudMontoRecibido.Value < a.CostoTotal)
+            {
+                Ui.Aviso("El monto recibido es menor que el total a pagar (" + Ui.Soles(a.CostoTotal) + ").");
+                nudMontoRecibido.Focus();
+                return;
+            }
             if (Ui.Mostrar(negocio.RegistrarPago(a.IdAtencion, medio.IdMedioPago, nudMontoRecibido.Value))) Ui.Intentar(Cargar);
         }
     }

@@ -10,7 +10,8 @@ namespace CEIBIO.Presentacion.Formalizacion
         public FrmAutorizarReporte()
         {
             InitializeComponent();
-            dgvReportes.SelectionChanged += (s, e) => Ui.Intentar(MostrarSeleccion);
+            Ui.AlSeleccionar(dgvReportes, MostrarSeleccion);
+            Ui.AlDobleClic(dgvReportes, VerReporte);
             btnAutorizar.Click += BtnAutorizar_Click;
             btnDevolver.Click += BtnDevolver_Click;
             btnAnular.Click += BtnAnular_Click;
@@ -49,7 +50,15 @@ namespace CEIBIO.Presentacion.Formalizacion
         {
             var r = Ui.Seleccionado<ReporteClinico>(dgvReportes);
             if (r == null) return;
+            if (!Ui.Confirmar("¿Desea autorizar el Reporte clínico de la atención " + r.NumeroAtencion + "?")) return;
             if (Ui.Mostrar(negocio.Autorizar(r.IdReporte))) Ui.Intentar(Cargar);
+        }
+
+        private void VerReporte()
+        {
+            var r = Ui.Seleccionado<ReporteClinico>(dgvReportes);
+            if (r == null) return;
+            Ui.Imprimir("Reporte clínico " + r.NumeroAtencion, ReporteNegocio.TextoImpresion(r));
         }
 
         private void BtnDevolver_Click(object? sender, EventArgs e)
@@ -64,6 +73,7 @@ namespace CEIBIO.Presentacion.Formalizacion
         {
             var r = Ui.Seleccionado<ReporteClinico>(dgvReportes);
             if (r == null) return;
+            if (Validacion.Vacio(txtMotivo.Text)) { Ui.Aviso("Ingrese el motivo de la anulación de la autorización."); txtMotivo.Focus(); return; }
             if (!Ui.Confirmar("¿Desea anular la autorización del reporte de la atención " + r.NumeroAtencion + "?")) return;
             if (Ui.Mostrar(negocio.AnularAutorizacion(r.IdReporte, txtMotivo.Text))) Ui.Intentar(Cargar);
         }

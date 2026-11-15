@@ -11,6 +11,8 @@ namespace CEIBIO.Presentacion.Entregas
         public FrmRetenerEntrega()
         {
             InitializeComponent();
+            Ui.SoloLectura(txtNumeroAtencion, txtPaciente);
+            CancelButton = btnCancelar;
             btnRetener.Click += BtnRetener_Click;
             btnCancelar.Click += (s, e) => { DialogResult = DialogResult.Cancel; Close(); };
         }

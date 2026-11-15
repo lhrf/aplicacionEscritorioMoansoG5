@@ -34,5 +34,11 @@ namespace CEIBIO.Negocio
             datos.CambiarEstado(id, false, Sesion.IdUsuario);
             return Respuesta.Ok("Condiciones inhabilitadas.");
         });
+
+        public Respuesta Habilitar(int id) => Respuesta.Intentar(() =>
+        {
+            datos.CambiarEstado(id, true, Sesion.IdUsuario);
+            return Respuesta.Ok("Condiciones habilitadas.");
+        });
     }
 }

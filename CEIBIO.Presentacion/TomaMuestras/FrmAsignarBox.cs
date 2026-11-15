@@ -11,6 +11,8 @@ namespace CEIBIO.Presentacion.TomaMuestras
         {
             InitializeComponent();
             cboBox.Format += (s, e) => { if (e.ListItem is Box b) e.Value = b.ToString(); };
+            Ui.Lista(cboBox);
+            Ui.AlDobleClic(dgvEspera, () => BtnAsignar_Click(btnAsignar, EventArgs.Empty));
             btnAsignar.Click += BtnAsignar_Click;
             btnCerrar.Click += (s, e) => Close();
             Load += (s, e) => Ui.Intentar(Cargar);
@@ -23,6 +25,8 @@ namespace CEIBIO.Presentacion.TomaMuestras
                 a.NumeroTurno?.ToString("000"), a.NumeroAtencion, a.NombrePaciente, a.Examenes
             });
             Ui.Combo(cboBox, negocio.ListarBoxesLibres(), "Numero", "IdBox");
+            if (cboBox.Items.Count > 0) cboBox.SelectedIndex = 0;
+            btnAsignar.Enabled = dgvEspera.Rows.Count > 0 && cboBox.Items.Count > 0;
             if (cboBox.Items.Count == 0 && dgvEspera.Rows.Count > 0) Ui.Info("No hay boxes libres en este momento.");
         }
 

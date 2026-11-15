@@ -10,6 +10,13 @@ namespace CEIBIO.Presentacion.Preparacion
         public FrmRecepcionMuestra()
         {
             InitializeComponent();
+            Ui.Mayusculas(txtCodigox);
+            Ui.AlPresionarEnter(txtCodigox, BuscarCodigo);
+            Ui.AlSeleccionar(dgvAcondicionadas, () =>
+            {
+                btnConfirmar.Enabled = dgvAcondicionadas.CurrentRow != null;
+                btnDevolver.Enabled = dgvAcondicionadas.CurrentRow != null;
+            });
             btnConfirmar.Click += BtnConfirmar_Click;
             btnDevolver.Click += BtnDevolver_Click;
             btnCerrar.Click += (s, e) => Close();
@@ -23,6 +30,19 @@ namespace CEIBIO.Presentacion.Preparacion
                 m.Codigo, m.NombrePaciente, m.Examenes, m.NombreAcondiciona, Ui.FechaHora(m.FechaAcondicionamiento)
             });
             txtCodigox.Clear();
+            btnConfirmar.Enabled = dgvAcondicionadas.CurrentRow != null;
+            btnDevolver.Enabled = dgvAcondicionadas.CurrentRow != null;
+        }
+
+        private void BuscarCodigo()
+        {
+            string codigo = txtCodigox.Text.Trim();
+            if (codigo.Length == 0) return;
+            var m = dgvAcondicionadas.Rows.Cast<DataGridViewRow>().Select(f => f.Tag as Muestra)
+                .FirstOrDefault(x => x != null && string.Equals(x.Codigo, codigo, StringComparison.OrdinalIgnoreCase));
+            if (m == null) { Ui.Aviso("La muestra " + codigo + " no está en la lista de muestras acondicionadas."); return; }
+            Ui.Seleccionar<Muestra>(dgvAcondicionadas, x => x.IdMuestra == m.IdMuestra);
+            BtnConfirmar_Click(btnConfirmar, EventArgs.Empty);
         }
 
         private void BtnConfirmar_Click(object? sender, EventArgs e)

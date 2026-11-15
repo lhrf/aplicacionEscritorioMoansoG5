@@ -11,6 +11,8 @@ namespace CEIBIO.Presentacion.Formalizacion
         public FrmDevolverReporte()
         {
             InitializeComponent();
+            Ui.SoloLectura(txtNumeroAtencion, txtPaciente);
+            CancelButton = btnCancelar;
             btnDevolver.Click += BtnDevolver_Click;
             btnCancelar.Click += (s, e) => { DialogResult = DialogResult.Cancel; Close(); };
         }

@@ -9,6 +9,7 @@ namespace CEIBIO.Presentacion.Formalizacion
         public FrmHistorialRevisiones()
         {
             InitializeComponent();
+            Ui.Mayusculas(txtNumeroAtencion);
             AcceptButton = btnBuscar;
             btnBuscar.Click += BtnBuscar_Click;
             btnCerrar.Click += (s, e) => Close();
