@@ -18,6 +18,7 @@ namespace CEIBIO.Presentacion.Entregas
 
         private void Buscar()
         {
+            if (!Ui.RangoValido(dtpFechaInicio, dtpFechaFin)) return;
             Ui.Intentar(() =>
             {
                 Ui.Llenar(dgvEntregas, negocio.ConsultarEntregas(dtpFechaInicio.Value, dtpFechaFin.Value), x => new object?[]

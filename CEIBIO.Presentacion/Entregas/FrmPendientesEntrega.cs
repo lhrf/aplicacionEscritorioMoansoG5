@@ -1,3 +1,4 @@
+using CEIBIO.Entidades;
 using CEIBIO.Negocio;
 
 namespace CEIBIO.Presentacion.Entregas
@@ -11,6 +12,7 @@ namespace CEIBIO.Presentacion.Entregas
             InitializeComponent();
             btnActualizar.Click += (s, e) => Cargar();
             btnCerrar.Click += (s, e) => Close();
+            Ui.AlDobleClic(dgvPendientes, Entregar);
             Load += (s, e) => Cargar();
         }
 
@@ -23,6 +25,15 @@ namespace CEIBIO.Presentacion.Entregas
                     r.NumeroAtencion, r.NombrePaciente, Ui.FechaHora(r.FechaAutorizacion), r.DiasSinRecoger
                 });
             });
+        }
+
+        private void Entregar()
+        {
+            var r = Ui.Seleccionado<ReporteClinico>(dgvPendientes);
+            if (r == null || !Permisos.PuedeAbrir("FrmRegistrarEntrega")) return;
+            using var f = new FrmRegistrarEntrega(r.Dni);
+            f.ShowDialog(this);
+            Cargar();
         }
     }
 }

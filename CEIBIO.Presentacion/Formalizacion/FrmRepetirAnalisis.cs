@@ -10,7 +10,9 @@ namespace CEIBIO.Presentacion.Formalizacion
         public FrmRepetirAnalisis()
         {
             InitializeComponent();
-            dgvRepeticion.SelectionChanged += (s, e) => MostrarSeleccion();
+            Ui.SoloLectura(txtResultadoAnterior);
+            Ui.AlSeleccionar(dgvRepeticion, MostrarSeleccion);
+            Ui.AlPresionarEnter(txtNuevoResultado, () => BtnGuardar_Click(btnGuardar, EventArgs.Empty));
             btnGuardar.Click += BtnGuardar_Click;
             btnCerrar.Click += (s, e) => Close();
             Load += (s, e) => Ui.Intentar(Cargar);
@@ -30,12 +32,15 @@ namespace CEIBIO.Presentacion.Formalizacion
             var r = Ui.Seleccionado<ResultadoAnalitico>(dgvRepeticion);
             txtResultadoAnterior.Text = r == null ? "" : r.Valor + (Validacion.Vacio(r.Unidad) ? "" : " " + r.Unidad);
             txtNuevoResultado.Clear();
+            txtNuevoResultado.Enabled = r != null;
+            btnGuardar.Enabled = r != null;
         }
 
         private void BtnGuardar_Click(object? sender, EventArgs e)
         {
             var r = Ui.Seleccionado<ResultadoAnalitico>(dgvRepeticion);
             if (r == null) { Ui.Aviso("Seleccione un resultado en repetición."); return; }
+            if (Validacion.Vacio(txtNuevoResultado.Text)) { Ui.Aviso("Ingrese el nuevo resultado."); txtNuevoResultado.Focus(); return; }
             if (Ui.Mostrar(negocio.RegistrarRepeticion(r.IdResultado, txtNuevoResultado.Text))) Ui.Intentar(Cargar);
         }
     }

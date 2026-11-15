@@ -27,6 +27,9 @@ namespace CEIBIO.Presentacion.Evaluacion
             txtHorasAyuno.ReadOnly = true;
             txtMedicamentos.ReadOnly = true;
             txtEstadoMuestra.ReadOnly = true;
+            Ui.SoloLectura(txtNumeroAtencion, txtPaciente, txtObservaciones);
+            btnApto.Enabled = false;
+            btnSuspender.Enabled = false;
             btnApto.Click += BtnApto_Click;
             btnSuspender.Click += BtnSuspender_Click;
             btnCerrar.Click += (s, e) => Close();
@@ -34,8 +37,11 @@ namespace CEIBIO.Presentacion.Evaluacion
 
         private void ElegirAtencion()
         {
-            var pendientes = negocio.ListarPendientes().Where(a => negocio.ObtenerPorAtencion(a.IdAtencion)?.Resultado == null
-                                                                && negocio.ObtenerPorAtencion(a.IdAtencion) != null).ToList();
+            var pendientes = negocio.ListarPendientes().Where(a =>
+            {
+                var ev = negocio.ObtenerPorAtencion(a.IdAtencion);
+                return ev != null && ev.Resultado == null;
+            }).ToList();
             if (pendientes.Count == 0)
             {
                 Ui.Aviso("No hay atenciones con observaciones registradas pendientes de resultado.");
@@ -62,6 +68,7 @@ namespace CEIBIO.Presentacion.Evaluacion
         private void BtnApto_Click(object? sender, EventArgs e)
         {
             if (atencion == null) return;
+            if (!Ui.Confirmar("¿Confirma que el paciente " + atencion.NombrePaciente + " está apto y se deriva a Caja?")) return;
             if (Ui.Mostrar(negocio.RegistrarApto(atencion.IdAtencion))) Close();
         }
 

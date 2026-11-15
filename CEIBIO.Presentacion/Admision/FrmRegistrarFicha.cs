@@ -17,8 +17,11 @@ namespace CEIBIO.Presentacion.Admision
         {
             InitializeComponent();
             txtDni.Text = dni;
-            txtDni.MaxLength = 8;
-            txtTelefono.MaxLength = 9;
+            Ui.SoloDigitos(txtDni, 8);
+            Ui.SoloDigitos(txtTelefono, 9);
+            Ui.Lista(cboSexo);
+            AcceptButton = btnGuardar;
+            CancelButton = btnCancelar;
             dtpFechaNacimiento.MaxDate = DateTime.Today;
             btnGuardar.Click += BtnGuardar_Click;
             btnCancelar.Click += (s, e) => { DialogResult = DialogResult.Cancel; Close(); };
@@ -38,7 +41,7 @@ namespace CEIBIO.Presentacion.Admision
             };
             var r = negocio.Registrar(p);
             if (!Ui.Mostrar(r)) return;
-            Registrado = negocio.ObtenerPorId(r.Id);
+            Ui.Intentar(() => Registrado = negocio.ObtenerPorId(r.Id));
             DialogResult = DialogResult.OK;
             Close();
         }

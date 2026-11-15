@@ -16,7 +16,9 @@ namespace CEIBIO.Presentacion.Admision
         public FrmRegistrarAtencion()
         {
             InitializeComponent();
-            txtDni.MaxLength = 8;
+            Ui.SoloDigitos(txtDni, 8);
+            Ui.Lista(cboConvenio);
+            Ui.SoloLectura(txtPaciente, txtFecha, txtUsuario, txtNumeroAtencion);
             txtFecha.Text = DateTime.Now.ToString("dd/MM/yyyy");
             txtUsuario.Text = Sesion.NombreUsuario;
             rdbEnSede.Checked = true;
@@ -27,6 +29,11 @@ namespace CEIBIO.Presentacion.Admision
             btnGuardar.Click += BtnGuardar_Click;
             btnAnular.Click += BtnAnular_Click;
             btnCancelar.Click += (s, e) => Close();
+            Ui.AlPresionarEnter(txtDni, () => BtnBuscarPaciente_Click(btnBuscarPaciente, EventArgs.Empty));
+            Ui.AlPresionarEnter(txtBuscarExamen, () => BtnAgregarExamen_Click(btnAgregarExamen, EventArgs.Empty));
+            Ui.AlDobleClic(dgvExamenes, () => BtnQuitarExamen_Click(btnQuitarExamen, EventArgs.Empty));
+            dgvExamenes.KeyDown += (s, e) => { if (e.KeyCode == Keys.Delete) BtnQuitarExamen_Click(btnQuitarExamen, EventArgs.Empty); };
+            txtDni.TextChanged += TxtDni_TextChanged;
             Load += (s, e) => Ui.Intentar(CargarConvenios);
             Nuevo();
         }
@@ -49,7 +56,34 @@ namespace CEIBIO.Presentacion.Admision
             txtBuscarExamen.Clear();
             btnGuardar.Enabled = true;
             btnAnular.Enabled = false;
+            Bloquear(false);
+            if (cboConvenio.Items.Count > 0) cboConvenio.SelectedIndex = 0;
             Refrescar();
+        }
+
+        private void Bloquear(bool bloquear)
+        {
+            btnBuscarPaciente.Enabled = !bloquear;
+            btnAgregarExamen.Enabled = !bloquear;
+            btnQuitarExamen.Enabled = !bloquear;
+            txtBuscarExamen.Enabled = !bloquear;
+            cboConvenio.Enabled = !bloquear;
+            rdbEnSede.Enabled = !bloquear;
+            rdbADomicilio.Enabled = !bloquear;
+        }
+
+        private void TxtDni_TextChanged(object? sender, EventArgs e)
+        {
+            if (registrada != null)
+            {
+                Nuevo();
+                return;
+            }
+            if (paciente != null && txtDni.Text.Trim() != paciente.Dni)
+            {
+                paciente = null;
+                txtPaciente.Clear();
+            }
         }
 
         private void BtnBuscarPaciente_Click(object? sender, EventArgs e)
@@ -77,6 +111,7 @@ namespace CEIBIO.Presentacion.Admision
 
         private void BtnAgregarExamen_Click(object? sender, EventArgs e)
         {
+            if (registrada != null) return;
             Ui.Intentar(() =>
             {
                 var encontrados = examenNegocio.ListarHabilitados(txtBuscarExamen.Text)
@@ -96,8 +131,9 @@ namespace CEIBIO.Presentacion.Admision
 
         private void BtnQuitarExamen_Click(object? sender, EventArgs e)
         {
+            if (registrada != null) return;
             var examen = Ui.Seleccionado<Examen>(dgvExamenes);
-            if (examen == null) return;
+            if (examen == null) { Ui.Aviso("Seleccione el examen que desea quitar."); return; }
             examenes.Remove(examen);
             Refrescar();
         }
@@ -130,16 +166,18 @@ namespace CEIBIO.Presentacion.Admision
                 convenio != null && convenio.IdConvenio > 0 ? convenio.IdConvenio : null);
             if (!Ui.Mostrar(r)) return;
 
-            registrada = negocio.ObtenerPorId(r.Id);
+            Ui.Intentar(() => registrada = negocio.ObtenerPorId(r.Id));
             txtNumeroAtencion.Text = r.Dato;
             btnGuardar.Enabled = false;
-            btnAnular.Enabled = true;
+            btnAnular.Enabled = registrada != null;
+            Bloquear(true);
 
             if (modalidad == Modalidad.ADomicilio && registrada != null)
             {
                 using var f = new FrmProgramarVisita(registrada);
                 f.ShowDialog(this);
             }
+            Ui.Info("Para registrar otra atención, ingrese un nuevo DNI.");
         }
 
         private void BtnAnular_Click(object? sender, EventArgs e)
@@ -147,7 +185,12 @@ namespace CEIBIO.Presentacion.Admision
             if (registrada == null) return;
             var motivo = Ui.Pedir("Anular atención", "Motivo de la anulación:");
             if (motivo == null) return;
-            if (Ui.Mostrar(negocio.Anular(registrada.IdAtencion, motivo))) Nuevo();
+            if (!Ui.Confirmar("¿Desea anular la atención " + registrada.NumeroAtencion + "?")) return;
+            if (Ui.Mostrar(negocio.Anular(registrada.IdAtencion, motivo)))
+            {
+                txtDni.Clear();
+                Nuevo();
+            }
         }
     }
 }

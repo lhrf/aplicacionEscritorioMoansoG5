@@ -12,7 +12,7 @@ namespace CEIBIO.Presentacion.Formalizacion
             InitializeComponent();
             rtbReporte.ReadOnly = true;
             rtbReporte.Font = new Font("Consolas", 10F);
-            dgvReportes.SelectionChanged += (s, e) => Ui.Intentar(MostrarSeleccion);
+            Ui.AlSeleccionar(dgvReportes, MostrarSeleccion);
             btnConformidad.Click += BtnConformidad_Click;
             btnObservar.Click += BtnObservar_Click;
             btnCerrar.Click += (s, e) => Close();
@@ -43,6 +43,7 @@ namespace CEIBIO.Presentacion.Formalizacion
         {
             var r = Ui.Seleccionado<ReporteClinico>(dgvReportes);
             if (r == null) return;
+            if (!Ui.Confirmar("¿Da su conformidad al Reporte clínico de la atención " + r.NumeroAtencion + "?")) return;
             if (Ui.Mostrar(negocio.DarConformidad(r.IdReporte))) Ui.Intentar(Cargar);
         }
 
@@ -50,6 +51,7 @@ namespace CEIBIO.Presentacion.Formalizacion
         {
             var r = Ui.Seleccionado<ReporteClinico>(dgvReportes);
             if (r == null) return;
+            if (Validacion.Vacio(txtObservaciones.Text)) { Ui.Aviso("Ingrese las observaciones para el Digitador Clínico."); txtObservaciones.Focus(); return; }
             if (Ui.Mostrar(negocio.Observar(r.IdReporte, txtObservaciones.Text))) Ui.Intentar(Cargar);
         }
     }

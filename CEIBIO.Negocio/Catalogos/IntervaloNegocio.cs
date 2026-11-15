@@ -39,6 +39,16 @@ namespace CEIBIO.Negocio
             return Respuesta.Ok("Intervalo inhabilitado.");
         });
 
+        public Respuesta Habilitar(int id) => Respuesta.Intentar(() =>
+        {
+            var intervalo = datos.ObtenerPorId(id);
+            if (intervalo == null) return Respuesta.Error("El intervalo no existe.");
+            if (datos.ExisteSuperposicion(intervalo))
+                return Respuesta.Error("No se puede habilitar: se superpone con otro intervalo habilitado del mismo parámetro y sexo para ese rango de edad.");
+            datos.CambiarEstado(id, true, Sesion.IdUsuario);
+            return Respuesta.Ok("Intervalo habilitado.");
+        });
+
         public static IntervaloReferencia? Elegir(IEnumerable<IntervaloReferencia> intervalos, int idParametro, string sexo, int edad)
         {
             return intervalos

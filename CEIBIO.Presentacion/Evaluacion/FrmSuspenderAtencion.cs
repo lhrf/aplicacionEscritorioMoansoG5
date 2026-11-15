@@ -6,7 +6,7 @@ namespace CEIBIO.Presentacion.Evaluacion
     public partial class FrmSuspenderAtencion : Form
     {
         private readonly EvaluacionNegocio negocio = new();
-        private readonly Atencion? atencion;
+        private Atencion? atencion;
 
         public FrmSuspenderAtencion()
         {
@@ -16,14 +16,36 @@ namespace CEIBIO.Presentacion.Evaluacion
 
         public FrmSuspenderAtencion(Atencion atencion) : this()
         {
-            this.atencion = atencion;
-            txtNumeroAtencion.Text = atencion.NumeroAtencion;
-            txtPaciente.Text = atencion.NombrePaciente;
+            Mostrar(atencion);
+        }
+
+        private void Mostrar(Atencion? a)
+        {
+            atencion = a;
+            txtNumeroAtencion.Text = a?.NumeroAtencion ?? "";
+            txtPaciente.Text = a?.NombrePaciente ?? "";
+            btnSuspender.Enabled = a != null;
+        }
+
+        private void ElegirAtencion()
+        {
+            if (atencion != null) return;
+            var pendientes = negocio.ListarPendientes();
+            if (pendientes.Count == 0)
+            {
+                Ui.Aviso("No hay atenciones pendientes de evaluación.");
+                Mostrar(null);
+                return;
+            }
+            Mostrar(Ui.Elegir("Seleccionar atención", pendientes, a => a.NumeroAtencion + " - " + a.NombrePaciente));
         }
 
         private void Configurar()
         {
             txtMotivo.ReadOnly = false;
+            Ui.SoloLectura(txtNumeroAtencion, txtPaciente);
+            CancelButton = btnCancelar;
+            Load += (s, e) => Ui.Intentar(ElegirAtencion);
             dtpNuevaFecha.MinDate = DateTime.Today.AddDays(1);
             dtpNuevaFecha.Value = DateTime.Today.AddDays(1);
             btnSuspender.Click += BtnSuspender_Click;
@@ -32,7 +54,7 @@ namespace CEIBIO.Presentacion.Evaluacion
 
         private void BtnSuspender_Click(object? sender, EventArgs e)
         {
-            if (atencion == null) { Ui.Aviso("Abra este formulario desde el resultado de la evaluación."); return; }
+            if (atencion == null) { Ui.Aviso("Seleccione la atención que desea suspender."); return; }
             var s = new Suspension { IdAtencion = atencion.IdAtencion, Motivo = txtMotivo.Text, NuevaFecha = dtpNuevaFecha.Value.Date };
             if (!Ui.Mostrar(negocio.Suspender(s))) return;
             DialogResult = DialogResult.OK;

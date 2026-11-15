@@ -1,3 +1,4 @@
+using CEIBIO.Entidades;
 using CEIBIO.Negocio;
 
 namespace CEIBIO.Presentacion.Preparacion
@@ -11,6 +12,7 @@ namespace CEIBIO.Presentacion.Preparacion
             InitializeComponent();
             button2.Click += (s, e) => Cargar();
             button1.Click += (s, e) => Close();
+            Ui.AlDobleClic(dgvPendientes, Acondicionar);
             Load += (s, e) => Cargar();
         }
 
@@ -23,6 +25,15 @@ namespace CEIBIO.Presentacion.Preparacion
                     m.Codigo, m.NombrePaciente, Ui.FechaHora(m.FechaIngreso), m.TiempoTranscurrido
                 });
             });
+        }
+
+        private void Acondicionar()
+        {
+            var m = Ui.Seleccionado<Muestra>(dgvPendientes);
+            if (m == null || !Permisos.PuedeAbrir("FrmAcondicionarMuestra")) return;
+            using var f = new FrmAcondicionarMuestra(m.Codigo);
+            f.ShowDialog(this);
+            Cargar();
         }
     }
 }

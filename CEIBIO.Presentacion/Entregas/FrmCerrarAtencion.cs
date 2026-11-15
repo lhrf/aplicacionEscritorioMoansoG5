@@ -12,6 +12,7 @@ namespace CEIBIO.Presentacion.Entregas
             InitializeComponent();
             btnCerrarAtencion.Click += BtnCerrarAtencion_Click;
             btnSalir.Click += (s, e) => Close();
+            Ui.AlDobleClic(dgvEntregadas, () => BtnCerrarAtencion_Click(btnCerrarAtencion, EventArgs.Empty));
             Load += (s, e) => Ui.Intentar(Cargar);
         }
 
@@ -21,12 +22,14 @@ namespace CEIBIO.Presentacion.Entregas
             {
                 x.NumeroAtencion, x.NombrePaciente, x.NombreRecibe, Ui.FechaHora(x.FechaEntrega)
             });
+            btnCerrarAtencion.Enabled = dgvEntregadas.Rows.Count > 0;
         }
 
         private void BtnCerrarAtencion_Click(object? sender, EventArgs e)
         {
             var x = Ui.Seleccionado<Entrega>(dgvEntregadas);
             if (x == null) { Ui.Aviso("Seleccione una atención entregada."); return; }
+            if (!Ui.Confirmar("¿Desea cerrar la atención " + x.NumeroAtencion + " de " + x.NombrePaciente + "?")) return;
             if (Ui.Mostrar(negocio.CerrarAtencion(x.IdAtencion))) Ui.Intentar(Cargar);
         }
     }

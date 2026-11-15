@@ -35,5 +35,11 @@ namespace CEIBIO.Negocio
             datos.CambiarEstado(id, false, Sesion.IdUsuario);
             return Respuesta.Ok("Convenio inhabilitado.");
         });
+
+        public Respuesta Habilitar(int id) => Respuesta.Intentar(() =>
+        {
+            datos.CambiarEstado(id, true, Sesion.IdUsuario);
+            return Respuesta.Ok("Convenio habilitado.");
+        });
     }
 }

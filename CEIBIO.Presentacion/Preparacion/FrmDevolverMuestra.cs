@@ -11,6 +11,8 @@ namespace CEIBIO.Presentacion.Preparacion
         public FrmDevolverMuestra()
         {
             InitializeComponent();
+            Ui.SoloLectura(txtCodigo, txtPaciente);
+            CancelButton = btnCancelar;
             btnDevolver.Click += BtnDevolver_Click;
             btnCancelar.Click += (s, e) => { DialogResult = DialogResult.Cancel; Close(); };
         }
@@ -25,6 +27,7 @@ namespace CEIBIO.Presentacion.Preparacion
         private void BtnDevolver_Click(object? sender, EventArgs e)
         {
             if (muestra == null) { Ui.Aviso("Abra este formulario desde la recepción de muestras."); return; }
+            if (Validacion.Vacio(txtDiferencia.Text)) { Ui.Aviso("Describa la diferencia encontrada en la muestra."); txtDiferencia.Focus(); return; }
             if (!Ui.Mostrar(negocio.Devolver(muestra.IdMuestra, txtDiferencia.Text))) return;
             DialogResult = DialogResult.OK;
             Close();

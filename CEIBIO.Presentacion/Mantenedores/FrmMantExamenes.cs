@@ -11,6 +11,7 @@ namespace CEIBIO.Presentacion.Mantenedores
         public FrmMantExamenes()
         {
             InitializeComponent();
+            Ui.Lista(cboTipoMuestra, cboProcedimiento);
             cboTipoMuestra.Items.Clear();
             cboTipoMuestra.Items.AddRange(ExamenNegocio.TiposMuestra);
             cboProcedimiento.Items.Clear();
@@ -19,7 +20,8 @@ namespace CEIBIO.Presentacion.Mantenedores
             nudTarifa.Minimum = 0;
             nudTarifa.Maximum = 9999;
             txtCodigo.MaxLength = 10;
-            m = new Mantenedor(grpDatos, btnNuevo, btnEditar, btnGuardar, btnCancelar, btnInhabilitar);
+            Ui.Mayusculas(txtCodigo);
+            m = new Mantenedor(grpDatos, btnNuevo, btnEditar, btnGuardar, btnCancelar, btnInhabilitar, dgvRegistros);
             btnBuscar.Click += (s, e) => Buscar();
             btnNuevo.Click += (s, e) => { m.Nuevo(); txtCodigo.Focus(); };
             btnEditar.Click += BtnEditar_Click;
@@ -27,8 +29,13 @@ namespace CEIBIO.Presentacion.Mantenedores
             btnCancelar.Click += (s, e) => m.Cancelar();
             btnInhabilitar.Click += BtnInhabilitar_Click;
             btnCerrar.Click += (s, e) => Close();
+            Ui.AlPresionarEnter(txtBuscar, Buscar);
+            Ui.AlDobleClic(dgvRegistros, () => BtnEditar_Click(null, EventArgs.Empty));
+            Ui.AlSeleccionar(dgvRegistros, MostrarEstado);
             Load += (s, e) => Buscar();
         }
+
+        private void MostrarEstado() => m.Estado(Ui.Seleccionado<Examen>(dgvRegistros)?.Habilitado);
 
         private void Buscar()
         {
@@ -36,6 +43,7 @@ namespace CEIBIO.Presentacion.Mantenedores
             {
                 x.Codigo, x.Nombre, x.TipoMuestra, x.Procedimiento, x.Tarifa.ToString("0.00"), x.EstadoTexto
             }));
+            MostrarEstado();
         }
 
         private void BtnEditar_Click(object? sender, EventArgs e)
@@ -70,8 +78,16 @@ namespace CEIBIO.Presentacion.Mantenedores
         {
             var x = Ui.Seleccionado<Examen>(dgvRegistros);
             if (x == null) { Ui.Aviso("Seleccione un registro."); return; }
-            if (!Ui.Confirmar("¿Desea inhabilitar el examen " + x.Nombre + "?")) return;
-            if (Ui.Mostrar(negocio.Inhabilitar(x.IdExamen))) Buscar();
+            if (x.Habilitado)
+            {
+                if (!Ui.Confirmar("¿Desea inhabilitar " + "el examen " + x.Nombre + "?")) return;
+                if (Ui.Mostrar(negocio.Inhabilitar(x.IdExamen))) Buscar();
+            }
+            else
+            {
+                if (!Ui.Confirmar("¿Desea habilitar nuevamente " + "el examen " + x.Nombre + "?")) return;
+                if (Ui.Mostrar(negocio.Habilitar(x.IdExamen))) Buscar();
+            }
         }
     }
 }

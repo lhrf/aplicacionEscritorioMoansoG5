@@ -11,7 +11,7 @@ namespace CEIBIO.Presentacion.TomaMuestras
         {
             InitializeComponent();
             textBox1.ReadOnly = true;
-            dataGridView1.SelectionChanged += (s, e) => Ui.Intentar(MostrarSeleccion);
+            Ui.AlSeleccionar(dataGridView1, MostrarSeleccion);
             button6.Click += BtnPreparar_Click;
             button5.Click += (s, e) => ImprimirEtiquetas();
             btnRegistrarRetorno.Click += BtnRegistrarRetorno_Click;
@@ -69,6 +69,7 @@ namespace CEIBIO.Presentacion.TomaMuestras
         {
             var v = Actual;
             if (v == null) return;
+            if (dateTimePicker1.Value > DateTime.Now) { Ui.Aviso("La hora de extracción no puede ser posterior a la hora actual."); return; }
             if (Ui.Mostrar(negocio.RegistrarRetorno(v.IdAtencion, dateTimePicker1.Value, textBox2.Text, textBox3.Text))) Ui.Intentar(Cargar);
         }
 

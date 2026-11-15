@@ -8,11 +8,12 @@ namespace CEIBIO.Presentacion
         private readonly Button guardar;
         private readonly Button cancelar;
         private readonly Button inhabilitar;
+        private readonly DataGridView? grilla;
 
         public int Id { get; private set; }
         public bool Editando { get; private set; }
 
-        public Mantenedor(Control datos, Button nuevo, Button editar, Button guardar, Button cancelar, Button inhabilitar)
+        public Mantenedor(Control datos, Button nuevo, Button editar, Button guardar, Button cancelar, Button inhabilitar, DataGridView? grilla = null)
         {
             this.datos = datos;
             this.nuevo = nuevo;
@@ -20,6 +21,7 @@ namespace CEIBIO.Presentacion
             this.guardar = guardar;
             this.cancelar = cancelar;
             this.inhabilitar = inhabilitar;
+            this.grilla = grilla;
             Modo(false);
         }
 
@@ -43,6 +45,11 @@ namespace CEIBIO.Presentacion
             Modo(false);
         }
 
+        public void Estado(bool? habilitado)
+        {
+            inhabilitar.Text = habilitado == false ? "Habilitar" : "Inhabilitar";
+        }
+
         private void Modo(bool editando)
         {
             Editando = editando;
@@ -52,6 +59,7 @@ namespace CEIBIO.Presentacion
             nuevo.Enabled = !editando;
             editar.Enabled = !editando;
             inhabilitar.Enabled = !editando;
+            if (grilla != null) grilla.Enabled = !editando;
         }
     }
 }

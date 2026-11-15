@@ -14,7 +14,7 @@ namespace CEIBIO.Presentacion.Mantenedores
             numericUpDown1.Minimum = 0;
             numericUpDown1.Maximum = 60;
             clbExamenes.CheckOnClick = true;
-            m = new Mantenedor(grpDatos, btnNuevo, btnEditar, button4, button2, btnInhabilitar);
+            m = new Mantenedor(grpDatos, btnNuevo, btnEditar, button4, button2, btnInhabilitar, dataGridView1);
             button3.Click += (s, e) => Buscar();
             btnNuevo.Click += (s, e) => { m.Nuevo(); textBox1.Focus(); };
             btnEditar.Click += BtnEditar_Click;
@@ -22,6 +22,9 @@ namespace CEIBIO.Presentacion.Mantenedores
             button2.Click += (s, e) => m.Cancelar();
             btnInhabilitar.Click += BtnInhabilitar_Click;
             button1.Click += (s, e) => Close();
+            Ui.AlPresionarEnter(txtBuscar, Buscar);
+            Ui.AlDobleClic(dataGridView1, () => BtnEditar_Click(null, EventArgs.Empty));
+            Ui.AlSeleccionar(dataGridView1, MostrarEstado);
             Load += (s, e) => Ui.Intentar(() =>
             {
                 clbExamenes.Items.Clear();
@@ -30,12 +33,15 @@ namespace CEIBIO.Presentacion.Mantenedores
             });
         }
 
+        private void MostrarEstado() => m.Estado(Ui.Seleccionado<Tubo>(dataGridView1)?.Habilitado);
+
         private void Buscar()
         {
             Ui.Intentar(() => Ui.Llenar(dataGridView1, negocio.Listar(txtBuscar.Text), x => new object?[]
             {
                 x.Tipo, x.ColorTapa, x.Aditivo, x.MinutosCentrifugacion, x.EstadoTexto
             }));
+            MostrarEstado();
         }
 
         private void BtnEditar_Click(object? sender, EventArgs e)
@@ -76,8 +82,16 @@ namespace CEIBIO.Presentacion.Mantenedores
         {
             var x = Ui.Seleccionado<Tubo>(dataGridView1);
             if (x == null) { Ui.Aviso("Seleccione un registro."); return; }
-            if (!Ui.Confirmar("¿Desea inhabilitar " + x.Tipo + "?")) return;
-            if (Ui.Mostrar(negocio.Inhabilitar(x.IdTubo))) Buscar();
+            if (x.Habilitado)
+            {
+                if (!Ui.Confirmar("¿Desea inhabilitar " + "el tubo " + x.Tipo + "?")) return;
+                if (Ui.Mostrar(negocio.Inhabilitar(x.IdTubo))) Buscar();
+            }
+            else
+            {
+                if (!Ui.Confirmar("¿Desea habilitar nuevamente " + "el tubo " + x.Tipo + "?")) return;
+                if (Ui.Mostrar(negocio.Habilitar(x.IdTubo))) Buscar();
+            }
         }
     }
 }

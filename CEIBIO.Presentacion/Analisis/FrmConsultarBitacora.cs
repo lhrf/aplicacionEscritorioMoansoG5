@@ -14,6 +14,7 @@ namespace CEIBIO.Presentacion.Analisis
             dtpFechaInicio.Value = DateTime.Today.AddDays(-7);
             dtpFechaFin.Value = DateTime.Today;
             btnBuscar.Click += (s, e) => Buscar();
+            cboEquipo.SelectionChangeCommitted += (s, e) => Buscar();
             btnCerrar.Click += (s, e) => Close();
             Load += (s, e) => Ui.Intentar(() =>
             {
@@ -27,6 +28,7 @@ namespace CEIBIO.Presentacion.Analisis
 
         private void Buscar()
         {
+            if (!Ui.RangoValido(dtpFechaInicio, dtpFechaFin)) return;
             Ui.Intentar(() =>
             {
                 int idEquipo = Ui.ItemCombo<Equipo>(cboEquipo)?.IdEquipo ?? 0;

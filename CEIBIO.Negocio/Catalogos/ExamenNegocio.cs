@@ -37,5 +37,11 @@ namespace CEIBIO.Negocio
             datos.CambiarEstado(id, false, Sesion.IdUsuario);
             return Respuesta.Ok("Examen inhabilitado. Las atenciones que ya lo usan no se modifican.");
         });
+
+        public Respuesta Habilitar(int id) => Respuesta.Intentar(() =>
+        {
+            datos.CambiarEstado(id, true, Sesion.IdUsuario);
+            return Respuesta.Ok("Examen habilitado.");
+        });
     }
 }

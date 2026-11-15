@@ -12,7 +12,7 @@ namespace CEIBIO.Presentacion.Mantenedores
         {
             InitializeComponent();
             clbExamenes.CheckOnClick = true;
-            m = new Mantenedor(grpDatos, btnNuevo, btnEditar, btnGuardar, btnCancelar, btnInhabilitar);
+            m = new Mantenedor(grpDatos, btnNuevo, btnEditar, btnGuardar, btnCancelar, btnInhabilitar, dgvRegistros);
             btnBuscar.Click += (s, e) => Buscar();
             btnNuevo.Click += (s, e) => { m.Nuevo(); txtNombre.Focus(); };
             btnEditar.Click += BtnEditar_Click;
@@ -21,6 +21,9 @@ namespace CEIBIO.Presentacion.Mantenedores
             btnInhabilitar.Click += BtnInhabilitar_Click;
             btnExaminar.Click += BtnExaminar_Click;
             btnCerrar.Click += (s, e) => Close();
+            Ui.AlPresionarEnter(txtBuscar, Buscar);
+            Ui.AlDobleClic(dgvRegistros, () => BtnEditar_Click(null, EventArgs.Empty));
+            Ui.AlSeleccionar(dgvRegistros, MostrarEstado);
             Load += (s, e) => Ui.Intentar(() =>
             {
                 clbExamenes.Items.Clear();
@@ -29,12 +32,15 @@ namespace CEIBIO.Presentacion.Mantenedores
             });
         }
 
+        private void MostrarEstado() => m.Estado(Ui.Seleccionado<Plantilla>(dgvRegistros)?.Habilitado);
+
         private void Buscar()
         {
             Ui.Intentar(() => Ui.Llenar(dgvRegistros, negocio.Listar(txtBuscar.Text), x => new object?[]
             {
                 x.Nombre, x.Formato, x.Examenes, x.EstadoTexto
             }));
+            MostrarEstado();
         }
 
         private void BtnExaminar_Click(object? sender, EventArgs e)
@@ -81,8 +87,16 @@ namespace CEIBIO.Presentacion.Mantenedores
         {
             var x = Ui.Seleccionado<Plantilla>(dgvRegistros);
             if (x == null) { Ui.Aviso("Seleccione un registro."); return; }
-            if (!Ui.Confirmar("¿Desea inhabilitar la plantilla " + x.Nombre + "?")) return;
-            if (Ui.Mostrar(negocio.Inhabilitar(x.IdPlantilla))) Buscar();
+            if (x.Habilitado)
+            {
+                if (!Ui.Confirmar("¿Desea inhabilitar " + "la plantilla " + x.Nombre + "?")) return;
+                if (Ui.Mostrar(negocio.Inhabilitar(x.IdPlantilla))) Buscar();
+            }
+            else
+            {
+                if (!Ui.Confirmar("¿Desea habilitar nuevamente " + "la plantilla " + x.Nombre + "?")) return;
+                if (Ui.Mostrar(negocio.Habilitar(x.IdPlantilla))) Buscar();
+            }
         }
     }
 }

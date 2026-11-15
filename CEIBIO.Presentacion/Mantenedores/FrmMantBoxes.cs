@@ -12,7 +12,7 @@ namespace CEIBIO.Presentacion.Mantenedores
         {
             InitializeComponent();
             textBox1.MaxLength = 10;
-            m = new Mantenedor(grpDatos, btnNuevo, btnEditar, guardar, cancelar, btnInhabilitar);
+            m = new Mantenedor(grpDatos, btnNuevo, btnEditar, guardar, cancelar, btnInhabilitar, dataGridView1);
             button3.Click += (s, e) => Buscar();
             btnNuevo.Click += (s, e) => { m.Nuevo(); textBox1.Focus(); };
             btnEditar.Click += BtnEditar_Click;
@@ -20,8 +20,13 @@ namespace CEIBIO.Presentacion.Mantenedores
             cancelar.Click += (s, e) => m.Cancelar();
             btnInhabilitar.Click += BtnInhabilitar_Click;
             button1.Click += (s, e) => Close();
+            Ui.AlPresionarEnter(txtBuscar, Buscar);
+            Ui.AlDobleClic(dataGridView1, () => BtnEditar_Click(null, EventArgs.Empty));
+            Ui.AlSeleccionar(dataGridView1, MostrarEstado);
             Load += (s, e) => Buscar();
         }
+
+        private void MostrarEstado() => m.Estado(Ui.Seleccionado<Box>(dataGridView1)?.Habilitado);
 
         private void Buscar()
         {
@@ -29,6 +34,7 @@ namespace CEIBIO.Presentacion.Mantenedores
             {
                 x.Numero, x.Descripcion, x.EstadoTexto
             }));
+            MostrarEstado();
         }
 
         private void BtnEditar_Click(object? sender, EventArgs e)
@@ -52,8 +58,16 @@ namespace CEIBIO.Presentacion.Mantenedores
         {
             var x = Ui.Seleccionado<Box>(dataGridView1);
             if (x == null) { Ui.Aviso("Seleccione un registro."); return; }
-            if (!Ui.Confirmar("¿Desea inhabilitar el box " + x.Numero + "?")) return;
-            if (Ui.Mostrar(negocio.Inhabilitar(x.IdBox))) Buscar();
+            if (x.Habilitado)
+            {
+                if (!Ui.Confirmar("¿Desea inhabilitar " + "el box " + x.Numero + "?")) return;
+                if (Ui.Mostrar(negocio.Inhabilitar(x.IdBox))) Buscar();
+            }
+            else
+            {
+                if (!Ui.Confirmar("¿Desea habilitar nuevamente " + "el box " + x.Numero + "?")) return;
+                if (Ui.Mostrar(negocio.Habilitar(x.IdBox))) Buscar();
+            }
         }
     }
 }

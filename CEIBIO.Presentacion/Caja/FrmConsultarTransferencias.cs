@@ -18,6 +18,7 @@ namespace CEIBIO.Presentacion.Caja
 
         private void Buscar()
         {
+            if (!Ui.RangoValido(dtpFechaInicio, dtpFechaFin)) return;
             Ui.Intentar(() =>
             {
                 var lista = negocio.ConsultarAutorizadas(dtpFechaInicio.Value, dtpFechaFin.Value);

@@ -11,6 +11,8 @@ namespace CEIBIO.Presentacion.Caja
         public FrmRechazarTransferencia()
         {
             InitializeComponent();
+            Ui.SoloLectura(txtNumeroAtencion, txtImporte);
+            CancelButton = btnCancelar;
             btnRechazar.Click += BtnRechazar_Click;
             btnCancelar.Click += (s, e) => { DialogResult = DialogResult.Cancel; Close(); };
         }
@@ -25,6 +27,7 @@ namespace CEIBIO.Presentacion.Caja
         private void BtnRechazar_Click(object? sender, EventArgs e)
         {
             if (pago == null) { Ui.Aviso("Abra este formulario desde la autorización de transferencias."); return; }
+            if (Validacion.Vacio(txtObservacion.Text)) { Ui.Aviso("Ingrese la observación del rechazo."); txtObservacion.Focus(); return; }
             if (!Ui.Mostrar(negocio.Rechazar(pago.IdPago, txtObservacion.Text))) return;
             DialogResult = DialogResult.OK;
             Close();

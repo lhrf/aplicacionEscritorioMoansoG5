@@ -12,7 +12,7 @@ namespace CEIBIO.Presentacion.Analisis
         {
             InitializeComponent();
             btnValidar.Click += BtnValidar_Click;
-            dgvPendientes.CellDoubleClick += (s, e) => BtnValidar_Click(s, e);
+            Ui.AlDobleClic(dgvPendientes, () => BtnValidar_Click(btnValidar, EventArgs.Empty));
             btnCerrar.Click += (s, e) => Close();
             Load += (s, e) => Ui.Intentar(Cargar);
         }
@@ -23,6 +23,7 @@ namespace CEIBIO.Presentacion.Analisis
             {
                 r.NumeroAtencion, r.NombrePaciente, r.NombreExamen, r.NombreTecnico, Ui.FechaHora(r.FechaEnvio)
             });
+            btnValidar.Enabled = dgvPendientes.Rows.Count > 0;
         }
 
         private void BtnValidar_Click(object? sender, EventArgs e)

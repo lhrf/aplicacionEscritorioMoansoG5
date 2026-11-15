@@ -12,7 +12,7 @@ namespace CEIBIO.Presentacion.Evaluacion
             InitializeComponent();
             nudHorasAyuno.Minimum = 0;
             nudHorasAyuno.Maximum = 72;
-            dgvPendientes.SelectionChanged += (s, e) => Ui.Intentar(MostrarSeleccion);
+            Ui.AlSeleccionar(dgvPendientes, MostrarSeleccion);
             btnGuardar.Click += BtnGuardar_Click;
             btnCerrar.Click += (s, e) => Close();
             Load += (s, e) => Ui.Intentar(Cargar);
@@ -41,6 +41,17 @@ namespace CEIBIO.Presentacion.Evaluacion
             nudHorasAyuno.Value = 0;
             txtMedicamentos.Clear();
             txtObservaciones.Clear();
+            var ev = a == null ? null : negocio.ObtenerPorAtencion(a.IdAtencion);
+            if (ev != null)
+            {
+                nudHorasAyuno.Value = Math.Min(nudHorasAyuno.Maximum, Math.Max(nudHorasAyuno.Minimum, ev.HorasAyuno));
+                txtMedicamentos.Text = ev.Medicamentos ?? "";
+                txtObservaciones.Text = ev.Observaciones ?? "";
+                chkRotulado.Checked = ev.RotuladoCorrecto == true;
+                chkHermetico.Checked = ev.RecipienteHermetico == true;
+                chkVolumen.Checked = ev.VolumenSuficiente == true;
+                chkConservacion.Checked = ev.ConservacionAdecuada == true;
+            }
             btnGuardar.Enabled = a != null;
         }
 

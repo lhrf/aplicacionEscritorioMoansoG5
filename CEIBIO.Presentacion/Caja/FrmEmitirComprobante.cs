@@ -12,7 +12,8 @@ namespace CEIBIO.Presentacion.Caja
         {
             InitializeComponent();
             txtPaciente.ReadOnly = true;
-            dgvPagadas.SelectionChanged += (s, e) => Ui.Intentar(MostrarSeleccion);
+            Ui.SoloLectura(txtNumeroComprobante, txtFecha, txtDni);
+            Ui.AlSeleccionar(dgvPagadas, MostrarSeleccion);
             btnEmitir.Click += BtnEmitir_Click;
             btnReimprimir.Click += BtnReimprimir_Click;
             btnAnular.Click += BtnAnular_Click;
@@ -56,7 +57,8 @@ namespace CEIBIO.Presentacion.Caja
             if (a == null) return;
             var r = negocio.Emitir(a.IdAtencion);
             if (!Ui.Mostrar(r)) return;
-            var emitido = negocio.ObtenerPorId(r.Id);
+            Comprobante? emitido = null;
+            Ui.Intentar(() => emitido = negocio.ObtenerPorId(r.Id));
             if (emitido != null) Ui.Imprimir("Comprobante " + emitido.NumeroComprobante, ComprobanteNegocio.TextoImpresion(emitido));
             Ui.Intentar(Cargar);
         }
@@ -70,6 +72,7 @@ namespace CEIBIO.Presentacion.Caja
         private void BtnAnular_Click(object? sender, EventArgs e)
         {
             if (comprobante == null || comprobante.IdComprobante == 0) return;
+            if (!Ui.Confirmar("¿Desea anular el comprobante " + comprobante.NumeroComprobante + "?")) return;
             var motivo = Ui.Pedir("Anular comprobante", "Motivo de la anulación:");
             if (motivo == null) return;
             if (Ui.Mostrar(negocio.Anular(comprobante.IdComprobante, motivo))) Ui.Intentar(Cargar);

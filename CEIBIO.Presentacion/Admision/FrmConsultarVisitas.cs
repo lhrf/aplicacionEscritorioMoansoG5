@@ -12,6 +12,7 @@ namespace CEIBIO.Presentacion.Admision
             dtpFecha.Value = DateTime.Today;
             btnBuscar.Click += (s, e) => Buscar();
             btnCerrar.Click += (s, e) => Close();
+            dtpFecha.ValueChanged += (s, e) => Buscar();
             Load += (s, e) => Buscar();
         }
 

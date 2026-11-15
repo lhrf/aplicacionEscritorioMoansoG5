@@ -42,16 +42,105 @@ namespace CEIBIO.Presentacion
 
         public static string FechaHora(DateTime? valor) => valor.HasValue ? valor.Value.ToString("dd/MM/yyyy HH:mm") : "";
 
+        private static readonly HashSet<DataGridView> cargando = new();
+
         public static void Llenar<T>(DataGridView grilla, IEnumerable<T> lista, Func<T, object?[]> fila)
         {
             grilla.AllowUserToAddRows = false;
+            grilla.AllowUserToDeleteRows = false;
             grilla.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             grilla.MultiSelect = false;
-            grilla.Rows.Clear();
-            foreach (var item in lista)
+            cargando.Add(grilla);
+            try
             {
-                int i = grilla.Rows.Add(fila(item));
-                grilla.Rows[i].Tag = item;
+                grilla.Rows.Clear();
+                foreach (var item in lista)
+                {
+                    int i = grilla.Rows.Add(fila(item));
+                    grilla.Rows[i].Tag = item;
+                }
+            }
+            finally
+            {
+                cargando.Remove(grilla);
+            }
+        }
+
+        public static void AlSeleccionar(DataGridView grilla, Action accion)
+        {
+            grilla.SelectionChanged += (s, e) =>
+            {
+                if (cargando.Contains(grilla)) return;
+                Intentar(accion);
+            };
+        }
+
+        public static void AlDobleClic(DataGridView grilla, Action accion)
+        {
+            grilla.CellDoubleClick += (s, e) =>
+            {
+                if (e.RowIndex < 0 || grilla.Rows[e.RowIndex].Tag == null) return;
+                Intentar(accion);
+            };
+        }
+
+        public static void AlPresionarEnter(Control control, Action accion)
+        {
+            control.KeyDown += (s, e) =>
+            {
+                if (e.KeyCode != Keys.Enter) return;
+                e.Handled = true;
+                e.SuppressKeyPress = true;
+                Intentar(accion);
+            };
+        }
+
+        public static void SoloDigitos(TextBox caja, int largo)
+        {
+            caja.MaxLength = largo;
+            caja.KeyPress += (s, e) =>
+            {
+                if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar)) e.Handled = true;
+            };
+        }
+
+        public static void Mayusculas(params TextBox[] cajas)
+        {
+            foreach (var c in cajas) c.CharacterCasing = CharacterCasing.Upper;
+        }
+
+        public static void SoloLectura(params TextBoxBase[] cajas)
+        {
+            foreach (var c in cajas)
+            {
+                c.ReadOnly = true;
+                c.TabStop = false;
+            }
+        }
+
+        public static void Lista(params ComboBox[] combos)
+        {
+            foreach (var c in combos) c.DropDownStyle = ComboBoxStyle.DropDownList;
+        }
+
+        public static bool RangoValido(DateTimePicker inicio, DateTimePicker fin)
+        {
+            if (fin.Value.Date >= inicio.Value.Date) return true;
+            Aviso("La fecha final no puede ser anterior a la fecha inicial.");
+            return false;
+        }
+
+        public static void Seleccionar<T>(DataGridView grilla, Func<T, bool> condicion) where T : class
+        {
+            foreach (DataGridViewRow fila in grilla.Rows)
+            {
+                if (fila.Tag is T item && condicion(item))
+                {
+                    grilla.ClearSelection();
+                    fila.Selected = true;
+                    grilla.CurrentCell = fila.Cells.Cast<DataGridViewCell>().FirstOrDefault(c => c.Visible) ?? fila.Cells[0];
+                    return;
+                }
             }
         }
 
@@ -86,7 +175,7 @@ namespace CEIBIO.Presentacion
                     case ComboBox cb: cb.SelectedIndex = -1; break;
                     case CheckBox ch: ch.Checked = false; break;
                     case NumericUpDown n: n.Value = Math.Max(n.Minimum, Math.Min(n.Maximum, 0)); break;
-                    case DateTimePicker d: d.Value = DateTime.Today; break;
+                    case DateTimePicker d: d.Value = DateTime.Today < d.MinDate ? d.MinDate : DateTime.Today > d.MaxDate ? d.MaxDate : DateTime.Today; break;
                     case CheckedListBox l:
                         for (int i = 0; i < l.Items.Count; i++) l.SetItemChecked(i, false);
                         break;
@@ -124,7 +213,7 @@ namespace CEIBIO.Presentacion
             f.Controls.AddRange(new Control[] { lbl, txt, ok, cancel });
             f.AcceptButton = ok;
             f.CancelButton = cancel;
-            return f.ShowDialog() == DialogResult.OK ? txt.Text.Trim() : null;
+            return f.ShowDialog(Form.ActiveForm) == DialogResult.OK ? txt.Text.Trim() : null;
         }
 
         public static T? Elegir<T>(string titulo, IEnumerable<T> lista, Func<T, string> texto) where T : class
@@ -151,11 +240,16 @@ namespace CEIBIO.Presentacion
             f.Controls.AddRange(new Control[] { lst, ok, cancel });
             f.AcceptButton = ok;
             f.CancelButton = cancel;
-            return f.ShowDialog() == DialogResult.OK && lst.SelectedIndex >= 0 ? items[lst.SelectedIndex] : null;
+            return f.ShowDialog(Form.ActiveForm) == DialogResult.OK && lst.SelectedIndex >= 0 ? items[lst.SelectedIndex] : null;
         }
 
         public static void Imprimir(string titulo, string texto)
         {
+            if (string.IsNullOrWhiteSpace(texto))
+            {
+                Aviso("No hay información para imprimir.");
+                return;
+            }
             var lineas = texto.Replace("\r\n", "\n").Split('\n');
             int indice = 0;
             using var documento = new PrintDocument { DocumentName = titulo };

@@ -12,6 +12,8 @@ namespace CEIBIO.Presentacion.Seguridad
             txtClaveActual.UseSystemPasswordChar = true;
             txtClaveNueva.UseSystemPasswordChar = true;
             txtClaveConfirmacion.UseSystemPasswordChar = true;
+            AcceptButton = btnGuardar;
+            CancelButton = btnCancelar;
             btnGuardar.Click += BtnGuardar_Click;
             btnCancelar.Click += (s, e) => Close();
         }
